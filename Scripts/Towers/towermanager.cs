@@ -31,11 +31,11 @@ public class towermanager : MonoBehaviour {
 
         if (GameObject.FindGameObjectWithTag("Enemy") && flying) {
 
-            float wind = GameObject.Find("GameManager").GetComponent<GameManager>().windSpeed * Time.deltaTime * 0.005f;
+            float wind = GameObject.Find("GameManager").GetComponent<GameManager>().windSpeed * Time.deltaTime * 0.0075f;
 
             transform.position = new Vector3(transform.position.x + wind, transform.position.y + wind, transform.position.z);
 
-        } else {
+        } else if (flying){
 
             Vector3 ToTarget = positionOg - transform.position;
             float ang = Mathf.Atan2(ToTarget.y, ToTarget.x) * Mathf.Rad2Deg;

@@ -15,9 +15,15 @@ public class GameManager : MonoBehaviour {
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI windText;
 
+    public TextMeshProUGUI endMessage;
+    public TextMeshProUGUI endCoin;
+    public TextMeshProUGUI endWave;
+
+    public GameObject died;
+
     void Update(){
 
-        windSpeed = Mathf.Round(Mathf.Cos((float)spawner.Wave) + 7 * 1.15078f * 100f) / 100f;
+        windSpeed = Mathf.Round(Mathf.Sin((float)spawner.Wave * 1.5f) + 7 * 100f) / 100f;
 
         hpText.text = (hp).ToString();
         coinText.text = (coin).ToString();
@@ -26,7 +32,24 @@ public class GameManager : MonoBehaviour {
 
         if (hp <= 0){
 
-            //endgame and such
+            died.SetActive(true);
+
+            endCoin.text = (coin).ToString();
+            endWave.text = (spawner.Wave).ToString();
+
+            if (spawner.mode == "easy") {
+
+                endMessage.text = "Its called easy mode for a reason";
+
+            } else if (spawner.mode == "regular") {
+
+                endMessage.text = "Just wait until tricky mode";
+
+            } else {
+
+                endMessage.text = "Do not worry many dont get here";
+
+            }
 
         }
 

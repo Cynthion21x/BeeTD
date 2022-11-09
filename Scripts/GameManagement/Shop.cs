@@ -110,4 +110,34 @@ public class Shop : MonoBehaviour {
 
     }
 
+    public void buySpider(){
+
+        int cost = 25;
+
+        if (cost <= gameManager.coin && placing == false) {
+
+            placing = true;
+
+            gameManager.coin -= cost;
+            turret = Instantiate(towers[2], mousePos, Quaternion.identity);
+
+        }
+
+    }
+
+        public void buyDragon(){
+
+        int cost = 175;
+
+        if (cost <= gameManager.coin && placing == false) {
+
+            placing = true;
+
+            gameManager.coin -= cost;
+            turret = Instantiate(towers[3], mousePos, Quaternion.identity);
+
+        }
+
+    }
+
 }

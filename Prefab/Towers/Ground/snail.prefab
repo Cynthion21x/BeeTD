@@ -181,9 +181,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3.5
-  fireRate: 1.75
+  fireRate: 1.85
   speed: 0.95
-  damage: 30
+  damage: 13
   projectileType: {fileID: 5938905900805307995, guid: dc8d765de2eb7224ab05d1c862d7d00c, type: 3}
   firePoint: {fileID: 75266554797413950}
   layerMask:

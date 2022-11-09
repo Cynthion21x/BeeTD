@@ -1,10 +1,16 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour {
+
+    public string mode;
+
+    public Image modeIcon;
+    public Sprite easy;
+    public Sprite tricky;
 
     public GameObject wasp1;
     public GameObject wasp2;
@@ -33,16 +39,35 @@ public class Spawner : MonoBehaviour {
 
         }
 
+        if (mode == "tricky"){
+
+                modeIcon.sprite = tricky;
+
+        }
+
+        if (mode == "easy"){
+
+                modeIcon.sprite = easy;
+
+        }
+
+        if (mode == "regular") {
+
+            modeIcon.enabled = false;;
+
+        } else {
+
+            modeIcon.enabled = true;
+
+        }
+
     }
 
     public void spawn(){
 
-        if (Wave % 64 == 0) {
+        if (Wave % 16 == 0) {
 
-            float HpPow = 1;
-            float SpdPow = 1;
-
-            StartCoroutine(AsyncSpawn(wasp4, 0, HpPow, SpdPow));
+            StartCoroutine(AsyncSpawn(wasp4, 0, 3000 * (Wave / 16), 1));
 
             Debug.Log("SpawnBoss");
 
@@ -53,13 +78,28 @@ public class Spawner : MonoBehaviour {
 
         int spawnCount = Wave;
 
+        mode = "easy";
+
+        if (spawnCount >= 16) {
+
+            spawnCount = 16;
+            mode = "regular";
+
+        }
+
+        if (Wave >= 64) {
+
+            mode = "tricky";
+
+        }
+
         for (int i = 1; i < spawnCount+1; i++) {
 
 
             if (i % 16 == 0) {
 
-                float QueenHp = 500 * (1f + ((float)Wave / 16));
-                float QueenSpeed = 1f;
+                float QueenHp = 1000;
+                float QueenSpeed = .75f;
 
                 StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
 
@@ -67,15 +107,15 @@ public class Spawner : MonoBehaviour {
 
             } else if (i % 4 == 0) {
 
-                float SpeedHp = 50 * (1 + ((float)Wave / 16) * 2);
-                float SpeedSpeed = 1f;
+                float SpeedHp = 65;
+                float SpeedSpeed = 1.5f;
 
                 StartCoroutine(AsyncSpawn(wasp2, (float)(i - 1) * (float)(spacing), SpeedHp, SpeedSpeed));
                 Debug.Log("SpawnSpeed");
 
             } else {
 
-                float DroneHp = 100 * (1 + ((float)Wave / 16) * 5f);
+                float DroneHp = 100;
                 float DroneSpeed = 1f;
 
                 StartCoroutine(AsyncSpawn(wasp1, (float)(i - 1) * (float)(spacing), DroneHp, DroneSpeed));
@@ -85,19 +125,30 @@ public class Spawner : MonoBehaviour {
 
         }
 
+
         Wave++;
 
     }
 
-    private IEnumerator AsyncSpawn(GameObject type, float time, float hpMult, float speedMult){
+    private IEnumerator AsyncSpawn(GameObject type, float time, float hp, float speed){
 
         yield return new WaitForSeconds(time);
         
         GameObject enemy = Instantiate(type, transform.position, Quaternion.identity);
 
         enemy.GetComponentInChildren<EnemyController>().target = positions;
-        enemy.GetComponentInChildren<EnemyController>().hp = hpMult;
-        enemy.GetComponentInChildren<EnemyController>().speed = speedMult;
+
+        if (mode == "tricky") {
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * 2f;
+        }
+
+        if (mode == "regular") {
+
+            enemy.GetComponentInChildren<EnemyController>().hp = hp;
+
+        }
+
+        enemy.GetComponentInChildren<EnemyController>().speed = speed;
 
     }
 

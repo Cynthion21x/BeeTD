@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75266553185512652}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14, y: 0.18, z: 0}
+  m_LocalPosition: {x: 0.02, y: 0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 75266553324364551}
@@ -68,10 +68,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1242797297
-  m_SortingLayer: 4
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2fed6fb664b12134890652d77d4f8d16, type: 3}
+  m_SortingLayerID: 1295577799
+  m_SortingLayer: 2
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 21300000, guid: 840b7e03a66b67d47a8f7225b7aeb53a, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.27058825}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
   m_Layer: 7
-  m_Name: Bee
+  m_Name: Spider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 75266553324364549}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -5.76, y: 1.52, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children:
   - {fileID: 75266553185512655}
   - {fileID: 75266554797413950}
@@ -154,10 +154,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1242797297
-  m_SortingLayer: 4
-  m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 2fed6fb664b12134890652d77d4f8d16, type: 3}
+  m_SortingLayerID: 1295577799
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 840b7e03a66b67d47a8f7225b7aeb53a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -180,17 +180,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14393c158d8b636488f4014fc76ab011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 0.9
-  fireRate: 0.34
-  speed: 3.8
-  damage: 6.25
-  projectileType: {fileID: 5938905900805307995, guid: 9ccff33e471f80d4093a10f1b9dd0570, type: 3}
+  range: 1.75
+  fireRate: 0.64
+  speed: 2
+  damage: 3
+  projectileType: {fileID: 5938905900805307995, guid: acd73b8371a7d7245864fc5afeedee73, type: 3}
   firePoint: {fileID: 75266554797413950}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
   canShoot: 1
-  flying: 1
+  flying: 0
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -241,7 +241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75266554797413951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.051, y: -0.06, z: 0}
+  m_LocalPosition: {x: 0.51, y: 0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 75266553324364551}

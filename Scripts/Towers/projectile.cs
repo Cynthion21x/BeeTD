@@ -9,6 +9,8 @@ public class projectile : MonoBehaviour {
     public float speed;
     public float lifeTime;
 
+    public float aoe = 0f;
+
     public float minSpeed;
 
     public float speedReduce;
