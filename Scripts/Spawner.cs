@@ -25,6 +25,8 @@ public class Spawner : MonoBehaviour {
     public Button button;
     public TextMeshProUGUI text;
 
+    public bool autoplay;
+
     void Update(){
 
         text.text = (Wave - 1).ToString();
@@ -36,6 +38,12 @@ public class Spawner : MonoBehaviour {
         } else {
 
             button.interactable = true;
+
+            if (autoplay) {
+
+                spawn();
+
+            }
 
         }
 

@@ -8,6 +8,7 @@ public class towermanager : MonoBehaviour {
     public float fireRate;
     public float speed;
     public float damage;
+    
     public GameObject projectileType;
 
     public Transform firePoint;

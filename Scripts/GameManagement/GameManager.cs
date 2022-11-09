@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour {
 
         if (hp <= 0){
 
+            spawner.autoplay = false;
+
             died.SetActive(true);
 
             endCoin.text = (coin).ToString();

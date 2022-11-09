@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class Ui : MonoBehaviour {
 
     public AudioSource sound;
+    public Spawner spawn;
 
     void Start(){
 
@@ -25,6 +26,12 @@ public class Ui : MonoBehaviour {
     public void soundSet(System.Single vol){
 
         sound.volume = vol;
+
+    }
+
+    public void AutoPlaySet(bool value) { 
+
+        spawn.autoplay = value;
 
     }
 
