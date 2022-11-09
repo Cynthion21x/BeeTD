@@ -26,10 +26,11 @@ public class Spawner : MonoBehaviour {
     public TextMeshProUGUI text;
 
     public bool autoplay;
+    public bool spawning;
 
     void Update(){
 
-        text.text = (Wave - 1).ToString();
+        text.text = (Wave-1).ToString();
 
         if (GameObject.FindGameObjectWithTag("Enemy")) {
 
@@ -39,11 +40,12 @@ public class Spawner : MonoBehaviour {
 
             button.interactable = true;
 
-            if (autoplay) {
+        }
 
-                spawn();
+        if (button.interactable && autoplay && spawning == false) {
 
-            }
+            spawning = true;
+            spawn();
 
         }
 
@@ -133,7 +135,6 @@ public class Spawner : MonoBehaviour {
 
         }
 
-
         Wave++;
 
     }
@@ -141,6 +142,8 @@ public class Spawner : MonoBehaviour {
     private IEnumerator AsyncSpawn(GameObject type, float time, float hp, float speed){
 
         yield return new WaitForSeconds(time);
+
+        spawning = false;
         
         GameObject enemy = Instantiate(type, transform.position, Quaternion.identity);
 
