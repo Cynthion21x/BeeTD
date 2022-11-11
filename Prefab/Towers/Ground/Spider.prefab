@@ -183,7 +183,7 @@ MonoBehaviour:
   range: 1.75
   fireRate: 0.64
   speed: 2
-  damage: 3
+  damage: 1.5
   projectileType: {fileID: 5938905900805307995, guid: acd73b8371a7d7245864fc5afeedee73, type: 3}
   firePoint: {fileID: 75266554797413950}
   layerMask:
@@ -191,6 +191,7 @@ MonoBehaviour:
     m_Bits: 64
   canShoot: 1
   flying: 0
+  spwn: {fileID: 0}
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -204,7 +205,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.042482615, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -215,7 +216,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1.7451043, y: 2}
   m_EdgeRadius: 0
 --- !u!1 &75266554797413951
 GameObject:

@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
 
     void Update(){
 
-        windSpeed = Mathf.Round(Mathf.Sin((float)spawner.Wave * 1.5f) + 7 * 100f) / 100f;
+        windSpeed = Mathf.Round(Mathf.Abs(Mathf.Sin((float)spawner.Wave * 2)) * 700f) / 100f;
 
         hpText.text = (hp).ToString();
         coinText.text = (coin).ToString();

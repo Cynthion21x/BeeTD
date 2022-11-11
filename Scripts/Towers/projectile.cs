@@ -18,6 +18,8 @@ public class projectile : MonoBehaviour {
     public GameObject ImpactEffect;
     public GameObject DespawnEffect;
 
+    public LayerMask EnemyLayer;
+
     void Start() {
 
         StartCoroutine(kill(lifeTime));
@@ -34,11 +36,29 @@ public class projectile : MonoBehaviour {
 
         EnemyController enemy = col.collider.GetComponent<EnemyController>();
 
-        if (enemy.enabled == true) {
-            enemy.hp -= damage;
+        if (enemy != null){
 
-            if (enemy.speed >= minSpeed)
-                enemy.speed -= speedReduce;
+            if (enemy.enabled == true) {
+
+                enemy.hp -= damage;
+
+                if (enemy.speed >= minSpeed)
+                    enemy.speed -= speedReduce;
+
+                Collider2D[] enemys = Physics2D.OverlapCircleAll(this.transform.position, aoe, EnemyLayer);
+
+                foreach (Collider2D coll in enemys) {
+
+                    if (coll.GetComponent<EnemyController>() != enemy){
+
+                        coll.GetComponent<EnemyController>().hp -= damage * 0.75f; 
+                        Debug.Log("Aditional target hit");  
+
+                    }   
+
+                }
+
+            }
 
             Instantiate(ImpactEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
@@ -49,6 +69,17 @@ public class projectile : MonoBehaviour {
     private IEnumerator kill(float Time) {
 
         yield return new WaitForSeconds(Time);
+
+        Collider2D[] enemys = Physics2D.OverlapCircleAll(this.transform.position, aoe, EnemyLayer);
+
+        Debug.Log("Aoe Hit: " + enemys.Length.ToString());
+
+        foreach (Collider2D coll in enemys) {
+
+            coll.GetComponent<EnemyController>().hp -= damage * 0.75f; 
+            Debug.Log("Aditional target hit");  
+
+        }   
 
         if (DespawnEffect != null){
 

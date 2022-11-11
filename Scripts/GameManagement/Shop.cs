@@ -19,6 +19,7 @@ public class Shop : MonoBehaviour {
     public GameObject turret;
 
     public GameObject circle;
+    public Spawner spwn;
 
     void Update(){
 
@@ -28,25 +29,6 @@ public class Shop : MonoBehaviour {
 
         canPlace = !(Physics2D.OverlapCircle(mousePos, .5f, cantPlaceOn));
 
-        /*
-        if (Physics2D.OverlapCircle(mousePos, .5f, cantPlaceOn)){
-
-            if (turret.GetComponent<towermanager>().flying == true && Physics2D.OverlapCircle(mousePos, .5f, cantPlaceOn).GetComponent<towermanager>().flying == false) {
-
-                canPlace = true;
-
-            } else{
-
-                canPlace = false;
-
-            }
-
-        } else {
-
-            canPlace = true;
-
-        }
-        */
 
         if (placing == true){
 
@@ -65,6 +47,7 @@ public class Shop : MonoBehaviour {
                 turret.GetComponent<BoxCollider2D>().enabled = true;
 
                 turret.GetComponent<towermanager>().Set();
+                turret.GetComponent<towermanager>().spwn = spwn;
 
                 placing = false;
 
@@ -97,7 +80,7 @@ public class Shop : MonoBehaviour {
 
     public void buyBee(){
 
-        int cost = 50;
+        int cost = 25;
 
         if (cost <= gameManager.coin && placing == false) {
 
@@ -112,7 +95,7 @@ public class Shop : MonoBehaviour {
 
     public void buySpider(){
 
-        int cost = 25;
+        int cost = 50;
 
         if (cost <= gameManager.coin && placing == false) {
 

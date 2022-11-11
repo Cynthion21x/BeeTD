@@ -17,6 +17,9 @@ public class EnemyController : MonoBehaviour {
     private float maxHp;
     private float maxSpd;
 
+    public int coinDrop;
+    public int damage;
+
     void Start(){
 
         maxHp = hp;
@@ -37,12 +40,12 @@ public class EnemyController : MonoBehaviour {
             Destroy(transform.parent.gameObject);
             Destroy(this.gameObject);
 
-            GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().coin += 20;
+            GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().coin += coinDrop;
             Instantiate(deathEffect, transform.position, Quaternion.identity);
         }
 
         if(current > (target.Length - 1)){
-            GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().hp--;
+            GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().hp -= damage;
             Destroy(transform.parent.gameObject);
             Destroy(this.gameObject);
         }

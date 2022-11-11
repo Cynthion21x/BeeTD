@@ -101,11 +101,14 @@ MonoBehaviour:
   damage: 0
   speed: 1.5
   lifeTime: 4
-  aoe: 0
+  aoe: 0.7
   minSpeed: 1
   speedReduce: 0.125
   ImpactEffect: {fileID: 6068470116422173642, guid: 06a3947e23b959e4e9f7e1cc5b6a5dd2, type: 3}
   DespawnEffect: {fileID: 6068470116422173642, guid: 06a3947e23b959e4e9f7e1cc5b6a5dd2, type: 3}
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!58 &2664368857461169248
 CircleCollider2D:
   m_ObjectHideFlags: 0

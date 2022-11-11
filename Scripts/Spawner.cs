@@ -27,6 +27,7 @@ public class Spawner : MonoBehaviour {
 
     public bool autoplay;
     public bool spawning;
+    public bool flying;
 
     void Update(){
 
@@ -42,7 +43,7 @@ public class Spawner : MonoBehaviour {
 
         }
 
-        if (button.interactable && autoplay && spawning == false) {
+        if (button.interactable && autoplay && spawning == false && flying == false) {
 
             spawning = true;
             spawn();
@@ -77,7 +78,7 @@ public class Spawner : MonoBehaviour {
 
         if (Wave % 16 == 0) {
 
-            StartCoroutine(AsyncSpawn(wasp4, 0, 3000 * (Wave / 16), 1));
+            StartCoroutine(AsyncSpawn(wasp4, 0, 5000, .75f));
 
             Debug.Log("SpawnBoss");
 
@@ -149,13 +150,21 @@ public class Spawner : MonoBehaviour {
 
         enemy.GetComponentInChildren<EnemyController>().target = positions;
 
+        if (mode == "easy") {
+
+            enemy.GetComponentInChildren<EnemyController>().hp = hp;
+
+        }
+
         if (mode == "tricky") {
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * 2f;
+
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * Mathf.Pow(1.5f, Wave);
+
         }
 
         if (mode == "regular") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp;
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * 1.25f * Wave;
 
         }
 

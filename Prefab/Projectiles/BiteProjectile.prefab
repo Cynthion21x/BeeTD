@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -948257017
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 0, b: 0.08780861, a: 0}
@@ -105,6 +105,9 @@ MonoBehaviour:
   speedReduce: 0
   ImpactEffect: {fileID: 6068470116422173642, guid: bd280bcf0b3d074468597ac54842c80f, type: 3}
   DespawnEffect: {fileID: 0}
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!58 &2664368857461169248
 CircleCollider2D:
   m_ObjectHideFlags: 0

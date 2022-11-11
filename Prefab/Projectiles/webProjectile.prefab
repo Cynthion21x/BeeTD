@@ -106,6 +106,9 @@ MonoBehaviour:
   speedReduce: 0.125
   ImpactEffect: {fileID: 6068470116422173642, guid: 6d2d5089f34077e4bb106d238be081e2, type: 3}
   DespawnEffect: {fileID: 6068470116422173642, guid: 6d2d5089f34077e4bb106d238be081e2, type: 3}
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!58 &2664368857461169248
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -184,7 +187,7 @@ ParticleSystem:
   m_GameObject: {fileID: 6942494072736721130}
   serializedVersion: 7
   lengthInSec: 5
-  simulationSpeed: 0.89
+  simulationSpeed: 0.77
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -743,7 +746,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 109
+    maxNumParticles: 599
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -1008,7 +1011,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 13.72
+      scalar: 17.72
       minScalar: 10
       maxCurve:
         serializedVersion: 2

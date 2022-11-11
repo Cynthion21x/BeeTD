@@ -147,6 +147,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  coinDrop: 5
+  damage: 1
 --- !u!61 &5720294140497085292
 BoxCollider2D:
   m_ObjectHideFlags: 0
