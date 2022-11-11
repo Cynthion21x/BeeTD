@@ -46,7 +46,7 @@ public class towermanager : MonoBehaviour {
             Vector3 ToTarget = positionOg - transform.position;
             float ang = Mathf.Atan2(ToTarget.y, ToTarget.x) * Mathf.Rad2Deg;
             Quaternion qu = Quaternion.AngleAxis(ang, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, qu, Time.deltaTime * speed * 2);
+            transform.rotation = Quaternion.Slerp(transform.rotation, qu, Time.deltaTime * 3);
 
             float step = speed * Time.deltaTime * .5f;
 
