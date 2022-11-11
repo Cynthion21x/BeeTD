@@ -43,6 +43,28 @@ public class Spawner : MonoBehaviour {
 
         }
 
+        GameObject[] tow = GameObject.FindGameObjectsWithTag("bug");
+        int requiredCount = tow.Length;
+        int currentCount = 0;
+
+        foreach (GameObject i in tow) {
+
+            if (i.GetComponent<towermanager>().isFlying == false) {
+                currentCount++;
+            }
+
+        }
+
+        if (currentCount >= requiredCount) {
+
+            flying = false;
+
+        } else {
+
+            flying = true;
+
+        }
+
         if (button.interactable && autoplay && spawning == false && flying == false) {
 
             spawning = true;
@@ -158,13 +180,13 @@ public class Spawner : MonoBehaviour {
 
         if (mode == "tricky") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * Mathf.Pow(1.5f, Wave);
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * Mathf.Pow(1.5f, Wave - 13);
 
         }
 
         if (mode == "regular") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * 1.25f * Wave;
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * 1.25f * Wave - 15;
 
         }
 

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 9200873605159302537}
   m_Layer: 7
   m_Name: snail
-  m_TagString: Untagged
+  m_TagString: bug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   range: 3.5
   fireRate: 1.85
   speed: 0.95
-  damage: 13
+  damage: 16
   projectileType: {fileID: 5938905900805307995, guid: dc8d765de2eb7224ab05d1c862d7d00c, type: 3}
   firePoint: {fileID: 75266554797413950}
   layerMask:
@@ -192,6 +192,7 @@ MonoBehaviour:
   canShoot: 1
   flying: 0
   spwn: {fileID: 0}
+  isFlying: 0
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0

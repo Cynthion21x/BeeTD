@@ -24,6 +24,9 @@ public class towermanager : MonoBehaviour {
 
     public Spawner spwn;
 
+    public bool isFlying = false;
+    private GameObject flyingChild = null;
+
     public void Set(){
 
         positionOg = transform.position;
@@ -32,10 +35,28 @@ public class towermanager : MonoBehaviour {
 
     void Update(){
 
+        // No fly stack
+        if (flyingChild == null && flying) {
 
+            flyingChild = new GameObject();
+            flyingChild.AddComponent<flyingTower>();
+            flyingChild.GetComponent<flyingTower>().perentTower = this.gameObject;
+            flyingChild.AddComponent<SpriteRenderer>();
+
+        } else {
+
+            if (flying == true) {
+
+                flyingChild.transform.position = positionOg;
+
+            }
+
+        }
+
+        // Glide away
         if (GameObject.FindGameObjectWithTag("Enemy") && flying) {
 
-            spwn.flying = true;
+            isFlying = true;
 
             float wind = GameObject.Find("GameManager").GetComponent<GameManager>().windSpeed * Time.deltaTime * 0.015f;
 
@@ -46,20 +67,21 @@ public class towermanager : MonoBehaviour {
             Vector3 ToTarget = positionOg - transform.position;
             float ang = Mathf.Atan2(ToTarget.y, ToTarget.x) * Mathf.Rad2Deg;
             Quaternion qu = Quaternion.AngleAxis(ang, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, qu, Time.deltaTime * 3);
+            transform.rotation = Quaternion.Slerp(transform.rotation, qu, Time.deltaTime * speed * 2f);
 
-            float step = speed * Time.deltaTime * .5f;
+            float step = 1.5f * Time.deltaTime;
 
             this.transform.position = Vector2.MoveTowards(this.transform.position, positionOg, step);
 
-            spwn.flying = true;
+            isFlying = true;
 
         } else if (flying) {
 
-            spwn.flying = false;
+            isFlying = false;
 
         }
 
+        // Shoot 
         if (Physics2D.OverlapCircle(transform.position, range, layerMask)) {
 
             target = Physics2D.OverlapCircle(transform.position, range, layerMask).GetComponent<EnemyController>();

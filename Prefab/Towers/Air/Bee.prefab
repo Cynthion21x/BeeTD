@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 9200873605159302537}
   m_Layer: 7
   m_Name: Bee
-  m_TagString: Untagged
+  m_TagString: bug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,6 +191,8 @@ MonoBehaviour:
     m_Bits: 64
   canShoot: 1
   flying: 1
+  spwn: {fileID: 0}
+  isFlying: 0
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0
