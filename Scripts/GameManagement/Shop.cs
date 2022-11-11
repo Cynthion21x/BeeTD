@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.EventSystems;
 
 public class Shop : MonoBehaviour {
 
@@ -22,6 +24,12 @@ public class Shop : MonoBehaviour {
     public Spawner spwn;
 
     public Collider2D selectedTower;
+
+    public GameObject selectorUi;
+    public TextMeshProUGUI selectorCost;
+    public TextMeshProUGUI selectorLevel;
+
+    //public bool hover;
 
     void Update(){
 
@@ -98,7 +106,11 @@ public class Shop : MonoBehaviour {
 
                 if (checker.Length == 0) {
 
-                    selectedTower = null;
+                    if (!EventSystem.current.IsPointerOverGameObject()) {
+
+                        selectedTower = null;
+
+                    }
 
                 }
 
@@ -111,6 +123,32 @@ public class Shop : MonoBehaviour {
             circle.transform.position = selectedTower.transform.position;
             circle.transform.localScale = new Vector2(selectedTower.GetComponent<towermanager>().range, selectedTower.GetComponent<towermanager>().range);
             circle.SetActive(true);
+
+            selectorUi.SetActive(true);
+            selectorLevel.text = "Level: " + selectedTower.GetComponent<towermanager>().level.ToString();
+
+            selectorCost.text = ((int)Mathf.Pow(selectedTower.GetComponent<towermanager>().level * 10, 2)).ToString();
+
+        }
+
+        if (selectedTower == null) {
+
+            selectorUi.SetActive(false);
+
+        }
+
+    }
+
+    public void buyUpgrade() {
+
+        int cost = (int)Mathf.Pow(selectedTower.GetComponent<towermanager>().level * 10, 2);
+
+        if (cost <= gameManager.coin) {
+
+            gameManager.coin -= cost;
+            selectedTower.GetComponent<towermanager>().damage *= 1.5f;
+            selectedTower.GetComponent<towermanager>().level++;
+
         }
 
     }
@@ -140,6 +178,21 @@ public class Shop : MonoBehaviour {
 
             gameManager.coin -= cost;
             turret = Instantiate(towers[1], mousePos, Quaternion.identity);
+
+        }
+
+    }
+
+   public void buyLady(){
+
+        int cost = 75;
+
+        if (cost <= gameManager.coin && placing == false) {
+
+            placing = true;
+
+            gameManager.coin -= cost;
+            turret = Instantiate(towers[4], mousePos, Quaternion.identity);
 
         }
 

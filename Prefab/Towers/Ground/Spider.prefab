@@ -193,6 +193,7 @@ MonoBehaviour:
   flying: 0
   spwn: {fileID: 0}
   isFlying: 0
+  level: 1
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0

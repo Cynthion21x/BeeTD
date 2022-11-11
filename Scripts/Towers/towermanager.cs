@@ -27,6 +27,8 @@ public class towermanager : MonoBehaviour {
     public bool isFlying = false;
     private GameObject flyingChild = null;
 
+    public int level = 1;
+
     public void Set(){
 
         positionOg = transform.position;
