@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,25 @@ public class GameManager : MonoBehaviour {
 
     public GameObject died;
 
+    private string easystring;
+    private string normalstring;
+    private string tricktstring;
+
+    void Start(){
+
+        System.Random random = new System.Random();
+        int num = random.Next(0, 3);
+
+        string[] easy = { "Awh not even past easy mode", "Its called easy for a reason", "you didnt use the meta" };
+        string[] norm = { "A fair place to die", "Nothing special happens here", "you died" };
+        string[] tricky = { "Thats so crazy", "It is quite tricky to be fair", "You ran the meta" };
+
+        easystring = easy[num];
+        normalstring = norm[num];
+        tricktstring = tricky[num]; 
+
+    }
+
     void Update(){
 
         windSpeed = Mathf.Round(Mathf.Abs(Mathf.Sin((float)spawner.Wave * 2)) * 700f) / 100f;
@@ -41,15 +61,15 @@ public class GameManager : MonoBehaviour {
 
             if (spawner.mode == "easy") {
 
-                endMessage.text = "Its called easy mode for a reason";
+                endMessage.text = "\"" + easystring + "\"";
 
             } else if (spawner.mode == "regular") {
 
-                endMessage.text = "Just wait until tricky mode";
+                endMessage.text = "\"" + normalstring + "\"";
 
             } else {
 
-                endMessage.text = "Do not worry many dont get here";
+                endMessage.text = "\"" + tricktstring + "\"";
 
             }
 

@@ -35,7 +35,7 @@ public class DiscordRP : MonoBehaviour {
 
     private void Start()
     {
-        discord = new Discord.Discord(1016345793852100719, (System.UInt64)Discord.CreateFlags.Default);
+        discord = new Discord.Discord(1016345793852100719, (System.UInt64)Discord.CreateFlags.NoRequireDiscord);
         rp = discord.GetActivityManager();
 
         time = DateTimeOffset.Now.ToUnixTimeSeconds();
@@ -88,22 +88,6 @@ public class DiscordRP : MonoBehaviour {
             else
             {
                 Debug.LogError("Failed to load RP");
-            }
-        });
-
-    }
-
-    void OnDestroy()
-    {
-        rp.ClearActivity((result) => {
-            if (result == Discord.Result.Ok)
-            {
-                Debug.Log("Cleared");
-                discord.Dispose();
-            }
-            else
-            {
-                Debug.LogError("huh");
             }
         });
 

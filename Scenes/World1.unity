@@ -6655,7 +6655,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100.05
+  m_fontSize: 49.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7584,7 +7584,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 179.35
+  m_fontSize: 89.65
   m_fontSizeBase: 110.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8060,7 +8060,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 179.35
+  m_fontSize: 89.65
   m_fontSizeBase: 110.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13073,7 +13073,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100.05
+  m_fontSize: 49.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -19515,7 +19515,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 179.25
+  m_fontSize: 88.9
   m_fontSizeBase: 110.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -19679,7 +19679,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100.05
+  m_fontSize: 49.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20344,7 +20344,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100.05
+  m_fontSize: 49.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -20653,7 +20653,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 141.6
+  m_fontSize: 70.85
   m_fontSizeBase: 110.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21377,7 +21377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d75bf3432274b448b75d0960494b686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 
+  mode: easy
   modeIcon: {fileID: 1303731697}
   easy: {fileID: 21300000, guid: 21abd91b3158be745bd3487a8d5bf17b, type: 3}
   tricky: {fileID: 21300000, guid: 45c9a9a5bdaee4441aabbbf68b60f8ee, type: 3}
@@ -21841,7 +21841,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 327.086, y: 327.086}
+  m_CellSize: {x: 161.48616, y: 161.48616}
   m_Spacing: {x: 1, y: 30}
   m_Constraint: 0
   m_ConstraintCount: 2
