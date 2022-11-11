@@ -4908,8 +4908,8 @@ MonoBehaviour:
   aoe: 1.04
   minSpeed: 0
   speedReduce: 0
-  ImpactEffect: {fileID: 6068470116422173642, guid: bd280bcf0b3d074468597ac54842c80f, type: 3}
-  DespawnEffect: {fileID: 6068470116422173642, guid: 07e899404519d7d4a9dc9cbc299b1056, type: 3}
+  ImpactEffect: {fileID: 6068470116422173642, guid: 07e899404519d7d4a9dc9cbc299b1056, type: 3}
+  DespawnEffect: {fileID: 0}
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 64

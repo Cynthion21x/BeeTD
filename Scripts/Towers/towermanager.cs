@@ -37,7 +37,7 @@ public class towermanager : MonoBehaviour {
 
             spwn.flying = true;
 
-            float wind = GameObject.Find("GameManager").GetComponent<GameManager>().windSpeed * Time.deltaTime * 0.0075f;
+            float wind = GameObject.Find("GameManager").GetComponent<GameManager>().windSpeed * Time.deltaTime * 0.015f;
 
             transform.position = new Vector3(transform.position.x + wind, transform.position.y + wind, transform.position.z);
 
