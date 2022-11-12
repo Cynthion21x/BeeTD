@@ -185,7 +185,7 @@ public class Shop : MonoBehaviour {
 
    public void buyLady(){
 
-        int cost = 75;
+        int cost = 25;
 
         if (cost <= gameManager.coin && placing == false) {
 
@@ -213,7 +213,7 @@ public class Shop : MonoBehaviour {
 
     }
 
-        public void buyDragon(){
+    public void buyDragon(){
 
         int cost = 175;
 
@@ -223,6 +223,36 @@ public class Shop : MonoBehaviour {
 
             gameManager.coin -= cost;
             turret = Instantiate(towers[3], mousePos, Quaternion.identity);
+
+        }
+
+    }
+
+    public void buyAnt(){
+
+        int cost = 150;
+
+        if (cost <= gameManager.coin && placing == false) {
+
+            placing = true;
+
+            gameManager.coin -= cost;
+            turret = Instantiate(towers[5], mousePos, Quaternion.identity);
+
+        }
+
+    }
+
+    public void buyMantis(){
+
+        int cost = 175;
+
+        if (cost <= gameManager.coin && placing == false) {
+
+            placing = true;
+
+            gameManager.coin -= cost;
+            turret = Instantiate(towers[6], mousePos, Quaternion.identity);
 
         }
 

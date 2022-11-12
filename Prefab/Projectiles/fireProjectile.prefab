@@ -4913,6 +4913,7 @@ MonoBehaviour:
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  statusEffect: burn
 --- !u!58 &2664368857461169248
 CircleCollider2D:
   m_ObjectHideFlags: 0

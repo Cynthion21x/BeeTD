@@ -230,7 +230,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  coinDrop: 0
+  coinDrop: 40
   damage: 5
 --- !u!61 &5520036999062632005
 BoxCollider2D:

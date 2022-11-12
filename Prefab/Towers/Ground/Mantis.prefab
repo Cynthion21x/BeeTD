@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75266553185512652}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02, y: 0.09, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.08, y: -0.0004, z: 0}
+  m_LocalScale: {x: 1, y: 0.9846, z: 1}
   m_Children: []
   m_Father: {fileID: 75266553324364551}
   m_RootOrder: 0
@@ -68,10 +68,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1295577799
-  m_SortingLayer: 2
-  m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: f7aab8abdef834c4f96fd2649a18e952, type: 3}
+  m_SortingLayerID: 1242797297
+  m_SortingLayer: 4
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: fe079e7d9b0235e49a1e55aa3472c158, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.27058825}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
   m_Layer: 7
-  m_Name: snail
+  m_Name: Mantis
   m_TagString: bug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 75266553324364549}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -5.76, y: 1.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_Children:
   - {fileID: 75266553185512655}
   - {fileID: 75266554797413950}
@@ -154,10 +154,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1295577799
-  m_SortingLayer: 2
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f7aab8abdef834c4f96fd2649a18e952, type: 3}
+  m_SortingLayerID: 1242797297
+  m_SortingLayer: 4
+  m_SortingOrder: 8
+  m_Sprite: {fileID: 21300000, guid: fe079e7d9b0235e49a1e55aa3472c158, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -180,11 +180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14393c158d8b636488f4014fc76ab011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 3.5
-  fireRate: 1.85
-  speed: 0.95
-  damage: 17.5
-  projectileType: {fileID: 5938905900805307995, guid: dc8d765de2eb7224ab05d1c862d7d00c, type: 3}
+  range: 2.39
+  fireRate: 4.04
+  speed: 16.82
+  damage: 70
+  projectileType: {fileID: 5938905900805307995, guid: 8d5d9f63cebe2df429dac71e60f73372, type: 3}
   firePoint: {fileID: 75266554797413950}
   layerMask:
     serializedVersion: 2
@@ -207,7 +207,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.03643793}
+  m_Offset: {x: 0, y: 0.025912523}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -218,7 +218,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.2712401}
+  m_Size: {x: 2, y: 1.4921157}
   m_EdgeRadius: 0
 --- !u!1 &75266554797413951
 GameObject:
@@ -244,7 +244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75266554797413951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8, y: 0, z: 0}
+  m_LocalPosition: {x: 1.11, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 75266553324364551}

@@ -20,6 +20,8 @@ public class projectile : MonoBehaviour {
 
     public LayerMask EnemyLayer;
 
+    public string statusEffect = "none";
+
     void Start() {
 
         StartCoroutine(kill(lifeTime));
@@ -41,6 +43,9 @@ public class projectile : MonoBehaviour {
             if (enemy.enabled == true) {
 
                 enemy.hp -= damage;
+
+                if (!enemy.statusEffect.Contains(statusEffect))
+                    enemy.statusEffect.Add(statusEffect);
 
                 if (enemy.speed >= minSpeed)
                     enemy.speed -= speedReduce;

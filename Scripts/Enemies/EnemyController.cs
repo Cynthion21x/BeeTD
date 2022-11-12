@@ -16,20 +16,67 @@ public class EnemyController : MonoBehaviour {
     private bool invun = false;
     private float maxHp;
     private float maxSpd;
+    private int maxCost;
+    private int maxDamage;
 
     public int coinDrop;
     public int damage;
+
+    private bool clearing;
+
+    public List<string> statusEffect;
 
     void Start(){
 
         maxHp = hp;
         maxSpd = speed;
+        maxCost = coinDrop;
+        maxDamage = damage;
         invun = true;
         StartCoroutine(cooldown());
+
+        statusEffect = new List<string>() { "none" };
 
     }
 
     void Update(){
+
+        foreach (string i in statusEffect) {
+
+            if (i != "none" && clearing == false) {
+
+                StartCoroutine(cleanStatus());
+                clearing = true;
+
+            }
+
+            if (i == "slow") {
+
+                speed = maxSpd * 0.5f;
+
+
+             }
+
+             if (i == "money") {
+
+                coinDrop = maxCost + 5;
+                damage = maxDamage + 1;
+
+              }
+
+              if (i == "posion") {
+
+                hp -= (maxHp * 0.0125f) * Time.deltaTime;
+
+              }
+
+              if (i == "burn") {
+
+                 hp -= 5f * Time.deltaTime;
+
+               }
+
+        }
 
         if (invun){
             hp = maxHp;
@@ -48,6 +95,12 @@ public class EnemyController : MonoBehaviour {
             GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().hp -= damage;
             Destroy(transform.parent.gameObject);
             Destroy(this.gameObject);
+        }
+
+        if (current >= target.Length) {
+
+            current = target.Length -1;
+
         }
 
         if ((Vector2)transform.position != (Vector2)target[current].position) {
@@ -84,6 +137,20 @@ public class EnemyController : MonoBehaviour {
 
         yield return new WaitForSeconds(2f);
         invun = false;
+
+    }
+
+    public IEnumerator cleanStatus() {
+
+        yield return new WaitForSeconds(1f);
+
+        statusEffect = new List<string>() { "none" };
+
+        coinDrop = maxCost;
+        speed = maxSpd;
+        damage = maxDamage;
+
+        clearing = false;
 
     }
 

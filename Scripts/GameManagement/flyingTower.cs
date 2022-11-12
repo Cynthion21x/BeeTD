@@ -37,5 +37,7 @@ public class flyingTower : MonoBehaviour {
 
         this.transform.rotation = perentTower.transform.rotation;
 
+        collide.isTrigger = true;
+
     }
 }
