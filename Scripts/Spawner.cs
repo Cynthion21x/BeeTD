@@ -100,7 +100,7 @@ public class Spawner : MonoBehaviour {
 
         if (Wave % 16 == 0) {
 
-            StartCoroutine(AsyncSpawn(wasp4, 0, 3000, .75f));
+            StartCoroutine(AsyncSpawn(wasp4, 0, 5000, .75f));
 
             Debug.Log("SpawnBoss");
 
@@ -131,7 +131,7 @@ public class Spawner : MonoBehaviour {
 
             if (i % 16 == 0) {
 
-                float QueenHp = 1400;
+                float QueenHp = 2000;
                 float QueenSpeed = .75f;
 
                 StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
