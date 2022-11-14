@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class towermanager : MonoBehaviour {
 
+    public bool precise;
+    public int accuracy;
+
     public float range;
     public float fireRate;
     public float speed;
@@ -13,7 +16,7 @@ public class towermanager : MonoBehaviour {
 
     public Transform firePoint;
 
-    private EnemyController target;
+    [SerializeField]private EnemyController target;
 
     public LayerMask layerMask;
 
@@ -84,15 +87,44 @@ public class towermanager : MonoBehaviour {
         }
 
         // Shoot 
-        if (Physics2D.OverlapCircle(transform.position, range, layerMask)) {
+        /*if (Physics2D.OverlapCircle(transform.position, range, layerMask) && target == null) {
 
-            target = Physics2D.OverlapCircle(transform.position, range, layerMask).GetComponent<EnemyController>();
+            Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, range, layerMask);
+            target = targets[targets.Length-1].GetComponent<EnemyController>();
+
+            //target = Physics2D.OverlapCircle(transform.position, range, layerMask).GetComponent<EnemyController>();
 
         } else {
 
             target = null;
 
+        }*/
+
+        if (target == null) {
+
+            if (Physics2D.OverlapCircle(transform.position, range, layerMask)) {
+
+                target = Physics2D.OverlapCircle(transform.position, range, layerMask).GetComponent<EnemyController>();
+
+            }
+
         }
+
+        bool c = false;
+
+        foreach (Collider2D i in Physics2D.OverlapCircleAll(transform.position, range, layerMask)) {
+
+            if (i.GetComponent<EnemyController>() == target) {
+
+                c = true;
+
+            }
+
+        }
+
+        if (c == false)
+
+            target = null;
 
         if (target != null) {
 
@@ -104,10 +136,15 @@ public class towermanager : MonoBehaviour {
 
             if (canShoot == true) {
 
-                GameObject project = Instantiate(projectileType, firePoint.position, Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed));
-                project.GetComponent<projectile>().damage = damage;
-            
-                StartCoroutine(cooldown(fireRate));
+                if (!precise) {
+
+                    shoot(q);
+
+                } else if (2 == 1 + 1) {
+
+                    shoot(q);
+
+                }
 
             }
         }
@@ -119,6 +156,15 @@ public class towermanager : MonoBehaviour {
         canShoot = false;
         yield return new WaitForSeconds(time);
         canShoot = true;
+
+    }
+
+    void shoot(Quaternion q) {
+
+        GameObject project = Instantiate(projectileType, firePoint.position, Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed));
+        project.GetComponent<projectile>().damage = damage;
+
+        StartCoroutine(cooldown(fireRate));
 
     }
 

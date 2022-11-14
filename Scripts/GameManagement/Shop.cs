@@ -146,7 +146,7 @@ public class Shop : MonoBehaviour {
         if (cost <= gameManager.coin) {
 
             gameManager.coin -= cost;
-            selectedTower.GetComponent<towermanager>().damage *= 1.5f;
+            selectedTower.GetComponent<towermanager>().damage *= 2f;
             selectedTower.GetComponent<towermanager>().level++;
 
         }
@@ -253,6 +253,21 @@ public class Shop : MonoBehaviour {
 
             gameManager.coin -= cost;
             turret = Instantiate(towers[6], mousePos, Quaternion.identity);
+
+        }
+
+    }
+
+    public void buyFirefly(){
+
+        int cost = 75;
+
+        if (cost <= gameManager.coin && placing == false) {
+
+            placing = true;
+
+            gameManager.coin -= cost;
+            turret = Instantiate(towers[7], mousePos, Quaternion.identity);
 
         }
 

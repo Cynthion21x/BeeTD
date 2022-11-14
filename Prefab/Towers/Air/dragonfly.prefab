@@ -181,7 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14393c158d8b636488f4014fc76ab011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 3.58
+  precise: 0
+  range: 3.09
   fireRate: 0.16
   speed: 0.5
   damage: 7

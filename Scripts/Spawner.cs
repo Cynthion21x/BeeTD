@@ -131,7 +131,7 @@ public class Spawner : MonoBehaviour {
 
             if (i % 16 == 0) {
 
-                float QueenHp = 2000;
+                float QueenHp = 1000;
                 float QueenSpeed = .75f;
 
                 StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));

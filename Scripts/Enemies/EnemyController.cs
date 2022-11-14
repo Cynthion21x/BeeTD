@@ -142,7 +142,7 @@ public class EnemyController : MonoBehaviour {
 
     public IEnumerator cleanStatus() {
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         statusEffect = new List<string>() { "none" };
 
