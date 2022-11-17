@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  speed: 1.5
+  speed: 1.96
   lifeTime: 4
   aoe: 0.7
   minSpeed: 1

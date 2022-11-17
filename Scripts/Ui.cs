@@ -7,7 +7,14 @@ public class Ui : MonoBehaviour {
     public AudioSource sound;
     public Spawner spawn;
 
-    void Start(){
+    void Start() {
+
+        if (!PlayerPrefs.HasKey("full")) {
+
+            PlayerPrefs.SetInt("full", 1);
+            Screen.fullScreen = true;
+
+        }
 
     }
 
@@ -29,9 +36,32 @@ public class Ui : MonoBehaviour {
 
     }
 
+    public void timeSet(System.Single vol){
+
+        Time.timeScale = vol;
+
+    }
+
+    public void FullscreenSet(bool value) {
+
+        Screen.fullScreen = value;
+
+        if (value)
+            PlayerPrefs.SetInt("full", 1);
+        else
+            PlayerPrefs.SetInt("full", 0);
+
+    }
+
     public void AutoPlaySet(bool value) { 
 
-        spawn.autoplay = value;
+        if (spawn != null)
+            spawn.autoplay = value;
+
+        if (value)
+            PlayerPrefs.SetInt("auto", 1);
+        else
+            PlayerPrefs.SetInt("auto", 0);
 
     }
 

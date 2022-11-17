@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class towermanager : MonoBehaviour {
 
+    public float weight;
+
     public bool precise;
     public int accuracy;
 
@@ -31,6 +33,8 @@ public class towermanager : MonoBehaviour {
     private GameObject flyingChild = null;
 
     public int level = 1;
+
+    public int sellPrice;
 
     public void Set(){
 
@@ -63,7 +67,7 @@ public class towermanager : MonoBehaviour {
 
             isFlying = true;
 
-            float wind = GameObject.Find("GameManager").GetComponent<GameManager>().windSpeed * Time.deltaTime * 0.015f;
+            float wind = GameObject.Find("GameManager").GetComponent<GameManager>().windSpeed * Time.deltaTime * weight * 0.15f;
 
             transform.position = new Vector3(transform.position.x + wind, transform.position.y + wind, transform.position.z);
 

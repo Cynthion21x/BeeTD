@@ -100,7 +100,7 @@ public class Spawner : MonoBehaviour {
 
         if (Wave % 16 == 0) {
 
-            StartCoroutine(AsyncSpawn(wasp4, 0, 5000, .75f));
+            StartCoroutine(AsyncSpawn(wasp4, 0, 3750, .75f));
 
             Debug.Log("SpawnBoss");
 
@@ -131,7 +131,7 @@ public class Spawner : MonoBehaviour {
 
             if (i % 16 == 0) {
 
-                float QueenHp = 1000;
+                float QueenHp = 700;
                 float QueenSpeed = .75f;
 
                 StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
@@ -186,7 +186,7 @@ public class Spawner : MonoBehaviour {
 
         if (mode == "regular") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * 1.25f * (Wave - 15);
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * 1.5f * (Wave - 15);
 
         }
 

@@ -29,6 +29,11 @@ public class Shop : MonoBehaviour {
     public TextMeshProUGUI selectorCost;
     public TextMeshProUGUI selectorLevel;
 
+    public GameObject sellUi;
+    public TextMeshProUGUI sellCost;
+
+    private int buyPrice;
+
     //public bool hover;
 
     void Update(){
@@ -61,6 +66,7 @@ public class Shop : MonoBehaviour {
 
                 turret.GetComponent<towermanager>().Set();
                 turret.GetComponent<towermanager>().spwn = spwn;
+                turret.GetComponent<towermanager>().sellPrice = (int)((double)buyPrice * 0.75d);
 
                 placing = false;
                 selectedTower = null;
@@ -83,7 +89,7 @@ public class Shop : MonoBehaviour {
 
                 Debug.Log("selecting");
 
-                Collider2D[] checker = Physics2D.OverlapCircleAll(mousePos, .5f, cantPlaceOn);
+                Collider2D[] checker = Physics2D.OverlapCircleAll(mousePos, .001f, cantPlaceOn);
 
                 foreach (Collider2D c in checker) {
 
@@ -94,7 +100,7 @@ public class Shop : MonoBehaviour {
                     }
 
                     if (turret != null) {
-                        if (selectedTower == turret.GetComponent<Collider2D>()) {
+                        if (selectedTower == turret.GetComponent<Collider2D>().GetComponent<towermanager>()) {
 
                             selectedTower = null;
                             turret = null;
@@ -125,6 +131,9 @@ public class Shop : MonoBehaviour {
             circle.SetActive(true);
 
             selectorUi.SetActive(true);
+            sellUi.SetActive(true);
+
+            sellCost.text = selectedTower.GetComponent<towermanager>().sellPrice.ToString();
             selectorLevel.text = "Level: " + selectedTower.GetComponent<towermanager>().level.ToString();
 
             selectorCost.text = ((int)Mathf.Pow(selectedTower.GetComponent<towermanager>().level * 10, 2)).ToString();
@@ -133,6 +142,7 @@ public class Shop : MonoBehaviour {
 
         if (selectedTower == null) {
 
+            sellUi.SetActive(false);
             selectorUi.SetActive(false);
 
         }
@@ -146,10 +156,21 @@ public class Shop : MonoBehaviour {
         if (cost <= gameManager.coin) {
 
             gameManager.coin -= cost;
-            selectedTower.GetComponent<towermanager>().damage *= 2f;
+            selectedTower.GetComponent<towermanager>().damage *= 1.5f;
             selectedTower.GetComponent<towermanager>().level++;
 
         }
+
+    }
+
+    public void sell() {
+
+        int cost = -(selectedTower.GetComponent<towermanager>().sellPrice);
+
+        gameManager.coin -= cost;
+
+        Destroy(selectedTower.gameObject);
+        selectedTower = null;
 
     }
 
@@ -162,6 +183,8 @@ public class Shop : MonoBehaviour {
             placing = true;
 
             gameManager.coin -= cost;
+            buyPrice = cost;
+
             turret = Instantiate(towers[0], mousePos, Quaternion.identity);
 
         }
@@ -177,6 +200,8 @@ public class Shop : MonoBehaviour {
             placing = true;
 
             gameManager.coin -= cost;
+            buyPrice = cost;
+
             turret = Instantiate(towers[1], mousePos, Quaternion.identity);
 
         }
@@ -192,6 +217,8 @@ public class Shop : MonoBehaviour {
             placing = true;
 
             gameManager.coin -= cost;
+            buyPrice = cost;
+
             turret = Instantiate(towers[4], mousePos, Quaternion.identity);
 
         }
@@ -207,6 +234,8 @@ public class Shop : MonoBehaviour {
             placing = true;
 
             gameManager.coin -= cost;
+            buyPrice = cost;
+
             turret = Instantiate(towers[2], mousePos, Quaternion.identity);
 
         }
@@ -222,6 +251,8 @@ public class Shop : MonoBehaviour {
             placing = true;
 
             gameManager.coin -= cost;
+            buyPrice = cost;
+
             turret = Instantiate(towers[3], mousePos, Quaternion.identity);
 
         }
@@ -237,6 +268,8 @@ public class Shop : MonoBehaviour {
             placing = true;
 
             gameManager.coin -= cost;
+            buyPrice = cost;
+
             turret = Instantiate(towers[5], mousePos, Quaternion.identity);
 
         }
@@ -252,6 +285,8 @@ public class Shop : MonoBehaviour {
             placing = true;
 
             gameManager.coin -= cost;
+            buyPrice = cost;
+
             turret = Instantiate(towers[6], mousePos, Quaternion.identity);
 
         }
@@ -267,7 +302,26 @@ public class Shop : MonoBehaviour {
             placing = true;
 
             gameManager.coin -= cost;
+            buyPrice = cost;
+
             turret = Instantiate(towers[7], mousePos, Quaternion.identity);
+
+        }
+
+    }
+
+    public void buyShield(){
+
+        int cost = 100;
+
+        if (cost <= gameManager.coin && placing == false) {
+
+            placing = true;
+
+            gameManager.coin -= cost;
+            buyPrice = cost;
+
+            turret = Instantiate(towers[8], mousePos, Quaternion.identity);
 
         }
 

@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour {
     public int coinDrop;
     public int damage;
 
-    private bool clearing;
+    public bool clearing;
 
     public List<string> statusEffect;
 
@@ -73,6 +73,12 @@ public class EnemyController : MonoBehaviour {
               if (i == "burn") {
 
                  hp -= 5f * Time.deltaTime;
+
+               }
+
+               if (i == "push") {
+
+                 speed = maxSpd * -1;
 
                }
 
@@ -142,7 +148,7 @@ public class EnemyController : MonoBehaviour {
 
     public IEnumerator cleanStatus() {
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         statusEffect = new List<string>() { "none" };
 

@@ -181,12 +181,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   precise: 0
+  accuracy: 0
   range: 3.5
   fireRate: 1.85
   speed: 0.95
-  damage: 17.5
+  damage: 19
   projectileType: {fileID: 5938905900805307995, guid: dc8d765de2eb7224ab05d1c862d7d00c, type: 3}
   firePoint: {fileID: 75266554797413950}
+  target: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -195,6 +197,7 @@ MonoBehaviour:
   spwn: {fileID: 0}
   isFlying: 0
   level: 1
+  sellPrice: 0
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0

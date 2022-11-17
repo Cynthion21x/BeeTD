@@ -59,14 +59,16 @@ public class projectile : MonoBehaviour {
                         coll.GetComponent<EnemyController>().hp -= damage * 0.75f; 
                         Debug.Log("Aditional target hit");  
 
-                    }   
+                    }
+
+
+                 Instantiate(ImpactEffect, transform.position, Quaternion.identity);
+                 Destroy(gameObject);
 
                 }
 
             }
 
-            Instantiate(ImpactEffect, transform.position, Quaternion.identity);
-            Destroy(gameObject);
         }
 
     }
