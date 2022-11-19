@@ -10,6 +10,12 @@ public class flyingTower : MonoBehaviour {
 
     void Update() {
 
+        if (perentTower == null) {
+
+            Destroy(gameObject);
+
+        }
+
         GameObject manager = GameObject.Find("GameManager");
 
         if(manager.GetComponent<Shop>().placing) {

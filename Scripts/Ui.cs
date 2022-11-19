@@ -46,22 +46,13 @@ public class Ui : MonoBehaviour {
 
         Screen.fullScreen = value;
 
-        if (value)
-            PlayerPrefs.SetInt("full", 1);
-        else
-            PlayerPrefs.SetInt("full", 0);
-
     }
 
     public void AutoPlaySet(bool value) { 
 
-        if (spawn != null)
+        if (spawn != null) {
             spawn.autoplay = value;
-
-        if (value)
-            PlayerPrefs.SetInt("auto", 1);
-        else
-            PlayerPrefs.SetInt("auto", 0);
+        }
 
     }
 

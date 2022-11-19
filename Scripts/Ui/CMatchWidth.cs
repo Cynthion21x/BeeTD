@@ -19,7 +19,7 @@ public class CMatchWidth : MonoBehaviour {
 
         //Debug.Log(camera.aspect);
 
-        if (camera.aspect > 1.6) {
+        if (camera.aspect > 1.75) {
 
             float unitsPerPixel = sceneWidth / Screen.width;
 

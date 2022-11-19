@@ -327,4 +327,21 @@ public class Shop : MonoBehaviour {
 
     }
 
+    public void buyCricket(){
+
+        int cost = 150;
+
+        if (cost <= gameManager.coin && placing == false) {
+
+            placing = true;
+
+            gameManager.coin -= cost;
+            buyPrice = cost;
+
+            turret = Instantiate(towers[9], mousePos, Quaternion.identity);
+
+        }
+
+    }
+
 }

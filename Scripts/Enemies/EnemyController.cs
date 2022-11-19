@@ -24,7 +24,11 @@ public class EnemyController : MonoBehaviour {
 
     public bool clearing;
 
+    public float damageMult = 1f;
+
     public List<string> statusEffect;
+
+    public SpriteRenderer damageSprite;
 
     void Start(){
 
@@ -37,9 +41,13 @@ public class EnemyController : MonoBehaviour {
 
         statusEffect = new List<string>() { "none" };
 
+        damageSprite.color = new Color(1, 1, 1, 0);
+
     }
 
     void Update(){
+
+        damageSprite.color = new Color(1, 1, 1, 1- hp / maxHp);
 
         foreach (string i in statusEffect) {
 
@@ -78,7 +86,13 @@ public class EnemyController : MonoBehaviour {
 
                if (i == "push") {
 
-                 speed = maxSpd * -1;
+                 speed = maxSpd * -0.25f;
+
+               }
+
+               if (i == "damage") {
+
+                 damageMult = 1.25f;
 
                }
 
@@ -156,7 +170,15 @@ public class EnemyController : MonoBehaviour {
         speed = maxSpd;
         damage = maxDamage;
 
+        damageMult = 1f;
+
         clearing = false;
+
+    }
+
+    public void Dealdamage(float dmg) {
+
+        hp -= dmg * damageMult;
 
     }
 

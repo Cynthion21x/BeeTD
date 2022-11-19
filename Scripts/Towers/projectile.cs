@@ -42,7 +42,7 @@ public class projectile : MonoBehaviour {
 
             if (enemy.enabled == true) {
 
-                enemy.hp -= damage;
+                enemy.Dealdamage(damage);
 
                 if (!enemy.statusEffect.Contains(statusEffect))
                     enemy.statusEffect.Add(statusEffect);
@@ -56,18 +56,22 @@ public class projectile : MonoBehaviour {
 
                     if (coll.GetComponent<EnemyController>() != enemy){
 
-                        coll.GetComponent<EnemyController>().hp -= damage * 0.75f; 
+                        coll.GetComponent<EnemyController>().Dealdamage(damage * 0.75f); 
                         Debug.Log("Aditional target hit");  
 
                     }
 
-
-                 Instantiate(ImpactEffect, transform.position, Quaternion.identity);
-                 Destroy(gameObject);
-
                 }
 
             }
+
+            if (ImpactEffect != null) {
+
+                Instantiate(ImpactEffect, transform.position, Quaternion.identity);
+
+            }
+
+            Destroy(gameObject);
 
         }
 

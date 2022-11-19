@@ -48,12 +48,18 @@ public class SaveOptions : MonoBehaviour {
 
         if (PlayerPrefs.GetInt("auto") == 1){
 
-            spawn.autoplay = true;
+            if (spawn != null) {
+                spawn.autoplay = true;
+            }
+
             AutoPlay.isOn = true;
 
         } else {
 
-            spawn.autoplay = false;
+            if (spawn != null) {
+                spawn.autoplay = false;
+            }
+
             AutoPlay.isOn = false;
 
         }
@@ -64,6 +70,26 @@ public class SaveOptions : MonoBehaviour {
 
         PlayerPrefs.SetFloat("vol", soundSlider.value);
         PlayerPrefs.SetFloat("time", timeSlider.value);
+
+        if (AutoPlay.isOn) {
+
+            PlayerPrefs.SetInt("auto", 1);
+
+        } else {
+
+            PlayerPrefs.SetInt("auto", 0);
+
+        }
+
+        if (fulscreen.isOn) {
+
+            PlayerPrefs.SetInt("full", 1);
+
+        } else {
+
+            PlayerPrefs.SetInt("full", 0);
+
+        }
 
     }
 

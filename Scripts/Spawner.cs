@@ -100,7 +100,7 @@ public class Spawner : MonoBehaviour {
 
         if (Wave % 16 == 0) {
 
-            StartCoroutine(AsyncSpawn(wasp4, 0, 3750, .75f));
+            StartCoroutine(AsyncSpawn(wasp4, 0, 3000, .75f));
 
             Debug.Log("SpawnBoss");
 
@@ -180,13 +180,13 @@ public class Spawner : MonoBehaviour {
 
         if (mode == "tricky") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * Mathf.Pow(1.5f, (Wave - 13));
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * 1.0625f * (Wave - 16);
 
         }
 
         if (mode == "regular") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * 1.5f * (Wave - 15);
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * (Wave-15) * 0.10204081632f;
 
         }
 
