@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class projectile : MonoBehaviour {
 
+    public int statusStack = 0;
+
     public float damage;
     public float speed;
     public float lifeTime;
@@ -44,11 +46,26 @@ public class projectile : MonoBehaviour {
 
                 enemy.Dealdamage(damage);
 
-                if (!enemy.statusEffect.Contains(statusEffect))
+                int sCount = 0;
+
+                foreach (string i in enemy.statusEffect) {
+
+                    if (i == statusEffect) {
+
+                        sCount++;
+
+                    }
+
+                }
+
+                Debug.Log(sCount);
+                Debug.Log(statusStack);
+
+                if (!(sCount >= statusStack-1)) {
+
                     enemy.statusEffect.Add(statusEffect);
 
-                if (enemy.speed >= minSpeed)
-                    enemy.speed -= speedReduce;
+                }
 
                 Collider2D[] enemys = Physics2D.OverlapCircleAll(this.transform.position, aoe, EnemyLayer);
 

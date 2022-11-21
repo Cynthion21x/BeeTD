@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour {
 
     void Update(){
 
-        text.text = (Wave).ToString();
+        text.text = (Wave-1).ToString();
 
         if (GameObject.FindGameObjectWithTag("Enemy")) {
 
@@ -180,7 +180,7 @@ public class Spawner : MonoBehaviour {
 
         if (mode == "tricky") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * 1.0625f * (Wave - 16);
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * 1.0625f * (Wave - 59);
 
         }
 

@@ -36,6 +36,8 @@ public class towermanager : MonoBehaviour {
 
     public int sellPrice;
 
+    public int Stacks = 1;
+
     public void Set(){
 
         positionOg = transform.position;
@@ -167,6 +169,7 @@ public class towermanager : MonoBehaviour {
 
         GameObject project = Instantiate(projectileType, firePoint.position, Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed));
         project.GetComponent<projectile>().damage = damage;
+        project.GetComponent<projectile>().statusStack += Stacks;
 
         StartCoroutine(cooldown(fireRate));
 

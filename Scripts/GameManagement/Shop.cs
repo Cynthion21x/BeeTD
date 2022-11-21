@@ -151,13 +151,24 @@ public class Shop : MonoBehaviour {
 
     public void buyUpgrade() {
 
-        int cost = (int)Mathf.Pow(selectedTower.GetComponent<towermanager>().level * 10, 2);
+        towermanager tar = selectedTower.GetComponent<towermanager>();
+
+        int cost = (int)Mathf.Pow(tar.level * 10, 2);
 
         if (cost <= gameManager.coin) {
 
             gameManager.coin -= cost;
-            selectedTower.GetComponent<towermanager>().damage *= 1.5f;
-            selectedTower.GetComponent<towermanager>().level++;
+
+            tar.damage *= 2f;
+            tar.level++;
+
+            tar.Stacks++;
+
+            if (tar.GetComponent<endOfRoundEffect>() != null) {
+
+                tar.GetComponent<endOfRoundEffect>().value++;
+
+            }
 
         }
 
@@ -174,9 +185,7 @@ public class Shop : MonoBehaviour {
 
     }
 
-    public void buySnail(){
-
-        int cost = 100;
+    public void buyTower(int towerID, int cost) {
 
         if (cost <= gameManager.coin && placing == false) {
 
@@ -185,163 +194,73 @@ public class Shop : MonoBehaviour {
             gameManager.coin -= cost;
             buyPrice = cost;
 
-            turret = Instantiate(towers[0], mousePos, Quaternion.identity);
+            turret = Instantiate(towers[towerID], mousePos, Quaternion.identity);
 
         }
+
+    }
+
+    public void buySnail(){
+
+        buyTower(0, 100);
 
     }
 
     public void buyBee(){
 
-        int cost = 25;
-
-        if (cost <= gameManager.coin && placing == false) {
-
-            placing = true;
-
-            gameManager.coin -= cost;
-            buyPrice = cost;
-
-            turret = Instantiate(towers[1], mousePos, Quaternion.identity);
-
-        }
+        buyTower(1, 25);
 
     }
 
    public void buyLady(){
 
-        int cost = 25;
-
-        if (cost <= gameManager.coin && placing == false) {
-
-            placing = true;
-
-            gameManager.coin -= cost;
-            buyPrice = cost;
-
-            turret = Instantiate(towers[4], mousePos, Quaternion.identity);
-
-        }
+        buyTower(4, 25);
 
     }
 
     public void buySpider(){
 
-        int cost = 50;
-
-        if (cost <= gameManager.coin && placing == false) {
-
-            placing = true;
-
-            gameManager.coin -= cost;
-            buyPrice = cost;
-
-            turret = Instantiate(towers[2], mousePos, Quaternion.identity);
-
-        }
+        buyTower(2, 50);
 
     }
 
     public void buyDragon(){
 
-        int cost = 175;
-
-        if (cost <= gameManager.coin && placing == false) {
-
-            placing = true;
-
-            gameManager.coin -= cost;
-            buyPrice = cost;
-
-            turret = Instantiate(towers[3], mousePos, Quaternion.identity);
-
-        }
+        buyTower(3, 175);
 
     }
 
     public void buyAnt(){
 
-        int cost = 150;
-
-        if (cost <= gameManager.coin && placing == false) {
-
-            placing = true;
-
-            gameManager.coin -= cost;
-            buyPrice = cost;
-
-            turret = Instantiate(towers[5], mousePos, Quaternion.identity);
-
-        }
+        buyTower(5, 150);
 
     }
 
     public void buyMantis(){
 
-        int cost = 175;
-
-        if (cost <= gameManager.coin && placing == false) {
-
-            placing = true;
-
-            gameManager.coin -= cost;
-            buyPrice = cost;
-
-            turret = Instantiate(towers[6], mousePos, Quaternion.identity);
-
-        }
-
+        buyTower(6, 175);
     }
 
     public void buyFirefly(){
 
-        int cost = 75;
-
-        if (cost <= gameManager.coin && placing == false) {
-
-            placing = true;
-
-            gameManager.coin -= cost;
-            buyPrice = cost;
-
-            turret = Instantiate(towers[7], mousePos, Quaternion.identity);
-
-        }
+        buyTower(7, 75);
 
     }
 
     public void buyShield(){
 
-        int cost = 100;
-
-        if (cost <= gameManager.coin && placing == false) {
-
-            placing = true;
-
-            gameManager.coin -= cost;
-            buyPrice = cost;
-
-            turret = Instantiate(towers[8], mousePos, Quaternion.identity);
-
-        }
+        buyTower(8, 50);
 
     }
 
     public void buyCricket(){
 
-        int cost = 150;
+        buyTower(9, 150);
 
-        if (cost <= gameManager.coin && placing == false) {
+    }
 
-            placing = true;
-
-            gameManager.coin -= cost;
-            buyPrice = cost;
-
-            turret = Instantiate(towers[9], mousePos, Quaternion.identity);
-
-        }
-
+    public void buydung(){
+        buyTower(10, 200);
     }
 
 }

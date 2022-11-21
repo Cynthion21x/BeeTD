@@ -53,7 +53,19 @@ public class EnemyController : MonoBehaviour {
 
             if (i != "none" && clearing == false) {
 
-                StartCoroutine(cleanStatus());
+                float time = 2f;
+
+                if (i == "push") {
+
+                    time = 0.2f;
+
+                } if (i == "poision" || i == "damage") {
+
+                    time = 1f;
+
+                }
+
+                StartCoroutine(cleanStatus(i, time));
                 clearing = true;
 
             }
@@ -74,25 +86,25 @@ public class EnemyController : MonoBehaviour {
 
               if (i == "posion") {
 
-                hp -= (maxHp * 0.0125f) * Time.deltaTime;
+                hp -= (maxHp * 0.0275f) * Time.deltaTime;
 
               }
 
               if (i == "burn") {
 
-                 hp -= 5f * Time.deltaTime;
+                 hp -= 10f * Time.deltaTime;
 
                }
 
                if (i == "push") {
 
-                 speed = maxSpd * -0.25f;
+                 speed = maxSpd * -1f;
 
                }
 
                if (i == "damage") {
 
-                 damageMult = 1.25f;
+                 damageMult += 1.25f * Time.deltaTime;
 
                }
 
@@ -160,13 +172,13 @@ public class EnemyController : MonoBehaviour {
 
     }
 
-    public IEnumerator cleanStatus() {
+    public IEnumerator cleanStatus(string status, float time) {
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(time);
 
-        statusEffect = new List<string>() { "none" };
+        statusEffect.Remove(status);
 
-        coinDrop = maxCost;
+        //coinDrop = maxCost;
         speed = maxSpd;
         damage = maxDamage;
 
