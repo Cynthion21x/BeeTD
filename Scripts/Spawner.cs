@@ -180,7 +180,7 @@ public class Spawner : MonoBehaviour {
 
         if (mode == "tricky") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * 1.0625f * (Wave - 59);
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * 2f * (Wave - 59);
 
         }
 
