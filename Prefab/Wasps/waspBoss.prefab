@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 4358339338174413545}
   - component: {fileID: 5520036999062632005}
   - component: {fileID: 3851055961650886384}
+  - component: {fileID: 8436615866032146233}
   m_Layer: 6
   m_Name: wasp
   m_TagString: Enemy
@@ -314,6 +315,18 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8436615866032146233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236515296525282619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985c3caf50a56474f8f616d1b309c811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8335541443593436257
 GameObject:
   m_ObjectHideFlags: 0

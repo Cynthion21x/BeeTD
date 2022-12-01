@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 75266553324364548}
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
+  - component: {fileID: 7601153821466122503}
   m_Layer: 7
   m_Name: shield
   m_TagString: bug
@@ -200,6 +201,7 @@ MonoBehaviour:
   level: 1
   sellPrice: 0
   Stacks: 1
+  maxDamage: 0
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -226,6 +228,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4294405, y: 1.0267045}
   m_EdgeRadius: 0
+--- !u!114 &7601153821466122503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f84e19bbf9b3eb84aa05b7eeeadc04c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: push
+  effect: {fileID: 6068470116422173642, guid: 06a3947e23b959e4e9f7e1cc5b6a5dd2, type: 3}
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

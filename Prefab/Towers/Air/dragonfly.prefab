@@ -69,7 +69,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1242797297
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 22f9fecf2ab06f04786c80bf9f09bf76, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.27058825}
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1242797297
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 22f9fecf2ab06f04786c80bf9f09bf76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -187,7 +187,7 @@ MonoBehaviour:
   range: 3.09
   fireRate: 0.16
   speed: 0.5
-  damage: 7
+  damage: 3
   projectileType: {fileID: 5938905900805307995, guid: 06cf1ff0d51c5f84da55b2899465833e, type: 3}
   firePoint: {fileID: 75266554797413950}
   target: {fileID: 0}
@@ -200,6 +200,8 @@ MonoBehaviour:
   isFlying: 0
   level: 1
   sellPrice: 0
+  Stacks: 1
+  maxDamage: 3
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -326,7 +328,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1242797297
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 22f9fecf2ab06f04786c80bf9f09bf76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

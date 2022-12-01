@@ -38,9 +38,12 @@ public class towermanager : MonoBehaviour {
 
     public int Stacks = 1;
 
+    public float maxDamage;
+
     public void Set(){
 
         positionOg = transform.position;
+        maxDamage = damage;
 
     }
 
@@ -63,6 +66,9 @@ public class towermanager : MonoBehaviour {
             }
 
         }
+
+        if(GameObject.Find("GameManager").GetComponent<Powers>().power != "vengence")
+            damage = maxDamage * Mathf.Pow(2, level-1);
 
         // Glide away
         if (GameObject.FindGameObjectWithTag("Enemy") && flying) {

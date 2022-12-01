@@ -40,6 +40,12 @@ public class Ui : MonoBehaviour {
 
         Time.timeScale = vol;
 
+        if(SceneManager.GetActiveScene().name == "MainMenu") {
+
+            Time.timeScale = 1f;
+
+        }
+
     }
 
     public void FullscreenSet(bool value) {

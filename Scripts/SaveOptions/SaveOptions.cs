@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class SaveOptions : MonoBehaviour {
@@ -28,7 +29,15 @@ public class SaveOptions : MonoBehaviour {
         sound.volume = PlayerPrefs.GetFloat("vol");
 
         timeSlider.value = PlayerPrefs.GetFloat("time");
+
         Time.timeScale = PlayerPrefs.GetFloat("time");
+
+        
+        if(SceneManager.GetActiveScene().name == "MainMenu") {
+
+            Time.timeScale = 1f;
+
+        }
 
         if (Time.timeScale <= 0) {
             Time.timeScale = 1;

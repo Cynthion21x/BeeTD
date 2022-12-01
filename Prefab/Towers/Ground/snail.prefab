@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14393c158d8b636488f4014fc76ab011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weight: 0
   precise: 0
   accuracy: 0
   range: 3.5
@@ -198,6 +199,8 @@ MonoBehaviour:
   isFlying: 0
   level: 1
   sellPrice: 0
+  Stacks: 1
+  maxDamage: 19
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0

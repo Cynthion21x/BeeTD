@@ -49,24 +49,33 @@ public class EnemyController : MonoBehaviour {
 
         damageSprite.color = new Color(1, 1, 1, 1- hp / maxHp);
 
+        float cricketStacks = 1;
+
         foreach (string i in statusEffect) {
 
-            if (i != "none" && clearing == false) {
+            if (i != "none") {
 
-                float time = 2f;
+                float time = 1f;
 
                 if (i == "push") {
 
                     time = 0.2f;
 
-                } if (i == "poision" || i == "damage") {
+                }
+                
+                if (i == "poision" || i == "damage") {
 
                     time = 1f;
 
                 }
 
+                if (i == "slow") {
+
+                    time = 3f;
+
+                }
+
                 StartCoroutine(cleanStatus(i, time));
-                clearing = true;
 
             }
 
@@ -86,29 +95,32 @@ public class EnemyController : MonoBehaviour {
 
               if (i == "posion") {
 
-                hp -= (maxHp * 0.0275f) * Time.deltaTime;
+                //hp -= (maxHp * 0.005f) * Time.deltaTime;
 
               }
 
               if (i == "burn") {
 
-                 hp -= 10f * Time.deltaTime;
+                //hp -= 10f * Time.deltaTime;
+                //Dealdamage(10f * Time.deltaTime);
 
                }
 
                if (i == "push") {
 
-                 speed = maxSpd * -1f;
+                 speed = maxSpd * -1.5f;
 
                }
 
                if (i == "damage") {
 
-                 damageMult += 1.25f * Time.deltaTime;
+                 cricketStacks += 0.5f;
 
                }
 
         }
+
+        damageMult = cricketStacks;
 
         if (invun){
             hp = maxHp;
@@ -178,13 +190,12 @@ public class EnemyController : MonoBehaviour {
 
         statusEffect.Remove(status);
 
-        //coinDrop = maxCost;
+        coinDrop = maxCost;
         speed = maxSpd;
         damage = maxDamage;
 
         damageMult = 1f;
 
-        clearing = false;
 
     }
 

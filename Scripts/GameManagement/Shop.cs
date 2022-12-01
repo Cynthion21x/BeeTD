@@ -31,8 +31,13 @@ public class Shop : MonoBehaviour {
 
     public GameObject sellUi;
     public TextMeshProUGUI sellCost;
+    public GameObject activUi;
 
     private int buyPrice;
+
+    public int damageBonus = 0;
+    public float damageBonusMultiple = 1f;
+    public float weightReduce = 0f;
 
     //public bool hover;
 
@@ -58,7 +63,7 @@ public class Shop : MonoBehaviour {
             circle.transform.position = mousePos;
             circle.transform.localScale = new Vector2(turret.GetComponent<towermanager>().range, turret.GetComponent<towermanager>().range);
 
-            if (Input.GetMouseButtonDown(0) && canPlace){
+            if (Input.GetMouseButtonUp(0) && canPlace){
 
                 turret.GetComponent<SpriteRenderer>().color = Color.white;
                 turret.GetComponent<towermanager>().enabled = true;
@@ -67,6 +72,9 @@ public class Shop : MonoBehaviour {
                 turret.GetComponent<towermanager>().Set();
                 turret.GetComponent<towermanager>().spwn = spwn;
                 turret.GetComponent<towermanager>().sellPrice = (int)((double)buyPrice * 0.75d);
+
+                if (turret.GetComponent<towermanager>().maxDamage != 0)
+                    turret.GetComponent<towermanager>().maxDamage += damageBonus;
 
                 placing = false;
                 selectedTower = null;
@@ -133,6 +141,16 @@ public class Shop : MonoBehaviour {
             selectorUi.SetActive(true);
             sellUi.SetActive(true);
 
+            if (selectedTower.GetComponent<activate>() != null) {
+
+                activUi.SetActive(true);
+
+            } else {
+
+                activUi.SetActive(false);
+
+            }
+
             sellCost.text = selectedTower.GetComponent<towermanager>().sellPrice.ToString();
             selectorLevel.text = "Level: " + selectedTower.GetComponent<towermanager>().level.ToString();
 
@@ -144,6 +162,7 @@ public class Shop : MonoBehaviour {
 
             sellUi.SetActive(false);
             selectorUi.SetActive(false);
+            activUi.SetActive(false);
 
         }
 
@@ -159,16 +178,28 @@ public class Shop : MonoBehaviour {
 
             gameManager.coin -= cost;
 
-            tar.damage *= 2f;
             tar.level++;
 
             tar.Stacks++;
+
+            tar.sellPrice += (int)(cost * 0.75f);
 
             if (tar.GetComponent<endOfRoundEffect>() != null) {
 
                 tar.GetComponent<endOfRoundEffect>().value++;
 
             }
+
+        }
+
+    }
+
+    public void buyAbility() {
+
+        if (100 <= gameManager.coin) {
+
+            gameManager.coin -= 100;
+            selectedTower.GetComponent<activate>().trigger();
 
         }
 
@@ -263,4 +294,13 @@ public class Shop : MonoBehaviour {
         buyTower(10, 200);
     }
 
+    public void buyTermite(){
+        buyTower(11, 100);
+    }
+
+    public void buyMosquito(){
+
+        buyTower(12, 125);
+
+    }
 }

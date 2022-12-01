@@ -7,22 +7,25 @@ public class BossHp : MonoBehaviour {
 
     public Slider bar;
     public GameObject bossG = null;
+    public GameObject bossE = null;
 
     public float maxHP;
 
     void Start() {
 
         bossG = null;
+        bossE = null;
 
     }
 
     void Update() {
 
-        if (bossG == null) {
+        if (bossG == null && bossE == null) {
 
             bossG = GameObject.Find("waspBoss(Clone)");
+            bossE = GameObject.Find("Elite(Clone)");
 
-            if (bossG != null) {
+            if (bossG != null || bossE != null) {
 
                 maxHP = GameObject.Find("wasp").GetComponent<EnemyController>().hp;
 
@@ -30,7 +33,7 @@ public class BossHp : MonoBehaviour {
 
         }
 
-        if (bossG != null) {
+        if (bossG != null || bossE != null) {
  
             bar.gameObject.SetActive(true);
             bar.maxValue = maxHP;
