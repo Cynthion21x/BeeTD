@@ -30,6 +30,8 @@ public class EnemyController : MonoBehaviour {
 
     public SpriteRenderer damageSprite;
 
+    public int glue;
+
     void Start(){
 
         maxHp = hp;
@@ -82,7 +84,7 @@ public class EnemyController : MonoBehaviour {
             if (i == "slow") {
 
                 speed = maxSpd * 0.5f;
-
+                hp -= glue * Time.deltaTime;
 
              }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour {
 
-    public GameObject selectingItem;
+    public itemList selectingItem;
 
     public string mode;
 
@@ -35,6 +35,8 @@ public class Spawner : MonoBehaviour {
 
     public int hpBonus = 0;
     public int coinBonus = 0;
+
+    public int glue = 0;
 
     void Update(){
 
@@ -76,8 +78,10 @@ public class Spawner : MonoBehaviour {
 
             spawning = true;
 
-            if (Wave != 1 || Wave % 16 == 0 || selectingItem.activeSelf == true) {
-                spawn();
+            if (selectingItem.selecting == false) {
+                if (Wave != 1) {
+                    spawn();
+                }
             }
 
         }
@@ -268,13 +272,13 @@ public class Spawner : MonoBehaviour {
 
         if (mode == "tricky") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave - 33) * 0.2f));
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave - 33) * 0.3f));
 
         }
 
         if (mode == "regular") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave-15) * 0.09f));
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave-15) * 0.1f));
 
         }
 

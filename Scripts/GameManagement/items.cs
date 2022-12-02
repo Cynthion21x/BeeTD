@@ -14,7 +14,18 @@ public class items : MonoBehaviour {
 
     public TextMeshProUGUI itemText;
 
+    public bool rare;
+    public GameObject rareGlow;
+
+    void Start() {
+
+        seed += System.DateTime.Now.Millisecond;
+
+    }
+
     void Update() {
+
+        rareGlow.SetActive(rare);
 
         if (itemsList.selecting == true) {
 
@@ -24,7 +35,7 @@ public class items : MonoBehaviour {
 
                 Random.InitState(seed + System.DateTime.Now.Millisecond);
 
-                int israte = Random.Range(1, 10);
+                int israte = Random.Range(1, 5);
 
                 if (israte == 1) {
 
@@ -35,7 +46,9 @@ public class items : MonoBehaviour {
 
                     this.GetComponent<Button>().onClick.AddListener(SelectItem);
 
-                    itemText.text = "< " + type + "> \n" + itemsList.itemDescR[id];
+                    itemText.text = "< " + type + "> \n" + itemsList.itemDescR[id] + "\n" + itemsList.itemQuoteR[id];
+
+                    rare = true;
 
                 } else {
 
@@ -46,7 +59,9 @@ public class items : MonoBehaviour {
 
                     this.GetComponent<Button>().onClick.AddListener(SelectItem);
 
-                    itemText.text = "< " + type + "> \n" + itemsList.itemDesc[id];
+                    itemText.text = "< " + type + "> \n" + itemsList.itemDesc[id] + "\n" + itemsList.itemQuote[id];
+
+                    rare = false;
 
                 }
 

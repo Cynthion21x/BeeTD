@@ -7,10 +7,12 @@ public class itemList : MonoBehaviour {
     public string[] item;
     public Sprite[] itemPic;
     public string[] itemDesc;
+    public string[] itemQuote;
 
     public string[] itemR;
     public Sprite[] itemPicR;
     public string[] itemDescR;
+    public string[] itemQuoteR;
 
     public bool selecting;
 

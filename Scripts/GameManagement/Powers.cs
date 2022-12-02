@@ -138,6 +138,39 @@ public class Powers : MonoBehaviour {
 
                 }
 
+                if (i == "wallet") {
+
+                    gameManager.coin += 50;
+                    items.Remove(i);
+                    ogLen = items.Count;
+
+                }
+
+                if (i == "tophat") {
+
+                    spawner.coinBonus += 5;
+                    items.Remove(i);
+                    ogLen = items.Count;
+
+                }
+
+                if (i == "honey") {
+
+                    gameManager.hp += 1;
+                    gameManager.coin += 10;
+                    items.Remove(i);
+                    ogLen = items.Count;
+
+                }
+
+                if (i == "glue") {
+
+                    spawner.glue++;
+                    items.Remove(i);
+                    ogLen = items.Count;
+
+                }
+
                 if (i == "Prosthetic Legs") {
 
                     foreach (GameObject t in towers) {
@@ -170,7 +203,9 @@ public class Powers : MonoBehaviour {
 
                 if (i == "boost") {
 
-                    foreach (GameObject t in towers) {
+                    for(int x = 0; x < 3; x++) {
+
+                        GameObject t = towers[Random.Range(0, towers.Length)];
 
                         towermanager towerman = t.GetComponent<towermanager>();
 
