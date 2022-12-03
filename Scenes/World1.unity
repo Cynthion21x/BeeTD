@@ -6428,7 +6428,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1647586430}
   m_Direction: 2
   m_Value: 1.0000005
-  m_Size: 0.3848949
+  m_Size: 0.3847775
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18662,7 +18662,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.25
+  m_fontSize: 17.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -23686,7 +23686,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.85
+  m_fontSize: 30.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24045,7 +24045,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 1, g: 0.60724205, b: 0.3150943, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 1, g: 0.60784316, b: 0.3137255, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -24977,7 +24977,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c049a6fd3f52abb43b75a803622e4c30, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1a2a6899e2cd8ee4386880ff69983895, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -27744,7 +27744,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.5
+  m_fontSize: 21.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -37088,7 +37088,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.85
+  m_fontSize: 30.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -42925,7 +42925,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.75
+  m_fontSize: 40.7
   m_fontSizeBase: 110.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -60968,7 +60968,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.5
+  m_fontSize: 17.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -66202,7 +66202,7 @@ MonoBehaviour:
   m_text: '< Vengence >
 
 
-    insects gain +5% damage each time hp is lost'
+    insects gain +7.5% damage each time hp is lost'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 99ea0f1e43469814fafa63efa415fba7, type: 2}
   m_sharedMaterial: {fileID: 953925020776080618, guid: 99ea0f1e43469814fafa63efa415fba7, type: 2}
@@ -71908,7 +71908,8 @@ MonoBehaviour:
   wasp2: {fileID: 1865367205869470843, guid: c9e32bc94d0990f4f817f32e5cc1b2aa, type: 3}
   wasp3: {fileID: 1865367205869470843, guid: 473e90ef1fa533c4597813886b5dcd04, type: 3}
   wasp4: {fileID: 1865367205869470843, guid: 39f5d15f6222c824dbfde5acbe7934ac, type: 3}
-  elites: []
+  elites:
+  - {fileID: 1865367205869470843, guid: f3011757470f61445bb7d7a8524b8317, type: 3}
   positions:
   - {fileID: 1624869573}
   - {fileID: 1364520895}
@@ -77643,6 +77644,7 @@ MonoBehaviour:
   sellUi: {fileID: 527787155}
   sellCost: {fileID: 923659464}
   activUi: {fileID: 1380150391}
+  activCost: {fileID: 1831699140}
   damageBonus: 0
   damageBonusMultiple: 1
   weightReduce: 1
@@ -77716,6 +77718,7 @@ MonoBehaviour:
   - wallet
   - glue
   - honey
+  - Prosthetic Arms
   itemPic:
   - {fileID: 21300000, guid: bc3436b6fc2709f44beb5177183bbb7c, type: 3}
   - {fileID: 21300000, guid: c57f1b94e4bfaf047abf6314e6df14e1, type: 3}
@@ -77724,6 +77727,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1954b174e31f07d43a2d25daf15f94d7, type: 3}
   - {fileID: 21300000, guid: df01b10371ef7db4db7215325b34d8b7, type: 3}
   - {fileID: 21300000, guid: 58fdffb272d626445aad1695d1e3a6f7, type: 3}
+  - {fileID: 21300000, guid: 375cace4b95d7cc448ac9dcbae97f129, type: 3}
   itemDesc:
   - lowers insects drift speed
   - +2 damage to all insects
@@ -77732,6 +77736,7 @@ MonoBehaviour:
   - +50 coins
   - +slowed enemies take 1 damage over time
   - +1 hp, +10 coins
+  - -0.1 fire cooldown
   itemQuote:
   - '"perhaps it has more offensive potential"'
   - '"ouch. thats gonna sting"'
@@ -77740,22 +77745,27 @@ MonoBehaviour:
   - '"I should give this back"'
   - '"don''t eat it"'
   - '"yummy and valuable"'
+  - '"Who came up with this?"'
   itemR:
   - leaf
   - boost
   - tophat
+  - toy dragon
   itemPicR:
   - {fileID: 21300000, guid: 79e9f16d203b58445a536f0d6fb6145a, type: 3}
   - {fileID: 21300000, guid: f565ca43e80930941bd3acf4eb810083, type: 3}
   - {fileID: 21300000, guid: 7d9f938809891054984b3ceae1c49ade, type: 3}
+  - {fileID: 21300000, guid: ae6fde9d38125f74a99c03ba53e276ec, type: 3}
   itemDescR:
   - +1 hp each time you collect an item
   - level up 3 random towers
   - +5 coins per kill
+  - +5 damage
   itemQuoteR:
   - '"1 of your 5 a day!"'
   - '"in essence everything is energy, and energy cannot be destroyed"'
   - '"looking dapper"'
+  - '"awww cute"'
   selecting: 0
   itemMenu: {fileID: 271809677}
   hp: {fileID: 2052669464}

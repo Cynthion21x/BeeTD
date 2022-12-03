@@ -86,7 +86,7 @@ public class Powers : MonoBehaviour {
 
             foreach (GameObject i in towers) {
 
-                i.GetComponent<towermanager>().damage = (i.GetComponent<towermanager>().maxDamage * Mathf.Pow(2, i.GetComponent<towermanager>().level-1)) * (1 + (0.05f * venStats));
+                i.GetComponent<towermanager>().damage = (i.GetComponent<towermanager>().maxDamage * Mathf.Pow(2, i.GetComponent<towermanager>().level-1)) * (1 + (0.075f * venStats));
 
             }
 
@@ -122,6 +122,25 @@ public class Powers : MonoBehaviour {
 
                         if (towerman.maxDamage != 0) {
                             towerman.maxDamage += 2;
+                        }
+
+                    }
+
+                    items.Remove(i);
+                    ogLen = items.Count;
+
+                }
+
+                if (i == "toy dragon") {
+
+                    shop.damageBonus += 5;
+
+                    foreach (GameObject t in towers) {
+
+                        towermanager towerman = t.GetComponent<towermanager>();
+
+                        if (towerman.maxDamage != 0) {
+                            towerman.maxDamage += 5;
                         }
 
                     }
@@ -178,6 +197,21 @@ public class Powers : MonoBehaviour {
                         towermanager towerman = t.GetComponent<towermanager>();
 
                         towerman.speed += 1;
+
+                    }
+
+                    items.Remove(i);
+                    ogLen = items.Count;
+
+                }
+
+                if (i == "Prosthetic Arms") {
+
+                    foreach (GameObject t in towers) {
+
+                        towermanager towerman = t.GetComponent<towermanager>();
+
+                        towerman.fireRate -= .1f;
 
                     }
 

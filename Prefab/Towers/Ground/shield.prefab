@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: push
   effect: {fileID: 6068470116422173642, guid: 06a3947e23b959e4e9f7e1cc5b6a5dd2, type: 3}
+  Cost: 70
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

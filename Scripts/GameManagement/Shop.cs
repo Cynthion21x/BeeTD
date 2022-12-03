@@ -32,6 +32,7 @@ public class Shop : MonoBehaviour {
     public GameObject sellUi;
     public TextMeshProUGUI sellCost;
     public GameObject activUi;
+    public TextMeshProUGUI activCost;
 
     private int buyPrice;
 
@@ -144,6 +145,7 @@ public class Shop : MonoBehaviour {
             if (selectedTower.GetComponent<activate>() != null) {
 
                 activUi.SetActive(true);
+                activCost.text = selectedTower.GetComponent<activate>().Cost.ToString();
 
             } else {
 
@@ -196,9 +198,9 @@ public class Shop : MonoBehaviour {
 
     public void buyAbility() {
 
-        if (100 <= gameManager.coin) {
+        if (selectedTower.GetComponent<activate>().Cost <= gameManager.coin) {
 
-            gameManager.coin -= 100;
+            gameManager.coin -= GetComponent<activate>().Cost;
             selectedTower.GetComponent<activate>().trigger();
 
         }

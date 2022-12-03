@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: damage
   effect: {fileID: 1306625701766452327, guid: d8739ab832661864b894f6f115abc796, type: 3}
+  Cost: 120
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

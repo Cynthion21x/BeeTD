@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: heal
   effect: {fileID: 6068470116422173642, guid: c1918fbcea0cafb4ca4a777fb81d56a2, type: 3}
+  Cost: 300
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

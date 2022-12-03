@@ -34,7 +34,7 @@ public class items : MonoBehaviour {
                 //int id = random.Next(0, itemsList.item.Length);
                 int id = RollDice((byte)(itemsList.item.Length-1));
 
-                int israte = UnityEngine.Random.Range(1, 5);
+                int israte = Random.Range(1, 5);
 
                 if (israte == 1) {
 

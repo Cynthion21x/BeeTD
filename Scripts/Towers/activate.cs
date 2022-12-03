@@ -6,6 +6,7 @@ public class activate : MonoBehaviour {
 
     public string ability;
     public GameObject effect;
+    public int Cost;
 
     public void trigger() {
 
