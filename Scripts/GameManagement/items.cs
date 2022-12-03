@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using System.Security.Cryptography;
+
 public class items : MonoBehaviour {
 
     public itemList itemsList;
@@ -17,11 +19,7 @@ public class items : MonoBehaviour {
     public bool rare;
     public GameObject rareGlow;
 
-    void Start() {
-
-        seed += System.DateTime.Now.Millisecond;
-
-    }
+    private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
 
     void Update() {
 
@@ -31,13 +29,17 @@ public class items : MonoBehaviour {
 
             if (type == null) {
 
-                int id = Random.Range(0, itemsList.item.Length);
+                //System.Random random = new System.Random(System.DateTime.Now.Millisecond);
 
-                Random.InitState(seed + System.DateTime.Now.Millisecond);
+                //int id = random.Next(0, itemsList.item.Length);
+                int id = RollDice((byte)(itemsList.item.Length-1));
 
-                int israte = Random.Range(1, 5);
+                int israte = UnityEngine.Random.Range(1, 5);
 
                 if (israte == 1) {
+
+                    //id = random.Next(0, itemsList.itemR.Length);
+                    id = RollDice((byte)(itemsList.itemR.Length-1));
 
                     this.GetComponent<Image>().sprite = itemsList.itemPicR[id];
                     type = itemsList.itemR[id];
@@ -86,4 +88,24 @@ public class items : MonoBehaviour {
 
     }
 
+
+    public static byte RollDice(byte numberSides) {
+
+        byte[] randomNumber = new byte[1];
+
+        do {
+
+            rngCsp.GetBytes(randomNumber);
+
+        } while (!IsFairRoll(randomNumber[0], numberSides));
+
+        return (byte)((randomNumber[0] % numberSides) + 1);
+    }
+
+    private static bool IsFairRoll(byte roll, byte numSides) {
+
+        int fullSetsOfValues = System.Byte.MaxValue / numSides;
+
+        return roll < numSides * fullSetsOfValues;
+    }
 }

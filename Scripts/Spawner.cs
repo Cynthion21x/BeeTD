@@ -76,10 +76,9 @@ public class Spawner : MonoBehaviour {
 
         if (button.interactable && autoplay && spawning == false && flying == false) {
 
-            spawning = true;
-
             if (selectingItem.selecting == false) {
                 if (Wave != 1) {
+                    //spawning = true;
                     spawn();
                 }
             }
@@ -111,6 +110,7 @@ public class Spawner : MonoBehaviour {
     }
 
     public void spawn(){
+        spawning = true;
 
         UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
 
@@ -123,7 +123,7 @@ public class Spawner : MonoBehaviour {
             float QueenHp = 1000;
             float QueenSpeed = .8f;
 
-            StartCoroutine(AsyncSpawn(elites[UnityEngine.Random.Range(0, elites.Length)], 0, QueenHp, QueenSpeed));
+            StartCoroutine(AsyncSpawn(elites[0], 0, QueenHp, QueenSpeed));
 
             Debug.Log("SpawnElite");
 
@@ -257,8 +257,6 @@ public class Spawner : MonoBehaviour {
     private IEnumerator AsyncSpawn(GameObject type, float time, float hp, float speed){
 
         yield return new WaitForSeconds(time);
-
-        spawning = false;
         
         GameObject enemy = Instantiate(type, positions[0].position, Quaternion.identity);
 
@@ -285,6 +283,7 @@ public class Spawner : MonoBehaviour {
         enemy.GetComponentInChildren<EnemyController>().speed = speed;
         enemy.GetComponentInChildren<EnemyController>().coinDrop += coinBonus;
 
+        spawning = false;
     }
 
 }

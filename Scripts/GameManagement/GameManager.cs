@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour {
     void Start(){
 
         System.Random random = new System.Random();
-        int num = random.Next(0, 3);
+        int num = random.Next(0, 5);
 
-        string[] easy = { "Awh not even past easy mode", "Its called easy for a reason", "you didnt use the meta", "Rip bozo" };
-        string[] norm = { "A fair place to die", "Nothing special happens here", "you died", "Boss a bit annoying huh" };
-        string[] tricky = { "Thats so crazy", "It is quite tricky to be fair", "You ran the meta", "siuvgmcsdoibgcmvbfdgoibcmvfoismdbcvo fgo" };
+        string[] easy = { "Awh not even past easy mode", "Its called easy for a reason", "you didnt use the meta", "Rip", "what were you thinking", "use a diffrent power next time"  };
+        string[] norm = { "A fair place to die", "Nothing special happens here", "you died", "Boss a bit annoying huh", "flying enemies get you every time", "these should be more personalised" };
+        string[] tricky = { "Thats so crazy", "It is quite tricky to be fair", "You ran the meta", "siuvgmcsdoibgcmvbfdgoibcmvfoismdbcvo fgo", "going for the new record?", "better luck next time" };
 
         easystring = easy[num];
         normalstring = norm[num];
