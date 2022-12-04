@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class showOnStart : MonoBehaviour {
     
-    public GameObject object;
+    public GameObject objectToShow;
 
     void Start() {
 
-        Object.SetActive(true);
+        objectToShow.SetActive(true);
 
     }
         

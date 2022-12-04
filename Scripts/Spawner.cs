@@ -222,7 +222,7 @@ public class Spawner : MonoBehaviour {
 
                 } else if (waveType == "normal") {
 
-                    float DroneHp = 150;
+                    float DroneHp = 125;
                     float DroneSpeed = 1f;
 
                     StartCoroutine(AsyncSpawn(wasp1, (float)(i - 1) * (float)(spacing), DroneHp, DroneSpeed));
@@ -270,13 +270,13 @@ public class Spawner : MonoBehaviour {
 
         if (mode == "tricky") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave - 33) * 0.3f));
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave - 33) * 1.75f));
 
         }
 
         if (mode == "regular") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave-15) * 0.1f));
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave-15) * 0.4f));
 
         }
 

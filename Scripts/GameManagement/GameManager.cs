@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 
     public float windSpeed = 5;
     public Spawner spawner;
+    public bool altwind;
 
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI coinText;
@@ -29,11 +30,11 @@ public class GameManager : MonoBehaviour {
     void Start(){
 
         System.Random random = new System.Random();
-        int num = random.Next(0, 5);
+        int num = random.Next(0, 6);
 
-        string[] easy = { "Awh not even past easy mode", "Its called easy for a reason", "you didnt use the meta", "Rip", "what were you thinking", "use a diffrent power next time"  };
-        string[] norm = { "A fair place to die", "Nothing special happens here", "you died", "Boss a bit annoying huh", "flying enemies get you every time", "these should be more personalised" };
-        string[] tricky = { "Thats so crazy", "It is quite tricky to be fair", "You ran the meta", "siuvgmcsdoibgcmvbfdgoibcmvfoismdbcvo fgo", "going for the new record?", "better luck next time" };
+        string[] easy = { "Awh not even past easy mode", "Its called easy for a reason", "you didnt use the meta", "Rip", "what were you thinking", "use a diffrent power next time", "Unlucky"  };
+        string[] norm = { "A fair place to die", "Nothing special happens here", "you died", "Boss a bit annoying huh", "flying enemies get you every time", "these should be more personalised", "better luck next time" };
+        string[] tricky = { "Thats so crazy", "It is quite tricky to be fair", "You ran the meta", "siuvgmcsdoibgcmvbfdgoibcmvfoismdbcvo fgo", "going for the new record?", "better luck next time", "wowzers" };
 
         easystring = easy[num];
         normalstring = norm[num];
@@ -44,6 +45,12 @@ public class GameManager : MonoBehaviour {
     void Update(){
 
         windSpeed = Mathf.Round(Mathf.Abs(Mathf.Sin((float)spawner.Wave * 2)) * 700f) / 100f;
+
+        if (altwind) {
+
+            windSpeed = Mathf.Round(Mathf.Sin((float)spawner.Wave) * 1400f) / 100f;
+
+        }
 
         hpText.text = (hp).ToString();
         coinText.text = (coin).ToString();

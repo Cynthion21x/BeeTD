@@ -19,7 +19,12 @@ public class items : MonoBehaviour {
     public bool rare;
     public GameObject rareGlow;
 
+    public GameObject itemList;
+    public GameObject itemFrame;
+    public GameObject rareItemFrame;
+
     private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
+    private int id;
 
     void Update() {
 
@@ -32,7 +37,7 @@ public class items : MonoBehaviour {
                 //System.Random random = new System.Random(System.DateTime.Now.Millisecond);
 
                 //int id = random.Next(0, itemsList.item.Length);
-                int id = RollDice((byte)(itemsList.item.Length-1));
+                id = RollDice((byte)(itemsList.item.Length-1));
 
                 int israte = Random.Range(1, 5);
 
@@ -83,6 +88,23 @@ public class items : MonoBehaviour {
         this.GetComponent<Image>().sprite = null;
 
         GameObject.Find("GameManager").GetComponent<Powers>().items.Add(type);
+
+        if (rare == false) {
+
+            GameObject itemInList = Instantiate(itemFrame);
+            itemInList.transform.parent = itemList.transform;
+
+            itemInList.GetComponent<Image>().sprite = itemsList.itemPic[id];
+
+        } else {
+
+            GameObject itemInList = Instantiate(rareItemFrame);
+            itemInList.transform.parent = itemList.transform;
+
+            //itemInList.GetComponent<Image>().sprite = itemsList.itemPicR[id];
+            itemInList.transform.GetChild(0).GetComponent<Image>().sprite = itemsList.itemPicR[id];
+
+        }
 
         type = null;
 

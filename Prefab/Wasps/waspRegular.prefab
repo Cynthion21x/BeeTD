@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 4358339338174413545}
   - component: {fileID: 5720294140497085292}
   - component: {fileID: 1670765273996057655}
+  - component: {fileID: 4635723548921304231}
+  - component: {fileID: 7316589283346565111}
   m_Layer: 6
   m_Name: wasp
   m_TagString: Enemy
@@ -155,6 +157,7 @@ MonoBehaviour:
   damageMult: 1
   statusEffect: []
   damageSprite: {fileID: 8451903283362860226}
+  glue: 0
 --- !u!61 &5720294140497085292
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -231,6 +234,32 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4635723548921304231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236515296525282619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e03bb5d5016c74eb927bcd9f4bf1e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChristmasSprite: {fileID: 21300000, guid: 1e1d0804ce543fa4c93d4abe8be38039, type: 3}
+--- !u!114 &7316589283346565111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236515296525282619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb3f32022b2db84982cffdc76d3223d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HalowSprite: {fileID: 21300000, guid: c3bb5f1e6bab69b419eb842ba25afc11, type: 3}
 --- !u!1 &8493412362829992170
 GameObject:
   m_ObjectHideFlags: 0
