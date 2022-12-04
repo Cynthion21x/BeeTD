@@ -15,6 +15,7 @@ public class Shop : MonoBehaviour {
     public Camera main;
 
     public LayerMask cantPlaceOn;
+    public LayerMask noGround;
 
     public bool placing = false;
     public bool canPlace = true;
@@ -50,6 +51,16 @@ public class Shop : MonoBehaviour {
         circle.SetActive(placing);
 
         canPlace = !(Physics2D.OverlapCircle(mousePos, .5f, cantPlaceOn));
+
+        if (turret.GetComponent<towermanager>().flying == false) {
+
+            if (Physics2D.OverlapCircle(mousePos, .5f, noGround)) {
+
+                canPlace = false;
+
+            }
+
+        }
 
 
         if (placing == true){
@@ -198,9 +209,11 @@ public class Shop : MonoBehaviour {
 
     public void buyAbility() {
 
-        if (selectedTower.GetComponent<activate>().Cost <= gameManager.coin) {
+        int cost = selectedTower.GetComponent<activate>().Cost;
 
-            gameManager.coin -= GetComponent<activate>().Cost;
+        if (cost <= gameManager.coin) {
+
+            gameManager.coin -= cost;
             selectedTower.GetComponent<activate>().trigger();
 
         }

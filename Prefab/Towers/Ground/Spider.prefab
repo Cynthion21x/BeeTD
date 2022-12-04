@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: Slow
   effect: {fileID: 6068470116422173642, guid: 6d2d5089f34077e4bb106d238be081e2, type: 3}
+  Cost: 50
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

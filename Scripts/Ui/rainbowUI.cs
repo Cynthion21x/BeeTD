@@ -10,7 +10,7 @@ public class rainbowUI : MonoBehaviour {
 
     void Update() {
 
-        lerpedColor = Color.Lerp(Color.blue, Color.magenta, Mathf.PingPong(Time.time, 1));
+        lerpedColor = Color.Lerp(Color.blue, Color.magenta, Mathf.PingPong(Time.unscaledTime, 1));
 
         this.GetComponent<Image>().color = lerpedColor;
 
