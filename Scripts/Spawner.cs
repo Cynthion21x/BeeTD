@@ -241,7 +241,7 @@ public class Spawner : MonoBehaviour {
 
                 if (waveType == "flying") {
 
-                    float SpeedHp = 150;
+                    float SpeedHp = 125;
                     float SpeedSpeed = 1.5f;
 
                     StartCoroutine(AsyncSpawn(wasp2, (float)(i - 1) * (float)(spacing), SpeedHp, SpeedSpeed));                 
