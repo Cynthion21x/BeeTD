@@ -253,9 +253,12 @@ public class Powers : MonoBehaviour {
 
                         gameManager.GetComponent<Shop>().FreeUpgrade(towerman);
 
+                        Debug.Log("boosted");
                     }
 
-                    items.Remove(i);
+                    Debug.Log("Finished Boost");
+
+                    items.Remove("boost");
                     ogLen = items.Count;
 
                 }

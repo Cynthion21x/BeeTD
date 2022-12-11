@@ -39,13 +39,13 @@ public class popup : MonoBehaviour {
 
         //transform.position += new Vector3(moveVector, 2) * Time.deltaTime;
 
-        if (text.fontSize < ogFontSize * 1.25f) {
+        if (text.fontSize >= ogFontSize * 1.25f) {
 
-            text.fontSize += Time.deltaTime * dissapearSpeed;
+            text.fontSize -= Time.deltaTime * dissapearSpeed * 4;
 
-        } else if (text.fontSize > ogFontSize) {
+        } else if (text.fontSize <= ogFontSize * 1.5f) {
 
-            text.fontSize -= Time.deltaTime * dissapearSpeed * 2;
+            text.fontSize += Time.deltaTime * dissapearSpeed * 2;
 
         }
 
@@ -68,7 +68,7 @@ public class popup : MonoBehaviour {
         text.fontSize = fontSize;
         ogFontSize = (int)text.fontSize;
 
-        transform.position += new Vector3(Random.Range(-1.3f, 1.3f), Random.Range(-1.3f, 1.3f), 0);
+        transform.position += new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
 
         dissapearSpeed = 10;
 

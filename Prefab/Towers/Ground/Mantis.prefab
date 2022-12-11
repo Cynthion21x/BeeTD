@@ -137,7 +137,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a08f6f3133c0ee649bc27551814e3014, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14393c158d8b636488f4014fc76ab011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageBoost: 0
+  ProjectileSpeedBoost: 0
   weight: 0
   precise: 1
   accuracy: 5
@@ -188,6 +190,7 @@ MonoBehaviour:
   fireRate: 4.04
   speed: 16.82
   damage: 60
+  LifeTime: 0
   projectileType: {fileID: 5938905900805307995, guid: 8d5d9f63cebe2df429dac71e60f73372, type: 3}
   firePoint: {fileID: 75266554797413950}
   target: {fileID: 0}
