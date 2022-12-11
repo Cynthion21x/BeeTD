@@ -8,6 +8,20 @@ public class activate : MonoBehaviour {
     public GameObject effect;
     public int Cost;
 
+    private int ogCost;
+
+    void Start() {
+
+        ogCost = Cost;
+
+    }
+
+    void Update() {
+
+        Cost = (int)(ogCost * GameObject.Find("GameManager").GetComponent<Shop>().abilitydiscount);
+
+    }
+
     public void trigger() {
 
         Instantiate(effect, this.transform.position, Quaternion.identity);

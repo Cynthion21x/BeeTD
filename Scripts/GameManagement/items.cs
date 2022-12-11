@@ -8,9 +8,12 @@ using System.Security.Cryptography;
 
 public class items : MonoBehaviour {
 
+    public items item1;
+    public items item2;
+
     public itemList itemsList;
 
-    private string type;
+    public string type;
 
     public int seed;
 
@@ -26,6 +29,12 @@ public class items : MonoBehaviour {
     private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
     private int id;
 
+    void Awake() {
+
+        type = null;
+
+    }
+
     void Update() {
 
         rareGlow.SetActive(rare);
@@ -37,14 +46,14 @@ public class items : MonoBehaviour {
                 //System.Random random = new System.Random(System.DateTime.Now.Millisecond);
 
                 //int id = random.Next(0, itemsList.item.Length);
-                id = RollDice((byte)(itemsList.item.Length-1));
+                id = RollDice((byte)(itemsList.item.Length));
 
-                int israte = Random.Range(1, 5);
+                int israte = Random.Range(1, 10);
 
                 if (israte == 1) {
 
                     //id = random.Next(0, itemsList.itemR.Length);
-                    id = RollDice((byte)(itemsList.itemR.Length-1));
+                    id = RollDice((byte)(itemsList.itemR.Length));
 
                     this.GetComponent<Image>().sprite = itemsList.itemPicR[id];
                     type = itemsList.itemR[id];
@@ -102,11 +111,14 @@ public class items : MonoBehaviour {
             itemInList.transform.parent = itemList.transform;
 
             //itemInList.GetComponent<Image>().sprite = itemsList.itemPicR[id];
-            itemInList.transform.GetChild(0).GetComponent<Image>().sprite = itemsList.itemPicR[id];
+            itemInList.transform.Find("item").GetComponent<Image>().sprite = itemsList.itemPicR[id];
 
         }
 
         type = null;
+
+        item1.type = null;
+        item2.type = null;
 
     }
 
@@ -121,7 +133,7 @@ public class items : MonoBehaviour {
 
         } while (!IsFairRoll(randomNumber[0], numberSides));
 
-        return (byte)((randomNumber[0] % numberSides) + 1);
+        return (byte)((randomNumber[0] % numberSides));
     }
 
     private static bool IsFairRoll(byte roll, byte numSides) {

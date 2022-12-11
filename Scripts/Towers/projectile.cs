@@ -104,7 +104,7 @@ public class projectile : MonoBehaviour {
 
         foreach (Collider2D coll in enemys) {
 
-            coll.GetComponent<EnemyController>().hp -= damage * 0.75f; 
+            coll.GetComponent<EnemyController>().Dealdamage(damage * 0.75f); 
             Debug.Log("Aditional target hit");  
 
         }   

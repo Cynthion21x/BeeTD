@@ -216,6 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be849cf70a71dc24d8a44f872028f8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DamagePopup: {fileID: 4181719007722013254, guid: fb791f0e67e7ced44a3bd4d711218006, type: 3}
+  damageReduce: 0
   hp: 1000
   speed: 0.75
   inc: 1

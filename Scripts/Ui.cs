@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class Ui : MonoBehaviour {
 
-    public AudioSource sound;
+    public AudioMixerGroup sound;
     public Spawner spawn;
 
     void Start() {
@@ -32,7 +33,7 @@ public class Ui : MonoBehaviour {
 
     public void soundSet(System.Single vol){
 
-        sound.volume = vol;
+        sound.audioMixer.SetFloat("volume", vol);
 
     }
 

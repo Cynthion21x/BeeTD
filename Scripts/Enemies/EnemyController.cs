@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
+    public GameObject DamagePopup;
+    public float damageReduce;
+
     public float hp = 100;
     public float speed;
     public int inc;
@@ -84,7 +87,7 @@ public class EnemyController : MonoBehaviour {
             if (i == "slow") {
 
                 speed = maxSpd * 0.5f;
-                hp -= glue * Time.deltaTime;
+                Dealdamage(glue * Time.deltaTime);
 
              }
 
@@ -196,14 +199,58 @@ public class EnemyController : MonoBehaviour {
         speed = maxSpd;
         damage = maxDamage;
 
-        damageMult = 1f;
+        if (status == "damage") {
 
+            damageMult = 1f;
+
+        }
 
     }
 
     public void Dealdamage(float dmg) {
 
-        hp -= dmg * damageMult;
+        float totalDamage = (dmg * damageMult) - damageReduce;
+
+        bool crit = false;
+
+        if (UnityEngine.Random.Range(1, 100) > 70) {
+
+            crit = true;
+            totalDamage *= 1.5f;
+
+        }
+
+        hp -= totalDamage;
+
+        if (totalDamage > 0.9) {
+
+            GameObject num = Instantiate(DamagePopup, transform.position, Quaternion.identity);
+
+            popup damagePopup = num.GetComponent<popup>();
+
+            if (crit) {
+
+                damagePopup.Setup(totalDamage, Color.blue, 8);
+
+            } else if (damageReduce > 0) {
+
+                damagePopup.Setup(totalDamage, Color.cyan, 5);
+
+            }  else if (damageMult > 1) {
+
+                damagePopup.Setup(totalDamage, Color.magenta, 7);
+
+            } else if (totalDamage < 0){
+
+                damagePopup.Setup(totalDamage, Color.green, 4);
+
+            } else {
+
+                damagePopup.Setup(totalDamage, Color.red, 5);
+
+            }
+
+        }
 
     }
 

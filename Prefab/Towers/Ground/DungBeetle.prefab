@@ -188,6 +188,7 @@ MonoBehaviour:
   fireRate: 0
   speed: 0
   damage: 0
+  LifeTime: 0
   projectileType: {fileID: 0}
   firePoint: {fileID: 75266554797413950}
   target: {fileID: 0}
@@ -243,7 +244,7 @@ MonoBehaviour:
   effect: money
   value: 0
   Escaler: 1.25
-  BaseGain: 10
+  BaseGain: 7
   Peffect: {fileID: 6068470116422173642, guid: ff834388739a0de48acf09b431084c00, type: 3}
 --- !u!1 &75266554797413951
 GameObject:

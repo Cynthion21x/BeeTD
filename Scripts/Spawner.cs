@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour {
 
+    public float EnemyScale;
+    public float EnemyHpBoost;
+
     public itemList selectingItem;
 
     public string mode;
@@ -120,10 +123,10 @@ public class Spawner : MonoBehaviour {
 
         if (isElite == 1 && mode != "easy") {
 
-            float QueenHp = 1000;
+            float QueenHp = 500;
             float QueenSpeed = .8f;
 
-            StartCoroutine(AsyncSpawn(elites[0], 0, QueenHp, QueenSpeed));
+            StartCoroutine(AsyncSpawn(elites[UnityEngine.Random.Range(1, elites.Length)], 0, QueenHp, QueenSpeed));
 
             Debug.Log("SpawnElite");
 
@@ -133,7 +136,7 @@ public class Spawner : MonoBehaviour {
 
         if (Wave % 16 == 0) {
 
-            StartCoroutine(AsyncSpawn(wasp4, 0, 1200, .75f));
+            StartCoroutine(AsyncSpawn(wasp4, 0, 800, .75f));
 
             Debug.Log("SpawnBoss");
 
@@ -205,7 +208,7 @@ public class Spawner : MonoBehaviour {
 
                 if (i % 16 == 0 && waveType == "normal") {
 
-                    float QueenHp = 900;
+                    float QueenHp = 300;
                     float QueenSpeed = .75f;
 
                     StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
@@ -232,7 +235,7 @@ public class Spawner : MonoBehaviour {
 
                 if (waveType == "bossRush") {
 
-                    float QueenHp = 900;
+                    float QueenHp = 600;
                     float QueenSpeed = .75f;
 
                     StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
@@ -270,13 +273,13 @@ public class Spawner : MonoBehaviour {
 
         if (mode == "tricky") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave - 33) * 1.75f));
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave - 32) * EnemyScale * 1.5f));
 
         }
 
         if (mode == "regular") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave-15) * 0.4f));
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave-15) * EnemyScale));
 
         }
 

@@ -43,7 +43,7 @@ public class Powers : MonoBehaviour {
 
                 case "prosparity":
 
-                    spawner.coinBonus = 7;
+                    spawner.coinBonus = 10;
 
                     selectingPower = false;
 
@@ -51,7 +51,7 @@ public class Powers : MonoBehaviour {
 
                 case "destruction":
 
-                    shop.damageBonus = 5;
+                    shop.baseDamageBoost = 1;
 
                     selectingPower = false;
 
@@ -61,6 +61,14 @@ public class Powers : MonoBehaviour {
 
                     gameManager.hp += 5;
                     gameManager.coin += 75;
+
+                    selectingPower = false;
+
+                    break;
+
+                case "creation":
+
+                    gameManager.GetComponent<Shop>().discount = 10;
 
                     selectingPower = false;
 
@@ -86,7 +94,7 @@ public class Powers : MonoBehaviour {
 
             foreach (GameObject i in towers) {
 
-                i.GetComponent<towermanager>().damage = (i.GetComponent<towermanager>().maxDamage * Mathf.Pow(2, i.GetComponent<towermanager>().level-1)) * (1 + (0.075f * venStats));
+                i.GetComponent<towermanager>().damage = (i.GetComponent<towermanager>().maxDamage * Mathf.Pow(2, i.GetComponent<towermanager>().level-1)) * (1 + (0.075f * venStats)) + i.GetComponent<towermanager>().damageBoost;
 
             }
 
@@ -121,7 +129,7 @@ public class Powers : MonoBehaviour {
                         towermanager towerman = t.GetComponent<towermanager>();
 
                         if (towerman.maxDamage != 0) {
-                            towerman.maxDamage += 2;
+                            towerman.damageBoost += 2;
                         }
 
                     }
@@ -133,14 +141,14 @@ public class Powers : MonoBehaviour {
 
                 if (i == "toy dragon") {
 
-                    shop.damageBonus += 5;
+                    shop.baseDamageBoost += 1;
 
                     foreach (GameObject t in towers) {
 
                         towermanager towerman = t.GetComponent<towermanager>();
 
                         if (towerman.maxDamage != 0) {
-                            towerman.maxDamage += 5;
+                            towerman.maxDamage += 1;
                         }
 
                     }
@@ -243,7 +251,7 @@ public class Powers : MonoBehaviour {
 
                         towermanager towerman = t.GetComponent<towermanager>();
 
-                        towerman.level ++;
+                        gameManager.GetComponent<Shop>().FreeUpgrade(towerman);
 
                     }
 
@@ -251,6 +259,40 @@ public class Powers : MonoBehaviour {
                     ogLen = items.Count;
 
                 }
+
+                if (i == "battery") {
+
+                    shop.abilitydiscount -= 0.05f;
+
+                    items.Remove(i);
+                    ogLen = items.Count;
+
+                }
+
+                if (i == "discount card") {
+
+                    shop.discount += 5;
+
+                    items.Remove(i);
+                    ogLen = items.Count;
+
+                }
+
+                if (i == "gunpowder") {
+
+                    foreach (GameObject t in towers) {
+
+                        towermanager towerman = t.GetComponent<towermanager>();
+
+                        towerman.ProjectileSpeedBoost += 0.5f;
+
+                    }                    
+
+                    items.Remove(i);
+                    ogLen = items.Count;
+
+                }
+
 
             }
 

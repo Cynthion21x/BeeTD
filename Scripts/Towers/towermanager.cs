@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class towermanager : MonoBehaviour {
 
+    public float damageBoost;
+    public float ProjectileSpeedBoost;
+
     public float weight;
 
     public bool precise;
@@ -13,7 +16,9 @@ public class towermanager : MonoBehaviour {
     public float fireRate;
     public float speed;
     public float damage;
-    
+
+    public float LifeTime;
+
     public GameObject projectileType;
 
     public Transform firePoint;
@@ -68,7 +73,7 @@ public class towermanager : MonoBehaviour {
         }
 
         if(GameObject.Find("GameManager").GetComponent<Powers>().power != "vengence")
-            damage = maxDamage * Mathf.Pow(2, level-1);
+            damage = maxDamage * Mathf.Pow(2, level-1) + damageBoost;
 
         // Glide away
         if (GameObject.FindGameObjectWithTag("Enemy") && flying) {
@@ -175,7 +180,10 @@ public class towermanager : MonoBehaviour {
 
         GameObject project = Instantiate(projectileType, firePoint.position, Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed));
         project.GetComponent<projectile>().damage = damage;
+        project.GetComponent<projectile>().lifeTime += LifeTime;
         project.GetComponent<projectile>().statusStack += Stacks;
+        project.GetComponent<projectile>().speed += ProjectileSpeedBoost;
+
 
         StartCoroutine(cooldown(fireRate));
 

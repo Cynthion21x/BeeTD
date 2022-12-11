@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 
 public class SaveOptions : MonoBehaviour {
 
-    public AudioSource sound;
+    public AudioMixerGroup sound;
     public Slider soundSlider;
 
     public Slider timeSlider;
@@ -26,7 +27,7 @@ public class SaveOptions : MonoBehaviour {
     public void loadValuesFloat(){
 
         soundSlider.value = PlayerPrefs.GetFloat("vol");
-        sound.volume = PlayerPrefs.GetFloat("vol");
+        sound.audioMixer.SetFloat("volume", PlayerPrefs.GetFloat("vol"));
 
         timeSlider.value = PlayerPrefs.GetFloat("time");
 

@@ -186,7 +186,8 @@ MonoBehaviour:
   range: 0.9
   fireRate: 0.34
   speed: 1.83
-  damage: 4.08
+  damage: 3.08
+  LifeTime: 0
   projectileType: {fileID: 5938905900805307995, guid: 9ccff33e471f80d4093a10f1b9dd0570, type: 3}
   firePoint: {fileID: 75266554797413950}
   target: {fileID: 0}
@@ -200,7 +201,7 @@ MonoBehaviour:
   level: 1
   sellPrice: 0
   Stacks: 1
-  maxDamage: 4.08
+  maxDamage: 3.08
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0

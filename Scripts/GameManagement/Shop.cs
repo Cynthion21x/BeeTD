@@ -6,6 +6,11 @@ using UnityEngine.EventSystems;
 
 public class Shop : MonoBehaviour {
 
+    public GameObject upgradeEffect;
+
+    public bool mouseOverUi;
+    public GameObject placeingUI;
+
     public GameManager gameManager;
 
     public Vector2 mousePos;
@@ -41,7 +46,20 @@ public class Shop : MonoBehaviour {
     public float damageBonusMultiple = 1f;
     public float weightReduce = 0f;
 
+    public float baseDamageBoost;
+
+    public int discount;
+    public float abilitydiscount;
+
+    int UILayer;
+
     //public bool hover;
+
+    void Start() {
+
+        UILayer = LayerMask.NameToLayer("UI");
+
+    }
 
     void Update(){
 
@@ -52,9 +70,9 @@ public class Shop : MonoBehaviour {
 
         canPlace = !(Physics2D.OverlapCircle(mousePos, .5f, cantPlaceOn));
 
-        if (turret.GetComponent<towermanager>().flying == false) {
+        if (turret != null && turret.GetComponent<towermanager>().flying == false) {
 
-            if (Physics2D.OverlapCircle(mousePos, .5f, noGround)) {
+            if (Physics2D.OverlapCircle(mousePos, .2f, noGround)) {
 
                 canPlace = false;
 
@@ -75,7 +93,9 @@ public class Shop : MonoBehaviour {
             circle.transform.position = mousePos;
             circle.transform.localScale = new Vector2(turret.GetComponent<towermanager>().range, turret.GetComponent<towermanager>().range);
 
-            if (Input.GetMouseButtonUp(0) && canPlace){
+            circle.GetComponent<SpriteRenderer>().color = new Color32(47, 114, 255, 101);
+
+            if (Input.GetMouseButtonUp(0) && canPlace && IsPointerOverUIElement() == false) {
 
                 turret.GetComponent<SpriteRenderer>().color = Color.white;
                 turret.GetComponent<towermanager>().enabled = true;
@@ -86,7 +106,8 @@ public class Shop : MonoBehaviour {
                 turret.GetComponent<towermanager>().sellPrice = (int)((double)buyPrice * 0.75d);
 
                 if (turret.GetComponent<towermanager>().maxDamage != 0)
-                    turret.GetComponent<towermanager>().maxDamage += damageBonus;
+                    turret.GetComponent<towermanager>().damageBoost = damageBonus;
+                    turret.GetComponent<towermanager>().maxDamage += baseDamageBoost;
 
                 placing = false;
                 selectedTower = null;
@@ -96,6 +117,7 @@ public class Shop : MonoBehaviour {
             if (canPlace == false){
 
                 turret.GetComponent<SpriteRenderer>().color = Color.red;
+                circle.GetComponent<SpriteRenderer>().color = new Color32(255, 25, 63, 101);
 
             }
 
@@ -105,7 +127,7 @@ public class Shop : MonoBehaviour {
 
         if (placing == false) {
 
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0) && IsPointerOverUIElement() == false) {
 
                 Debug.Log("selecting");
 
@@ -119,7 +141,8 @@ public class Shop : MonoBehaviour {
 
                     }
 
-                    if (turret != null) {
+                    if (turret != null && IsPointerOverUIElement() == false) {
+
                         if (selectedTower == turret.GetComponent<Collider2D>().GetComponent<towermanager>()) {
 
                             selectedTower = null;
@@ -179,7 +202,17 @@ public class Shop : MonoBehaviour {
 
         }
 
+        placeingUI.SetActive(placing);
+
     }
+
+    public bool IsPointerOverUIElement() {
+
+        Debug.Log(EventSystem.current.IsPointerOverGameObject());
+        return EventSystem.current.IsPointerOverGameObject();
+
+    }
+
 
     public void buyUpgrade() {
 
@@ -197,9 +230,61 @@ public class Shop : MonoBehaviour {
 
             tar.sellPrice += (int)(cost * 0.75f);
 
+            Instantiate(upgradeEffect, tar.transform.position, Quaternion.identity);
+
             if (tar.GetComponent<endOfRoundEffect>() != null) {
 
                 tar.GetComponent<endOfRoundEffect>().value++;
+
+            }
+
+            if (selectedTower.gameObject.name == "centipede(Clone)") {
+
+                tar.maxDamage += 0.5f;
+
+            }
+
+            if (selectedTower.gameObject.name == "shield(Clone)") {
+
+                tar.fireRate -= 0.5f;
+
+            }
+
+        }
+
+    }
+
+    public void FreeUpgrade(towermanager tar) {
+
+       int cost = 0;
+
+        if (cost <= gameManager.coin) {
+
+            gameManager.coin -= cost;
+
+            tar.level++;
+
+            tar.Stacks++;
+
+            tar.sellPrice += (int)(cost * 0.75f);
+
+            Instantiate(upgradeEffect, tar.transform.position, Quaternion.identity);
+
+            if (tar.GetComponent<endOfRoundEffect>() != null) {
+
+                tar.GetComponent<endOfRoundEffect>().value++;
+
+            }
+
+            if (selectedTower.gameObject.name == "centipede(Clone)") {
+
+                tar.maxDamage += 0.5f;
+
+            }
+
+            if (selectedTower.gameObject.name == "shield(Clone)") {
+
+                tar.fireRate -= 0.5f;
 
             }
 
@@ -231,14 +316,28 @@ public class Shop : MonoBehaviour {
 
     }
 
+    public void cancell() {
+
+        if (placing == true) {
+            gameManager.coin += buyPrice;
+
+            Destroy(turret.gameObject);
+            placing = false;
+        }
+
+    }
+
+
     public void buyTower(int towerID, int cost) {
 
-        if (cost <= gameManager.coin && placing == false) {
+        int dcost = cost - discount;
+
+        if (dcost <= gameManager.coin && placing == false) {
 
             placing = true;
 
-            gameManager.coin -= cost;
-            buyPrice = cost;
+            gameManager.coin -= dcost;
+            buyPrice = dcost;
 
             turret = Instantiate(towers[towerID], mousePos, Quaternion.identity);
 
@@ -316,6 +415,12 @@ public class Shop : MonoBehaviour {
     public void buyMosquito(){
 
         buyTower(12, 125);
+
+    }
+
+    public void buyCentepiede(){
+
+        buyTower(13, 225);
 
     }
 }

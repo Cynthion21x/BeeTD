@@ -185,9 +185,10 @@ MonoBehaviour:
   precise: 1
   accuracy: 0
   range: 1.04
-  fireRate: 2.98
+  fireRate: 4.46
   speed: 5.4
   damage: 0
+  LifeTime: 0
   projectileType: {fileID: 5938905900805307995, guid: b4c9a2dd04b156a4b83247047fafa77b, type: 3}
   firePoint: {fileID: 75266554797413950}
   target: {fileID: 0}
