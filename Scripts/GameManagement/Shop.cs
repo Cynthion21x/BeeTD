@@ -332,6 +332,12 @@ public class Shop : MonoBehaviour {
 
         int dcost = cost - discount;
 
+        if (dcost <= 5) {
+
+            dcost = 5;
+
+        }
+
         if (dcost <= gameManager.coin && placing == false) {
 
             placing = true;

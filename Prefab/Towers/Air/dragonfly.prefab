@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 75266553324364548}
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
+  - component: {fileID: -7216545404826665462}
   m_Layer: 7
   m_Name: dragonfly
   m_TagString: bug
@@ -231,6 +232,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8598914, y: 0.6923194}
   m_EdgeRadius: 0
+--- !u!114 &-7216545404826665462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
+  m_ShapePath:
+  - {x: -1.5462326, y: -0.06276004, z: 0}
+  - {x: 0.18074745, y: -0.10083218, z: 0}
+  - {x: 0.17425285, y: 0.113427185, z: 0}
+  - {x: -1.5462321, y: 0.045306984, z: 0}
+  m_ShapePathHash: 319666802
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 249914
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

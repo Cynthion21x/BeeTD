@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 89313803888614280}
   - component: {fileID: 3061272808361261624}
+  - component: {fileID: 5777299424359565310}
   m_Layer: 7
   m_Name: Spider
   m_TagString: bug
@@ -138,7 +139,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7496fe35250ee5749b7bce0921379cae, type: 2}
+  - {fileID: 2100000, guid: a08f6f3133c0ee649bc27551814e3014, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -260,6 +261,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HalowSprite: {fileID: 21300000, guid: a2612d4c9fd434c4782a1c82685beb7a, type: 3}
+--- !u!114 &5777299424359565310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
+  m_ShapePath:
+  - {x: -0.51605415, y: -0.41311777, z: 0}
+  - {x: 0.37568682, y: -0.39440277, z: 0}
+  - {x: 0.37568706, y: 0.3663285, z: 0}
+  - {x: -0.53476995, y: 0.44119182, z: 0}
+  m_ShapePathHash: 350065470
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -253568
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

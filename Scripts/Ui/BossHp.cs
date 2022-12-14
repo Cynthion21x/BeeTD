@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 public class BossHp : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class BossHp : MonoBehaviour {
     public GameObject bossE = null;
 
     public float maxHP;
+
+    public GameObject effects;
 
     void Start() {
 
@@ -28,6 +31,7 @@ public class BossHp : MonoBehaviour {
             if (bossG != null || bossE != null) {
 
                 maxHP = GameObject.Find("wasp").GetComponent<EnemyController>().hp;
+                effects.GetComponent<Volume>().weight = 0;
 
             }
 
@@ -38,11 +42,22 @@ public class BossHp : MonoBehaviour {
             bar.gameObject.SetActive(true);
             bar.maxValue = maxHP;
 
+            effects.SetActive(true);
+
             bar.value = GameObject.Find("wasp").GetComponent<EnemyController>().hp;
+
+            Volume vol = effects.GetComponent<Volume>();
+
+            if (vol.weight <= 1) {
+
+                vol.weight += Time.unscaledDeltaTime;
+
+            }
 
         } else {
 
             bar.gameObject.SetActive(false);
+            effects.SetActive(false);
 
         }
         

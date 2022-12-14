@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 7946947901762057781}
+  - component: {fileID: -6966381105065422485}
   m_Layer: 7
   m_Name: Mantis
   m_TagString: bug
@@ -246,6 +247,32 @@ MonoBehaviour:
   ability: damage
   effect: {fileID: 1306625701766452327, guid: d8739ab832661864b894f6f115abc796, type: 3}
   Cost: 120
+--- !u!114 &-6966381105065422485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
+  m_ShapePath:
+  - {x: -0.9486787, y: -0.14735684, z: 0}
+  - {x: 0.8368663, y: -0.18462867, z: 0}
+  - {x: 0.78096026, y: 0.1287214, z: 0}
+  - {x: -0.94867855, y: 0.110086404, z: 0}
+  m_ShapePathHash: 2093217343
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 248592
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

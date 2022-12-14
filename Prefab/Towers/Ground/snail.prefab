@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 4128162947315708910}
+  - component: {fileID: 5076152103787910747}
   m_Layer: 7
   m_Name: snail
   m_TagString: bug
@@ -181,6 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14393c158d8b636488f4014fc76ab011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageBoost: 0
+  ProjectileSpeedBoost: 0
   weight: 0
   precise: 0
   accuracy: 0
@@ -188,6 +191,7 @@ MonoBehaviour:
   fireRate: 1.85
   speed: 0.95
   damage: 19
+  LifeTime: 0
   projectileType: {fileID: 5938905900805307995, guid: dc8d765de2eb7224ab05d1c862d7d00c, type: 3}
   firePoint: {fileID: 75266554797413950}
   target: {fileID: 0}
@@ -241,6 +245,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChristmasSprite: {fileID: 21300000, guid: 08a2097b98ad6c04fbf5a220c09cf531, type: 3}
+--- !u!114 &5076152103787910747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
+  m_ShapePath:
+  - {x: -0.5764808, y: -0.4012313, z: 0}
+  - {x: 0.26979452, y: -0.38662755, z: 0}
+  - {x: 0.26979455, y: 0.32821086, z: 0}
+  - {x: -0.6787098, y: 0.3428153, z: 0}
+  m_ShapePathHash: -346688742
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -265954
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

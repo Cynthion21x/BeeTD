@@ -273,7 +273,7 @@ public class Spawner : MonoBehaviour {
 
         if (mode == "tricky") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave - 32) * EnemyScale * 1.5f));
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave - 32) * EnemyScale * 1.25f));
 
         }
 
@@ -285,6 +285,7 @@ public class Spawner : MonoBehaviour {
 
         enemy.GetComponentInChildren<EnemyController>().speed = speed;
         enemy.GetComponentInChildren<EnemyController>().coinDrop += coinBonus;
+        enemy.GetComponentInChildren<EnemyController>().glue = glue;
 
         spawning = false;
     }

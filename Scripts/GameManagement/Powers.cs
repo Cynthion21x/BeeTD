@@ -11,6 +11,7 @@ public class Powers : MonoBehaviour {
     public Shop shop;
     public Spawner spawner;
     public GameManager gameManager;
+    public DebugController debugging;
 
     private int startHp;
     private int venStats;
@@ -20,6 +21,7 @@ public class Powers : MonoBehaviour {
     public bool selectingItem;
 
     private int ogLen;
+    private bool checkingItems = false;
 
     void Start() {
 
@@ -34,6 +36,14 @@ public class Powers : MonoBehaviour {
         if (selectingPower) {
 
             switch (power) {
+
+                case "sandbox":
+
+                    debugging.sandboxing = true;
+
+                    selectingPower = false;
+
+                    break;
 
                 case "vengence":
 
@@ -102,7 +112,7 @@ public class Powers : MonoBehaviour {
 
         //Items - 1 Time use
 
-        if (ogLen != items.Count) {
+        if (checkingItems == true) {
 
             foreach (string i in items) {
 
@@ -296,8 +306,16 @@ public class Powers : MonoBehaviour {
 
                 }
 
+                checkingItems = false;
+
 
             }
+
+        }
+
+        if (ogLen != items.Count) {
+
+            checkingItems = true;
 
         }
 

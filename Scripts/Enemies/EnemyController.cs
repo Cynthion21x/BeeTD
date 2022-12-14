@@ -34,8 +34,11 @@ public class EnemyController : MonoBehaviour {
     public SpriteRenderer damageSprite;
 
     public int glue;
+    private float totalDot;
 
     void Start(){
+
+        InvokeRepeating("DOT", 1, 1);
 
         maxHp = hp;
         maxSpd = speed;
@@ -56,11 +59,13 @@ public class EnemyController : MonoBehaviour {
 
         float cricketStacks = 1;
 
+        totalDot = 0;
+
         foreach (string i in statusEffect) {
 
             if (i != "none") {
 
-                float time = 1f;
+                float time = 2f;
 
                 if (i == "push") {
 
@@ -70,13 +75,13 @@ public class EnemyController : MonoBehaviour {
                 
                 if (i == "poision" || i == "damage") {
 
-                    time = 1f;
+                    time = 5f;
 
                 }
 
                 if (i == "slow") {
 
-                    time = 3f;
+                    time = 5f;
 
                 }
 
@@ -87,7 +92,8 @@ public class EnemyController : MonoBehaviour {
             if (i == "slow") {
 
                 speed = maxSpd * 0.5f;
-                Dealdamage(glue * Time.deltaTime);
+
+                totalDot += glue;
 
              }
 
@@ -102,12 +108,13 @@ public class EnemyController : MonoBehaviour {
 
                 //hp -= (maxHp * 0.005f) * Time.deltaTime;
 
+                totalDot += (maxHp * 0.01f);
+
               }
 
               if (i == "burn") {
 
-                //hp -= 10f * Time.deltaTime;
-                //Dealdamage(10f * Time.deltaTime);
+                totalDot += 4;
 
                }
 
@@ -207,9 +214,15 @@ public class EnemyController : MonoBehaviour {
 
     }
 
-    public void Dealdamage(float dmg) {
+    public void Dealdamage(float dmg, bool isDot = false) {
 
         float totalDamage = (dmg * damageMult) - damageReduce;
+
+        if (damageReduce > dmg) {
+
+            totalDamage = 0;
+
+        }
 
         bool crit = false;
 
@@ -220,35 +233,55 @@ public class EnemyController : MonoBehaviour {
 
         }
 
+        if (isDot) {
+
+            crit = false;
+
+        }
+
         hp -= totalDamage;
 
-        if (totalDamage > 0.9) {
+        GameObject num = Instantiate(DamagePopup, transform.position, Quaternion.identity);
 
-            GameObject num = Instantiate(DamagePopup, transform.position, Quaternion.identity);
+        popup damagePopup = num.GetComponent<popup>();
 
-            popup damagePopup = num.GetComponent<popup>();
+        if (totalDamage < 0) {
 
-            if (crit) {
+            damagePopup.Setup(totalDamage, "heal", 6);
 
-                damagePopup.Setup(totalDamage, Color.blue, 8);
+        } else if ((int)totalDamage == 0) {
 
-            } else if (damageReduce > 0) {
+            damagePopup.Setup(totalDamage, "none", 4);
 
-                damagePopup.Setup(totalDamage, Color.cyan, 5);
+        } else if (isDot) {
 
-            }  else if (damageMult > 1) {
+            damagePopup.Setup(totalDamage, "dot", 7);
 
-                damagePopup.Setup(totalDamage, Color.magenta, 7);
+        } else if (crit) {
 
-            } else if (totalDamage < 0){
+            damagePopup.Setup(totalDamage, "crit", 8);
 
-                damagePopup.Setup(totalDamage, Color.green, 4);
+        } else if (damageReduce > 0) {
 
-            } else {
+            damagePopup.Setup(totalDamage, "shield", 5);
 
-                damagePopup.Setup(totalDamage, Color.red, 5);
+        } else if (damageMult > 1) {
 
-            }
+            damagePopup.Setup(totalDamage, "cricket", 7);
+
+        } else {
+
+            damagePopup.Setup(totalDamage, "hit", 6);
+
+        }
+
+        }
+
+    void DOT() {
+
+        if (totalDot > 0) {
+
+            Dealdamage(totalDot, true);
 
         }
 

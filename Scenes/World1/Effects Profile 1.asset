@@ -25,7 +25,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.268
+    m_Value: 0.412
     min: 0
     max: 1
   smoothness:
@@ -52,15 +52,15 @@ MonoBehaviour:
   m_AdvancedMode: 0
   threshold:
     m_OverrideState: 1
-    m_Value: 1.39
+    m_Value: 1.2
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 8.4
+    m_Value: 10.31
     min: 0
   scatter:
     m_OverrideState: 1
-    m_Value: 0.818
+    m_Value: 0.824
     min: 0
     max: 1
   clamp:
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_Value: {fileID: 2800000, guid: 67412ba2b76316446a45303d1e47298e, type: 3}
   dirtIntensity:
     m_OverrideState: 1
-    m_Value: 0.99
+    m_Value: 1.62
     min: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -101,37 +101,5 @@ MonoBehaviour:
   m_Name: Effects Profile 1
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 3148235630111099901}
   - {fileID: -2452475018061862412}
   - {fileID: -6728150890304288742}
---- !u!114 &3148235630111099901
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70afe9e12c7a7ed47911bb608a23a8ff, type: 3}
-  m_Name: SplitToning
-  m_EditorClassIdentifier: 
-  active: 0
-  m_AdvancedMode: 0
-  shadows:
-    m_OverrideState: 1
-    m_Value: {r: 0.26132074, g: 0.39602363, b: 0.5, a: 1}
-    hdr: 0
-    showAlpha: 0
-    showEyeDropper: 1
-  highlights:
-    m_OverrideState: 1
-    m_Value: {r: 1, g: 0.70549023, b: 0.2584905, a: 1}
-    hdr: 0
-    showAlpha: 0
-    showEyeDropper: 1
-  balance:
-    m_OverrideState: 1
-    m_Value: -50
-    min: -100
-    max: 100

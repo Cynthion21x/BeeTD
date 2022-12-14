@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 75266553324364548}
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
+  - component: {fileID: 7437579515050949216}
   m_Layer: 7
   m_Name: termite
   m_TagString: bug
@@ -180,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14393c158d8b636488f4014fc76ab011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageBoost: 0
+  ProjectileSpeedBoost: 0
   weight: 0
   precise: 0
   accuracy: 0
@@ -187,6 +190,7 @@ MonoBehaviour:
   fireRate: 0.39
   speed: 2.23
   damage: 4.06
+  LifeTime: 0
   projectileType: {fileID: 5938905900805307995, guid: f3289b0e296d05842aec8629a205f3a9, type: 3}
   firePoint: {fileID: 75266554797413950}
   target: {fileID: 0}
@@ -227,6 +231,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8321245, y: 0.9798322}
   m_EdgeRadius: 0
+--- !u!114 &7437579515050949216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
+  m_ShapePath:
+  - {x: -0.81888866, y: -0.11574798, z: 0}
+  - {x: 0.6164691, y: -0.2755526, z: 0}
+  - {x: 0.62712276, y: 0.2755528, z: 0}
+  - {x: -0.7869272, y: 0.16901627, z: 0}
+  m_ShapePathHash: -667310164
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -268074
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

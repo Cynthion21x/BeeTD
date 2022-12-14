@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 8436615866032146233}
   - component: {fileID: 6379669994848115281}
   - component: {fileID: 4420383600629044893}
+  - component: {fileID: 7281763430479595687}
   m_Layer: 6
   m_Name: wasp
   m_TagString: Enemy
@@ -217,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamagePopup: {fileID: 4181719007722013254, guid: fb791f0e67e7ced44a3bd4d711218006, type: 3}
-  damageReduce: 0
+  damageReduce: 1
   hp: 1000
   speed: 0.75
   inc: 1
@@ -358,6 +359,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HalowSprite: {fileID: 21300000, guid: 222c16b7fa38b6b4382703890a9c255c, type: 3}
+--- !u!114 &7281763430479595687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236515296525282619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
+  m_ShapePath:
+  - {x: -0.8697214, y: -0.29853153, z: 0}
+  - {x: 0.8697214, y: -0.25913915, z: 0}
+  - {x: 0.81063306, y: 0.27883524, z: 0}
+  - {x: -0.7318481, y: 0.2788353, z: 0}
+  m_ShapePathHash: -98067119
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 298642
 --- !u!1 &8335541443593436257
 GameObject:
   m_ObjectHideFlags: 0
