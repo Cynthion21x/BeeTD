@@ -53,7 +53,8 @@ public class Powers : MonoBehaviour {
 
                 case "prosparity":
 
-                    spawner.coinBonus = 10;
+                    spawner.coinBonus = 5;
+                    gameManager.coin += 25;
 
                     selectingPower = false;
 
@@ -77,8 +78,6 @@ public class Powers : MonoBehaviour {
                     break;
 
                 case "creation":
-
-                    gameManager.GetComponent<Shop>().discount = 10;
 
                     selectingPower = false;
 
@@ -275,7 +274,7 @@ public class Powers : MonoBehaviour {
 
                 if (i == "battery") {
 
-                    shop.abilitydiscount -= 0.05f;
+                    gameManager.Ecap += 25;
 
                     items.Remove(i);
                     ogLen = items.Count;

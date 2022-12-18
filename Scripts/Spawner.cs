@@ -17,8 +17,8 @@ public class Spawner : MonoBehaviour {
     public Sprite easy;
     public Sprite tricky;
 
-    public GameObject wasp1;
-    public GameObject wasp2;
+    public GameObject[] wasp1;
+    public GameObject[] wasp2;
     public GameObject wasp3;
     public GameObject wasp4;
 
@@ -123,7 +123,7 @@ public class Spawner : MonoBehaviour {
 
         if (isElite == 1 && mode != "easy") {
 
-            float QueenHp = 500;
+            float QueenHp = 500 * .75f;
             float QueenSpeed = .8f;
 
             StartCoroutine(AsyncSpawn(elites[UnityEngine.Random.Range(1, elites.Length)], 0, QueenHp, QueenSpeed));
@@ -136,7 +136,7 @@ public class Spawner : MonoBehaviour {
 
         if (Wave % 16 == 0) {
 
-            StartCoroutine(AsyncSpawn(wasp4, 0, 800, .75f));
+            StartCoroutine(AsyncSpawn(wasp4, 0, 800 * .75f, .75f));
 
             Debug.Log("SpawnBoss");
 
@@ -206,9 +206,21 @@ public class Spawner : MonoBehaviour {
 
         for (int i = 1; i < spawnCount+1; i++) {
 
+            int Eindex = 0;
+                
+            if (mode == "normal") {
+
+                Eindex = UnityEngine.Random.Range(0, wasp1.Length);
+
+            } else if (mode == "tricky") {
+
+                Eindex = UnityEngine.Random.Range(0, wasp1.Length-1) + 1;
+
+            }
+
                 if (i % 16 == 0 && waveType == "normal") {
 
-                    float QueenHp = 300;
+                    float QueenHp = 300 * .75f;
                     float QueenSpeed = .75f;
 
                     StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
@@ -217,25 +229,25 @@ public class Spawner : MonoBehaviour {
 
                 } else if (i % 4 == 0 && waveType == "normal") {
 
-                    float SpeedHp = 75;
+                    float SpeedHp = 75 * .75f;
                     float SpeedSpeed = 1.5f;
 
-                    StartCoroutine(AsyncSpawn(wasp2, (float)(i - 1) * (float)(spacing), SpeedHp, SpeedSpeed));
+                    StartCoroutine(AsyncSpawn(wasp2[Eindex], (float)(i - 1) * (float)(spacing), SpeedHp, SpeedSpeed));
                     Debug.Log("SpawnSpeed");
 
                 } else if (waveType == "normal") {
 
-                    float DroneHp = 125;
+                    float DroneHp = 125 * .75f;
                     float DroneSpeed = 1f;
 
-                    StartCoroutine(AsyncSpawn(wasp1, (float)(i - 1) * (float)(spacing), DroneHp, DroneSpeed));
+                    StartCoroutine(AsyncSpawn(wasp1[Eindex], (float)(i - 1) * (float)(spacing), DroneHp, DroneSpeed));
                     Debug.Log("SpawnNormal");
 
                 }
 
                 if (waveType == "bossRush") {
 
-                    float QueenHp = 600;
+                    float QueenHp = 600 * .75f;
                     float QueenSpeed = .75f;
 
                     StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
@@ -244,10 +256,10 @@ public class Spawner : MonoBehaviour {
 
                 if (waveType == "flying") {
 
-                    float SpeedHp = 125;
+                    float SpeedHp = 125 * .75f;
                     float SpeedSpeed = 1.5f;
 
-                    StartCoroutine(AsyncSpawn(wasp2, (float)(i - 1) * (float)(spacing), SpeedHp, SpeedSpeed));                 
+                    StartCoroutine(AsyncSpawn(wasp2[Eindex], (float)(i - 1) * (float)(spacing), SpeedHp, SpeedSpeed));                 
 
                 }
 

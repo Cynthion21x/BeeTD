@@ -61,7 +61,7 @@ public class projectile : MonoBehaviour {
                 Debug.Log(sCount);
                 Debug.Log(statusStack);
 
-                if (!(sCount >= statusStack-1)) {
+                if (!(sCount >= statusStack)) {
 
                     enemy.statusEffect.Add(statusEffect);
 
@@ -75,6 +75,24 @@ public class projectile : MonoBehaviour {
 
                         coll.GetComponent<EnemyController>().Dealdamage(damage * 0.75f); 
                         Debug.Log("Aditional target hit");  
+
+                        sCount = 0;
+
+                        foreach (string i in enemy.statusEffect) {
+
+                            if (i == statusEffect) {
+
+                                sCount++;
+
+                            }
+
+                        }
+
+                        if (!(sCount >= statusStack)) {
+
+                            enemy.statusEffect.Add(statusEffect);
+
+                        }
 
                     }
 

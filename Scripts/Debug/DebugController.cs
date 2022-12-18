@@ -104,6 +104,7 @@ public class DebugController : MonoBehaviour {
             DestroyAll,
             SetBeeCoin,
             SetHp,
+            SetWave,
             Help
 
         };

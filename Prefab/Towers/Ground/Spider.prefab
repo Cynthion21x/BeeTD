@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &75266553185512655
 Transform:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 89313803888614280}
   - component: {fileID: 3061272808361261624}
-  - component: {fileID: 5777299424359565310}
+  - component: {fileID: 26412798426572942}
   m_Layer: 7
   m_Name: Spider
   m_TagString: bug
@@ -189,7 +189,7 @@ MonoBehaviour:
   precise: 1
   accuracy: 0
   range: 1.75
-  fireRate: 0.64
+  fireRate: 1.28
   speed: 2.5
   damage: 1.5
   LifeTime: 0
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: Slow
   effect: {fileID: 6068470116422173642, guid: 6d2d5089f34077e4bb106d238be081e2, type: 3}
-  Cost: 50
+  Cost: 10
 --- !u!114 &3061272808361261624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HalowSprite: {fileID: 21300000, guid: a2612d4c9fd434c4782a1c82685beb7a, type: 3}
---- !u!114 &5777299424359565310
+--- !u!114 &26412798426572942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,23 +270,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 75266553324364549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Script: {fileID: 11500000, guid: f8ea8eba17ba91742a03cc07568ae9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
-  m_ShapePath:
-  - {x: -0.51605415, y: -0.41311777, z: 0}
-  - {x: 0.37568682, y: -0.39440277, z: 0}
-  - {x: 0.37568706, y: 0.3663285, z: 0}
-  - {x: -0.53476995, y: 0.44119182, z: 0}
-  m_ShapePathHash: 350065470
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -253568
+  offset: {x: -0.08, y: -0.1}
+  OrderInLayer: -1
+  colour: {r: 0, g: 0, b: 0, a: 0.25490198}
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

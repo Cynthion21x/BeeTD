@@ -11,6 +11,12 @@ public class EnemyController : MonoBehaviour {
     public float speed;
     public int inc;
 
+    public bool randomInc;
+
+    public bool coinDrain;
+
+    public bool Ghost;
+
     public GameObject deathEffect;
 
     public Transform[] target;
@@ -35,6 +41,7 @@ public class EnemyController : MonoBehaviour {
 
     public int glue;
     private float totalDot;
+    private float baseDot;
 
     void Start(){
 
@@ -45,11 +52,33 @@ public class EnemyController : MonoBehaviour {
         maxCost = coinDrop;
         maxDamage = damage;
         invun = true;
-        StartCoroutine(cooldown());
+
+        if (Ghost == false) {
+            StartCoroutine(cooldown());
+        } else if (Ghost) {
+            StartCoroutine(phaseIn());
+        }
 
         statusEffect = new List<string>() { "none" };
 
+        baseDot = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().hp;
         damageSprite.color = new Color(1, 1, 1, 0);
+
+        if (coinDrain) {
+
+            GameManager c = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>();
+
+            c.coin -= 60;
+
+            if (c.coin < 0) {
+
+                c.coin = 0;
+
+            }
+
+            coinDrop += 75;
+
+        }
 
     }
 
@@ -73,7 +102,7 @@ public class EnemyController : MonoBehaviour {
 
                 }
                 
-                if (i == "poision" || i == "damage") {
+                if (i == "poision" || i == "damage" || i == "protectionDrain") {
 
                     time = 5f;
 
@@ -103,6 +132,12 @@ public class EnemyController : MonoBehaviour {
                 damage = maxDamage + 1;
 
               }
+
+             if (i == "protectionDrain") {
+
+                totalDot += baseDot/2;
+
+             }
 
               if (i == "posion") {
 
@@ -179,7 +214,11 @@ public class EnemyController : MonoBehaviour {
 
         } else {
 
-            current+=inc;
+            if (randomInc == false) {
+                current += inc;
+            } else {
+                current += Random.Range(0, inc);
+            }
 
         }
 
@@ -193,6 +232,16 @@ public class EnemyController : MonoBehaviour {
 
         yield return new WaitForSeconds(2f);
         invun = false;
+
+    }
+
+    public IEnumerator phaseIn(){
+
+        speed = maxSpd * 1.5f;
+        yield return new WaitForSeconds(3f);
+        invun = false;
+
+        speed = maxSpd;
 
     }
 

@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 3601026271524692094}
   - component: {fileID: 3416214974414096443}
   - component: {fileID: 4808309183178100080}
+  - component: {fileID: 5041062742798062606}
   m_Layer: 6
   m_Name: wasp
   m_TagString: Enemy
@@ -288,7 +289,22 @@ MonoBehaviour:
   - {x: -0.8108509, y: 0.24340388, z: 0}
   m_ShapePathHash: -298999865
   m_Mesh: {fileID: 0}
-  m_InstanceId: 279384
+  m_InstanceId: 118460
+--- !u!114 &5041062742798062606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236515296525282619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ea8eba17ba91742a03cc07568ae9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: -0.1, y: -0.7}
+  OrderInLayer: -1
+  colour: {r: 0, g: 0, b: 0, a: 0.28235295}
 --- !u!1 &8493095678195994733
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &334452666613361890
 Transform:
   m_ObjectHideFlags: 0

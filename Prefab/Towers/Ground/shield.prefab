@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &75266553185512655
 Transform:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 7601153821466122503}
-  - component: {fileID: 3568864248772763438}
+  - component: {fileID: 841003957375199939}
   m_Layer: 7
   m_Name: shield
   m_TagString: bug
@@ -246,8 +246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: push
   effect: {fileID: 6068470116422173642, guid: 06a3947e23b959e4e9f7e1cc5b6a5dd2, type: 3}
-  Cost: 70
---- !u!114 &3568864248772763438
+  Cost: 25
+--- !u!114 &841003957375199939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,23 +256,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 75266553324364549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Script: {fileID: 11500000, guid: f8ea8eba17ba91742a03cc07568ae9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
-  m_ShapePath:
-  - {x: -0.47154617, y: -0.2284565, z: 0}
-  - {x: 0.41870025, y: -0.31300962, z: 0}
-  - {x: 0.33414787, y: 0.37642387, z: 0}
-  - {x: -0.5138224, y: 0.2073192, z: 0}
-  m_ShapePathHash: 270432119
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -263256
+  offset: {x: -0.08, y: -0.1}
+  OrderInLayer: -1
+  colour: {r: 0, g: 0, b: 0, a: 0.25490198}
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

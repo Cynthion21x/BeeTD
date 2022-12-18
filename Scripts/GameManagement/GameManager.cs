@@ -8,6 +8,12 @@ public class GameManager : MonoBehaviour {
     
     public int hp = 10;
     public int coin = 100;
+    public int energy = 0;
+
+    public int EgainRate;
+    public int Ecap;
+
+    public Color fullColor;
 
     public float windSpeed = 5;
     public Spawner spawner;
@@ -15,6 +21,7 @@ public class GameManager : MonoBehaviour {
 
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI coinText;
+    public TextMeshProUGUI energyText;
     public TextMeshProUGUI windText;
 
     public TextMeshProUGUI endMessage;
@@ -38,7 +45,9 @@ public class GameManager : MonoBehaviour {
 
         easystring = easy[num];
         normalstring = norm[num];
-        tricktstring = tricky[num]; 
+        tricktstring = tricky[num];
+
+        InvokeRepeating("GainEnergy", 1f, 1f);
 
     }
 
@@ -54,6 +63,17 @@ public class GameManager : MonoBehaviour {
 
         hpText.text = (hp).ToString();
         coinText.text = (coin).ToString();
+        energyText.text = (energy).ToString();
+
+        if (energy >= Ecap) {
+
+            energyText.color = fullColor;
+
+        } else {
+
+            energyText.color = new Color(1, 1, 1, 1);
+
+        }
 
         windText.text = (windSpeed).ToString() + " mph";
 
@@ -77,6 +97,20 @@ public class GameManager : MonoBehaviour {
             } else {
 
                 endMessage.text = "\"" + tricktstring + "\"";
+
+            }
+
+        }
+
+    }
+
+    public void GainEnergy() {
+
+        if (GameObject.FindGameObjectWithTag("Enemy")) {
+
+            if (energy < Ecap) {
+
+                energy += EgainRate;
 
             }
 

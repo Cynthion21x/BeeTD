@@ -238,13 +238,13 @@ public class Shop : MonoBehaviour {
 
             }
 
-            if (selectedTower.gameObject.name == "centipede(Clone)") {
+            if (tar.gameObject.name == "centipede(Clone)") {
 
                 tar.maxDamage += 0.5f;
 
             }
 
-            if (selectedTower.gameObject.name == "shield(Clone)") {
+            if (tar.gameObject.name == "shield(Clone)") {
 
                 tar.fireRate -= 0.5f;
 
@@ -276,13 +276,13 @@ public class Shop : MonoBehaviour {
 
             }
 
-            if (selectedTower.gameObject.name == "centipede(Clone)") {
+            if (tar.gameObject.name == "centipede(Clone)") {
 
                 tar.maxDamage += 0.5f;
 
             }
 
-            if (selectedTower.gameObject.name == "shield(Clone)") {
+            if (tar.gameObject.name == "shield(Clone)") {
 
                 tar.fireRate -= 0.5f;
 
@@ -296,9 +296,9 @@ public class Shop : MonoBehaviour {
 
         int cost = selectedTower.GetComponent<activate>().Cost;
 
-        if (cost <= gameManager.coin) {
+        if (cost <= gameManager.energy) {
 
-            gameManager.coin -= cost;
+            gameManager.energy -= cost;
             selectedTower.GetComponent<activate>().trigger();
 
         }
@@ -351,82 +351,10 @@ public class Shop : MonoBehaviour {
 
     }
 
-    public void buySnail(){
+    public void buyFromShop(towerShop insect) {
 
-        buyTower(0, 100);
-
-    }
-
-    public void buyBee(){
-
-        buyTower(1, 25);
+        buyTower(insect.id, insect.cost);
 
     }
 
-   public void buyLady(){
-
-        buyTower(4, 25);
-
-    }
-
-    public void buySpider(){
-
-        buyTower(2, 50);
-
-    }
-
-    public void buyDragon(){
-
-        buyTower(3, 175);
-
-    }
-
-    public void buyAnt(){
-
-        buyTower(5, 150);
-
-    }
-
-    public void buyMantis(){
-
-        buyTower(6, 175);
-    }
-
-    public void buyFirefly(){
-
-        buyTower(7, 75);
-
-    }
-
-    public void buyShield(){
-
-        buyTower(8, 50);
-
-    }
-
-    public void buyCricket(){
-
-        buyTower(9, 150);
-
-    }
-
-    public void buydung(){
-        buyTower(10, 200);
-    }
-
-    public void buyTermite(){
-        buyTower(11, 100);
-    }
-
-    public void buyMosquito(){
-
-        buyTower(12, 125);
-
-    }
-
-    public void buyCentepiede(){
-
-        buyTower(13, 225);
-
-    }
 }

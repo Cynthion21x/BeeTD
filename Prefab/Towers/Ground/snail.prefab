@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &75266553185512655
 Transform:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 4128162947315708910}
-  - component: {fileID: 5076152103787910747}
+  - component: {fileID: 2517512313791361851}
   m_Layer: 7
   m_Name: snail
   m_TagString: bug
@@ -188,9 +188,9 @@ MonoBehaviour:
   precise: 0
   accuracy: 0
   range: 3.5
-  fireRate: 1.85
+  fireRate: 3.7
   speed: 0.95
-  damage: 19
+  damage: 20
   LifeTime: 0
   projectileType: {fileID: 5938905900805307995, guid: dc8d765de2eb7224ab05d1c862d7d00c, type: 3}
   firePoint: {fileID: 75266554797413950}
@@ -205,7 +205,7 @@ MonoBehaviour:
   level: 1
   sellPrice: 0
   Stacks: 1
-  maxDamage: 19
+  maxDamage: 20
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChristmasSprite: {fileID: 21300000, guid: 08a2097b98ad6c04fbf5a220c09cf531, type: 3}
---- !u!114 &5076152103787910747
+--- !u!114 &2517512313791361851
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,23 +254,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 75266553324364549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Script: {fileID: 11500000, guid: f8ea8eba17ba91742a03cc07568ae9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
-  m_ShapePath:
-  - {x: -0.5764808, y: -0.4012313, z: 0}
-  - {x: 0.26979452, y: -0.38662755, z: 0}
-  - {x: 0.26979455, y: 0.32821086, z: 0}
-  - {x: -0.6787098, y: 0.3428153, z: 0}
-  m_ShapePathHash: -346688742
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -265954
+  offset: {x: -0.08, y: -0.1}
+  OrderInLayer: -1
+  colour: {r: 0, g: 0, b: 0, a: 0.25490198}
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

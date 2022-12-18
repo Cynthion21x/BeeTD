@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &75266553185512655
 Transform:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 75266553324364548}
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
-  - component: {fileID: 7437579515050949216}
+  - component: {fileID: 6223402922684039124}
   m_Layer: 7
   m_Name: termite
   m_TagString: bug
@@ -187,9 +187,9 @@ MonoBehaviour:
   precise: 0
   accuracy: 0
   range: 1.69
-  fireRate: 0.39
+  fireRate: 0.78
   speed: 2.23
-  damage: 4.06
+  damage: 7.06
   LifeTime: 0
   projectileType: {fileID: 5938905900805307995, guid: f3289b0e296d05842aec8629a205f3a9, type: 3}
   firePoint: {fileID: 75266554797413950}
@@ -204,7 +204,7 @@ MonoBehaviour:
   level: 1
   sellPrice: 0
   Stacks: 1
-  maxDamage: 4.06
+  maxDamage: 6.06
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8321245, y: 0.9798322}
   m_EdgeRadius: 0
---- !u!114 &7437579515050949216
+--- !u!114 &6223402922684039124
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,23 +240,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 75266553324364549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Script: {fileID: 11500000, guid: f8ea8eba17ba91742a03cc07568ae9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
-  m_ShapePath:
-  - {x: -0.81888866, y: -0.11574798, z: 0}
-  - {x: 0.6164691, y: -0.2755526, z: 0}
-  - {x: 0.62712276, y: 0.2755528, z: 0}
-  - {x: -0.7869272, y: 0.16901627, z: 0}
-  m_ShapePathHash: -667310164
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -268074
+  offset: {x: -0.08, y: -0.1}
+  OrderInLayer: -1
+  colour: {r: 0, g: 0, b: 0, a: 0.25490198}
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

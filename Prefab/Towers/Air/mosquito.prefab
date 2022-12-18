@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &75266553185512655
 Transform:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 679125340594436505}
-  - component: {fileID: 2382497504593497359}
+  - component: {fileID: 4534196092464165269}
   m_Layer: 7
   m_Name: mosquito
   m_TagString: bug
@@ -188,7 +188,7 @@ MonoBehaviour:
   precise: 0
   accuracy: 0
   range: 0.79
-  fireRate: 0.85
+  fireRate: 1.7
   speed: 3.04
   damage: 1.38
   LifeTime: 0
@@ -246,8 +246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: heal
   effect: {fileID: 6068470116422173642, guid: c1918fbcea0cafb4ca4a777fb81d56a2, type: 3}
-  Cost: 300
---- !u!114 &2382497504593497359
+  Cost: 100
+--- !u!114 &4534196092464165269
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,23 +256,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 75266553324364549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Script: {fileID: 11500000, guid: f8ea8eba17ba91742a03cc07568ae9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 000000002d8a816bc7f2384d6572067cf5d0a16ff194134a07bf7ac78b2f4601
-  m_ShapePath:
-  - {x: -0.5511321, y: -0.124986745, z: 0}
-  - {x: 0.63636124, y: -0.19601117, z: 0}
-  - {x: 0.6647713, y: 0.1533966, z: 0}
-  - {x: -0.55113214, y: 0.16760176, z: 0}
-  m_ShapePathHash: -224648022
-  m_Mesh: {fileID: 0}
-  m_InstanceId: 250330
+  offset: {x: -0.18, y: -0.2}
+  OrderInLayer: 1
+  colour: {r: 0, g: 0, b: 0, a: 0.27058825}
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0
