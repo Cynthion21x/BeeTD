@@ -208,7 +208,7 @@ public class Spawner : MonoBehaviour {
 
             int Eindex = 0;
                 
-            if (mode == "normal") {
+            if (mode == "regular") {
 
                 Eindex = UnityEngine.Random.Range(0, wasp1.Length);
 

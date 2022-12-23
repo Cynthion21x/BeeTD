@@ -68,7 +68,7 @@ public class EnemyController : MonoBehaviour {
 
             GameManager c = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>();
 
-            c.coin -= 60;
+            c.coin -= 10;
 
             if (c.coin < 0) {
 
@@ -76,7 +76,7 @@ public class EnemyController : MonoBehaviour {
 
             }
 
-            coinDrop += 75;
+            coinDrop += 20;
 
         }
 
@@ -201,9 +201,7 @@ public class EnemyController : MonoBehaviour {
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed * 2);
 
-            float step = speed * Time.deltaTime;
-
-            this.transform.position = Vector2.MoveTowards(this.transform.position, target[current].position, step); 
+            this.transform.position = Vector2.MoveTowards(this.transform.position, target[current].position, speed * Time.deltaTime); 
 
         } else if(current >= (target.Length - 1)) {
 
@@ -237,7 +235,7 @@ public class EnemyController : MonoBehaviour {
 
     public IEnumerator phaseIn(){
 
-        speed = maxSpd * 1.5f;
+        speed = maxSpd * 2f;
         yield return new WaitForSeconds(3f);
         invun = false;
 

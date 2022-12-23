@@ -71,7 +71,7 @@ public class Powers : MonoBehaviour {
                 case "protection":
 
                     gameManager.hp += 5;
-                    gameManager.coin += 75;
+                    gameManager.coin += 50;
 
                     selectingPower = false;
 

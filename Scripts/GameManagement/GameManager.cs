@@ -37,11 +37,12 @@ public class GameManager : MonoBehaviour {
     void Start(){
 
         System.Random random = new System.Random();
-        int num = random.Next(0, 7);
 
-        string[] easy = { "Awh not even past easy mode", "Its called easy for a reason", "you didnt use the meta", "sorry to say but it dosent get any easier than this", "what were you thinking", "use a diffrent power next time", "Unlucky", "skill t-issue"  };
-        string[] norm = { "A fair place to die", "Nothing special happens here", "you died", "Boss a bit annoying huh", "flying enemies get you every time", "these should be more personalised", "better luck next time", "you got bee'd" };
-        string[] tricky = { "Thats so crazy", "It is quite tricky to be fair", "You ran the meta", "siuvgmcsdoibgcmvbfdgoibcmvfoismdbcvo fgo", "going for the new record?", "better luck next time", "wowzers", "im supprised you didn't quit at the first wave"  };
+        string[] easy = { "Awh not even past easy mode", "Its called easy for a reason", "you didnt use the meta", "sorry to say but it dosent get any easier than this", "what were you thinking", "use a diffrent power next time", "Unlucky", "skill t-issue", "the wasps are mean", "i think its best to just not say anything", "thats a little bit cringe", "perhaps there is a greater meaning behind all these messages", "I wonder where the most people die"  };
+        string[] norm = { "where better to die than normal mode", "Nothing special happens here", "you died", "Boss a bit annoying huh", "flying enemies get you every time", "these should be more personalised", "better luck next time", "you got bee'd", "these messages are decided beffore you even play", "theres not much more i can say other than 'you died'", "i just write these when im bored", "don't blame the randomness", "seems to be windy everywhere these days" };
+        string[] tricky = { "Thats so crazy", "It is quite tricky to be fair", "You ran the meta", "siuvgmcsdoibgcmvbfdgoibcmvfoismdbcvofgo", "going for the new record?", "better luck next time", "wowzers", "im supprised you didn't quit at the first wave", "this message is the best reward your gonna get", "surely these messages get boring", "go out side and see some real insects", "you did this", "I don't call it tricky mode for nothing"  };
+
+        int num = random.Next(0, easy.Length);
 
         easystring = easy[num];
         normalstring = norm[num];

@@ -13,6 +13,16 @@ public class mapSelector : MonoBehaviour {
         maps[mapSelected].isActive = true;
         maps[mapSelected].gameObject.SetActive(true);
 
+        foreach (map i in maps) {
+
+            if (maps[mapSelected] != i) {
+
+                Destroy(i.gameObject);
+
+            }
+
+        }
+
     }
 
 }

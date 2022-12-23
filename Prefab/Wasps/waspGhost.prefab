@@ -136,8 +136,8 @@ MonoBehaviour:
   damageReduce: 0
   hp: 50
   speed: 1.5
-  inc: 3
-  randomInc: 0
+  inc: 2
+  randomInc: 1
   coinDrain: 0
   Ghost: 1
   deathEffect: {fileID: 6068470116422173642, guid: ff834388739a0de48acf09b431084c00, type: 3}
@@ -264,7 +264,7 @@ MonoBehaviour:
   - {x: -0.8108509, y: 0.24340388, z: 0}
   m_ShapePathHash: -298999865
   m_Mesh: {fileID: 0}
-  m_InstanceId: 115872
+  m_InstanceId: 103884
 --- !u!114 &5041062742798062606
 MonoBehaviour:
   m_ObjectHideFlags: 0

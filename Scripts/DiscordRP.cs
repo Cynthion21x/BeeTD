@@ -10,6 +10,7 @@ public class DiscordRP : MonoBehaviour {
     public Discord.ActivityManager rp;
 
     public String Details;
+    public String State;
     public long time;
 
     void Awake()
@@ -58,25 +59,32 @@ public class DiscordRP : MonoBehaviour {
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             Details = "In Menu";
+            State = null;
         }
         else
         {
-            Details = "In Game";
+
+            Details = GameObject.FindGameObjectWithTag("GameControl").GetComponent<Powers>().power;
+
+            State = "Wave: " + GameObject.Find("Spawn").GetComponent<Spawner>().Wave;
         }
 
         discord.RunCallbacks();
 
         var activity = new Discord.Activity
         {
-            State = null,
+            State = State,
             Details = Details,
+
             Timestamps = {
                 Start = time,
             },
+
             Assets = {
                   LargeImage = "icon",
                   LargeText = "Its a bee"
-              },
+             },
+
             Instance = true,
         };
 
