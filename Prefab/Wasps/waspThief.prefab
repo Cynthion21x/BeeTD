@@ -134,7 +134,7 @@ MonoBehaviour:
   DamagePopup: {fileID: 4181719007722013254, guid: fb791f0e67e7ced44a3bd4d711218006, type: 3}
   damageReduce: 0
   hp: 100
-  speed: 1
+  speed: 2
   inc: 1
   randomInc: 0
   coinDrain: 1

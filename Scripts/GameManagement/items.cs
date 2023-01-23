@@ -50,7 +50,7 @@ public class items : MonoBehaviour {
 
                 int israte = Random.Range(1, 100);
 
-                if (israte > 30) {
+                if (israte > 80) {
 
                     //id = random.Next(0, itemsList.itemR.Length);
                     id = RollDice((byte)(itemsList.itemR.Length));

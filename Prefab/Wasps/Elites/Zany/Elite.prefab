@@ -218,9 +218,11 @@ MonoBehaviour:
   DamagePopup: {fileID: 4181719007722013254, guid: fb791f0e67e7ced44a3bd4d711218006, type: 3}
   damageReduce: 0
   hp: 1000
-  speed: 1
+  speed: 1.25
   inc: 3
   randomInc: 1
+  coinDrain: 0
+  Ghost: 0
   deathEffect: {fileID: 6068470116422173642, guid: ff834388739a0de48acf09b431084c00, type: 3}
   target:
   - {fileID: 0}
@@ -261,7 +263,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10, y: 10}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

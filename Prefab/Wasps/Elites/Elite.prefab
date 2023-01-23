@@ -219,8 +219,11 @@ MonoBehaviour:
   DamagePopup: {fileID: 4181719007722013254, guid: fb791f0e67e7ced44a3bd4d711218006, type: 3}
   damageReduce: 0
   hp: 1000
-  speed: 0.75
+  speed: 1
   inc: 1
+  randomInc: 0
+  coinDrain: 0
+  Ghost: 0
   deathEffect: {fileID: 6068470116422173642, guid: ff834388739a0de48acf09b431084c00, type: 3}
   target:
   - {fileID: 0}
@@ -357,7 +360,7 @@ MonoBehaviour:
   - {x: -0.90750337, y: 0.18034825, z: 0}
   m_ShapePathHash: -315909434
   m_Mesh: {fileID: 0}
-  m_InstanceId: 118814
+  m_InstanceId: 26576
 --- !u!114 &5901472552856278995
 MonoBehaviour:
   m_ObjectHideFlags: 0

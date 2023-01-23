@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 679125340594436505}
   - component: {fileID: 4534196092464165269}
+  - component: {fileID: 4771868078877885218}
   m_Layer: 7
   m_Name: mosquito
   m_TagString: bug
@@ -185,10 +186,12 @@ MonoBehaviour:
   damageBoost: 0
   ProjectileSpeedBoost: 0
   weight: 0.1
-  precise: 0
+  NoDamage: 0
+  melee: 1
+  meleeEffect: {fileID: 2290929154517207014, guid: 3d0e884013d452440b595d4535aeeaba, type: 3}
   accuracy: 0
   range: 0.79
-  fireRate: 1.7
+  fireRate: 3.4
   speed: 3.04
   damage: 1.38
   LifeTime: 0
@@ -262,6 +265,25 @@ MonoBehaviour:
   offset: {x: -0.18, y: -0.2}
   OrderInLayer: 1
   colour: {r: 0, g: 0, b: 0, a: 0.27058825}
+--- !u!95 &4771868078877885218
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cf271de3b9eae4f47957921e73117005, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

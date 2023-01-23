@@ -38,6 +38,18 @@ public class endOfRoundEffect : MonoBehaviour {
 
             }
 
+            if (effect == "damage") {
+
+                GameManager gamemanager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+                if (gamemanager.hp > 1) {
+
+                    gamemanager.hp -= value;
+
+                }
+
+            }
+
             if (Peffect != null)
                 Instantiate(Peffect, transform.position, Quaternion.identity, gameObject.transform).transform.localScale = new Vector2(Escaler, Escaler);
 

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &75266553185512655
 Transform:
   m_ObjectHideFlags: 0
@@ -95,6 +95,8 @@ GameObject:
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 8688401213541486359}
+  - component: {fileID: -435744602313898505}
+  - component: {fileID: 1282842954415228333}
   m_Layer: 7
   m_Name: Ant
   m_TagString: bug
@@ -184,7 +186,9 @@ MonoBehaviour:
   damageBoost: 0
   ProjectileSpeedBoost: 0
   weight: 0
-  precise: 0
+  NoDamage: 1
+  melee: 0
+  meleeEffect: {fileID: 0}
   accuracy: 0
   range: 1.75
   fireRate: 0.31
@@ -246,6 +250,39 @@ MonoBehaviour:
   offset: {x: -0.08, y: -0.1}
   OrderInLayer: -1
   colour: {r: 0, g: 0, b: 0, a: 0.25490198}
+--- !u!95 &-435744602313898505
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cf271de3b9eae4f47957921e73117005, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1282842954415228333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974ffc7435c830742b6178761fe90b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Skin: {fileID: 21300000, guid: 450d40c6e69f27d40b8274ad2c8a8baa, type: 3}
+  id: 2
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

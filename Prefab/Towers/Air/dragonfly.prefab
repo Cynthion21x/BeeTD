@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 75266553324364548}
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
+  - component: {fileID: -8928352296586755480}
   m_Layer: 7
   m_Name: dragonfly
   m_TagString: bug
@@ -187,7 +188,7 @@ MonoBehaviour:
   precise: 0
   accuracy: 0
   range: 3.09
-  fireRate: 0.32
+  fireRate: 0.64
   speed: 0.5
   damage: 3
   LifeTime: 0
@@ -231,6 +232,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8598914, y: 0.6923194}
   m_EdgeRadius: 0
+--- !u!95 &-8928352296586755480
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cf271de3b9eae4f47957921e73117005, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

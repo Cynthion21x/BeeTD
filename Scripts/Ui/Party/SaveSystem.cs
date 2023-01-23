@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem {
 
-    public static void Save(string dataName, int[] intData = null, string[] stringData = null) {
+    public static void Save(string dataName, int[] intData = null) {
 
         BinaryFormatter formatter = new BinaryFormatter();
 
@@ -17,10 +17,6 @@ public static class SaveSystem {
         if (intData != null) {
 
             formatter.Serialize(stream, intData);
-
-        } else if (stringData != null) {
-
-            formatter.Serialize(stream, stringData);
 
         }
 
@@ -46,27 +42,9 @@ public static class SaveSystem {
 
         } else {
 
-            return null;
+            FileStream stream = new FileStream(path, FileMode.Create);
 
-        }
-
-    }
-
-    public static string[] LoadStr(string dataName) {
-
-        string path = Application.persistentDataPath + "/" + dataName + ".silverfish";
-
-        if (File.Exists(path)) {
-
-            BinaryFormatter formatter = new BinaryFormatter();
-
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            string[] data = formatter.Deserialize(stream) as string[];
-
-            return data;
-
-        } else {
+            stream.Close();
 
             return null;
 

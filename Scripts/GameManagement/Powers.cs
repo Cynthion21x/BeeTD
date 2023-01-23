@@ -79,6 +79,7 @@ public class Powers : MonoBehaviour {
 
                 case "creation":
 
+                    gameManager.coin += 75;
                     selectingPower = false;
 
                     break;

@@ -94,8 +94,9 @@ GameObject:
   - component: {fileID: 75266553324364548}
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
-  - component: {fileID: 7946947901762057781}
   - component: {fileID: 1794879406618523692}
+  - component: {fileID: 4585107436086168866}
+  - component: {fileID: -2172585614580623113}
   m_Layer: 7
   m_Name: LeafBug
   m_TagString: bug
@@ -185,10 +186,12 @@ MonoBehaviour:
   damageBoost: 0
   ProjectileSpeedBoost: 0
   weight: 0
-  precise: 1
+  NoDamage: 1
+  melee: 0
+  meleeEffect: {fileID: 0}
   accuracy: 5
   range: 2.39
-  fireRate: 2
+  fireRate: 2.75
   speed: 1
   damage: 0
   LifeTime: 0
@@ -232,21 +235,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9342647, y: 1.2965903}
   m_EdgeRadius: 0
---- !u!114 &7946947901762057781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75266553324364549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f84e19bbf9b3eb84aa05b7eeeadc04c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ability: damage
-  effect: {fileID: 1306625701766452327, guid: d8739ab832661864b894f6f115abc796, type: 3}
-  Cost: 60
 --- !u!114 &1794879406618523692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +250,39 @@ MonoBehaviour:
   offset: {x: -0.2, y: -0.01}
   OrderInLayer: 1
   colour: {r: 0, g: 0, b: 0, a: 0.25490198}
+--- !u!95 &4585107436086168866
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cf271de3b9eae4f47957921e73117005, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-2172585614580623113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974ffc7435c830742b6178761fe90b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Skin: {fileID: 21300000, guid: 86ca831bb83e0864ab78303bcefa5bd1, type: 3}
+  id: 1
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

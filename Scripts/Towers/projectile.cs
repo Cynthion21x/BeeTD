@@ -58,8 +58,8 @@ public class projectile : MonoBehaviour {
 
                 }
 
-                Debug.Log(sCount);
-                Debug.Log(statusStack);
+                //Debug.Log(sCount);
+                //Debug.Log(statusStack);
 
                 if (!(sCount >= statusStack)) {
 
@@ -118,7 +118,7 @@ public class projectile : MonoBehaviour {
 
         Collider2D[] enemys = Physics2D.OverlapCircleAll(this.transform.position, aoe, EnemyLayer);
 
-        Debug.Log("Aoe Hit: " + enemys.Length.ToString());
+        //Debug.Log("Aoe Hit: " + enemys.Length.ToString());
 
         foreach (Collider2D coll in enemys) {
 

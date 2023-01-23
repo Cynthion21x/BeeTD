@@ -43,8 +43,14 @@ public class towerShop : MonoBehaviour {
 
         } else if ((gameManager.power != Power) && IsPowerLocked == true) {
 
-            button.interactable = false;
-            pic.color = new Color(0, 0, 0);
+            /*button.interactable = false;
+            pic.color = new Color(0, 0, 0);*/
+
+            if (gameManager.power != "no") {
+
+                Destroy(gameObject);
+
+            }
 
         }  else {
 

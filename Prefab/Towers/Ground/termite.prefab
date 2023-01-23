@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 75266553324364550}
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 6223402922684039124}
+  - component: {fileID: -4070404313321788092}
   m_Layer: 7
   m_Name: termite
   m_TagString: bug
@@ -187,9 +188,9 @@ MonoBehaviour:
   precise: 0
   accuracy: 0
   range: 1.69
-  fireRate: 0.78
+  fireRate: 1.56
   speed: 2.23
-  damage: 7.06
+  damage: 6.06
   LifeTime: 0
   projectileType: {fileID: 5938905900805307995, guid: f3289b0e296d05842aec8629a205f3a9, type: 3}
   firePoint: {fileID: 75266554797413950}
@@ -246,6 +247,25 @@ MonoBehaviour:
   offset: {x: -0.08, y: -0.1}
   OrderInLayer: -1
   colour: {r: 0, g: 0, b: 0, a: 0.25490198}
+--- !u!95 &-4070404313321788092
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cf271de3b9eae4f47957921e73117005, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour {
 
+    public float BaseHpScale;
     public float EnemyScale;
     public float EnemyHpBoost;
 
@@ -119,16 +120,16 @@ public class Spawner : MonoBehaviour {
 
         int isElite = UnityEngine.Random.Range(1, 10);
 
-        Debug.Log("Spawning Elite" + isElite.ToString());
+        //Debug.Log("Spawning Elite" + isElite.ToString());
 
         if (isElite == 1 && mode != "easy") {
 
-            float QueenHp = 500 * .75f;
+            float QueenHp = 500 * BaseHpScale;
             float QueenSpeed = .8f;
 
             StartCoroutine(AsyncSpawn(elites[UnityEngine.Random.Range(1, elites.Length)], 0, QueenHp, QueenSpeed));
 
-            Debug.Log("SpawnElite");
+            //Debug.Log("SpawnElite");
 
             return;
 
@@ -136,9 +137,9 @@ public class Spawner : MonoBehaviour {
 
         if (Wave % 16 == 0) {
 
-            StartCoroutine(AsyncSpawn(wasp4, 0, 800 * .75f, .75f));
+            StartCoroutine(AsyncSpawn(wasp4, 0, 800 * BaseHpScale, .75f));
 
-            Debug.Log("SpawnBoss");
+            //Debug.Log("SpawnBoss");
 
             Wave++;
 
@@ -195,7 +196,6 @@ public class Spawner : MonoBehaviour {
 
         }
 
-
         if (decider == 3) {
 
             waveType = "normal";
@@ -212,6 +212,8 @@ public class Spawner : MonoBehaviour {
 
                 Eindex = UnityEngine.Random.Range(0, wasp1.Length);
 
+                //Debug.Log(Eindex);
+
             } else if (mode == "tricky") {
 
                 Eindex = UnityEngine.Random.Range(0, wasp1.Length-1) + 1;
@@ -220,34 +222,34 @@ public class Spawner : MonoBehaviour {
 
                 if (i % 16 == 0 && waveType == "normal") {
 
-                    float QueenHp = 300 * .75f;
+                    float QueenHp = 300 * BaseHpScale;
                     float QueenSpeed = .75f;
 
                     StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
 
-                    Debug.Log("SpawnQueen");
+                    //Debug.Log("SpawnQueen");
 
                 } else if (i % 4 == 0 && waveType == "normal") {
 
-                    float SpeedHp = 75 * .75f;
+                    float SpeedHp = 75 * BaseHpScale;
                     float SpeedSpeed = 1.5f;
 
                     StartCoroutine(AsyncSpawn(wasp2[Eindex], (float)(i - 1) * (float)(spacing), SpeedHp, SpeedSpeed));
-                    Debug.Log("SpawnSpeed");
+                    //Debug.Log("SpawnSpeed");
 
                 } else if (waveType == "normal") {
 
-                    float DroneHp = 125 * .75f;
+                    float DroneHp = 125 * BaseHpScale;
                     float DroneSpeed = 1f;
 
                     StartCoroutine(AsyncSpawn(wasp1[Eindex], (float)(i - 1) * (float)(spacing), DroneHp, DroneSpeed));
-                    Debug.Log("SpawnNormal");
+                    //Debug.Log("SpawnNormal");
 
                 }
 
                 if (waveType == "bossRush") {
 
-                    float QueenHp = 600 * .75f;
+                    float QueenHp = 600 * BaseHpScale;
                     float QueenSpeed = .75f;
 
                     StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
@@ -256,7 +258,7 @@ public class Spawner : MonoBehaviour {
 
                 if (waveType == "flying") {
 
-                    float SpeedHp = 125 * .75f;
+                    float SpeedHp = 125 * BaseHpScale;
                     float SpeedSpeed = 1.5f;
 
                     StartCoroutine(AsyncSpawn(wasp2[Eindex], (float)(i - 1) * (float)(spacing), SpeedHp, SpeedSpeed));                 
@@ -285,7 +287,7 @@ public class Spawner : MonoBehaviour {
 
         if (mode == "tricky") {
 
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave - 32) * EnemyScale * 1.25f));
+            enemy.GetComponentInChildren<EnemyController>().hp = hp * 2 * (1 + ((Wave - 32) * EnemyScale));
 
         }
 
@@ -295,7 +297,7 @@ public class Spawner : MonoBehaviour {
 
         }
 
-        enemy.GetComponentInChildren<EnemyController>().speed = speed;
+        //enemy.GetComponentInChildren<EnemyController>().speed = speed;
         enemy.GetComponentInChildren<EnemyController>().coinDrop += coinBonus;
         enemy.GetComponentInChildren<EnemyController>().glue = glue;
 

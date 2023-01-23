@@ -24,7 +24,13 @@ public class activate : MonoBehaviour {
 
     public void trigger() {
 
-        Instantiate(effect, this.transform.position, Quaternion.identity);
+        GameObject summon = Instantiate(effect, this.transform.position, Quaternion.identity);
+
+        if (ability == "summon") {
+
+            summon.GetComponent<towermanager>().Set();
+
+        }
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -38,23 +44,30 @@ public class activate : MonoBehaviour {
 
             }
 
-             if (ability == "Slow") {
+            if (ability == "Slow") {
 
                 en.statusEffect.Add("slow");
 
             }
 
-             if (ability == "push") {
+            if (ability == "push") {
 
                 en.statusEffect.Add("push");
                 en.Dealdamage(20);
 
             }
+
         }
 
         if (ability == "heal") {
 
             GameObject.Find("GameManager").GetComponent<GameManager>().hp += 1;
+
+         }
+
+         if (ability == "summon") {
+
+                Destroy(gameObject);
 
          }
 

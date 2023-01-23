@@ -94,7 +94,7 @@ public class EnemyController : MonoBehaviour {
 
             if (i != "none") {
 
-                float time = 2f;
+                float time = 5f;
 
                 if (i == "push") {
 
@@ -104,7 +104,7 @@ public class EnemyController : MonoBehaviour {
                 
                 if (i == "poision" || i == "damage" || i == "protectionDrain") {
 
-                    time = 5f;
+                    time = 7f;
 
                 }
 
@@ -236,7 +236,7 @@ public class EnemyController : MonoBehaviour {
     public IEnumerator phaseIn(){
 
         speed = maxSpd * 2f;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         invun = false;
 
         speed = maxSpd;

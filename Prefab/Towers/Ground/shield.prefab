@@ -96,6 +96,8 @@ GameObject:
   - component: {fileID: 9200873605159302537}
   - component: {fileID: 7601153821466122503}
   - component: {fileID: 841003957375199939}
+  - component: {fileID: -2293304109837511069}
+  - component: {fileID: 6431796923843174188}
   m_Layer: 7
   m_Name: shield
   m_TagString: bug
@@ -185,7 +187,9 @@ MonoBehaviour:
   damageBoost: 0
   ProjectileSpeedBoost: 0
   weight: 0
-  precise: 1
+  NoDamage: 1
+  melee: 0
+  meleeEffect: {fileID: 0}
   accuracy: 0
   range: 1.04
   fireRate: 4.46
@@ -262,6 +266,39 @@ MonoBehaviour:
   offset: {x: -0.08, y: -0.1}
   OrderInLayer: -1
   colour: {r: 0, g: 0, b: 0, a: 0.25490198}
+--- !u!95 &-2293304109837511069
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cf271de3b9eae4f47957921e73117005, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6431796923843174188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75266553324364549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974ffc7435c830742b6178761fe90b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Skin: {fileID: 21300000, guid: bb0e3369c2527a240948ef7139324aa9, type: 3}
+  id: 7
 --- !u!1 &75266554797413951
 GameObject:
   m_ObjectHideFlags: 0

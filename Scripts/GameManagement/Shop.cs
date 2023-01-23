@@ -208,7 +208,7 @@ public class Shop : MonoBehaviour {
 
     public bool IsPointerOverUIElement() {
 
-        Debug.Log(EventSystem.current.IsPointerOverGameObject());
+        //Debug.Log(EventSystem.current.IsPointerOverGameObject());
         return EventSystem.current.IsPointerOverGameObject();
 
     }
