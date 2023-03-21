@@ -29,6 +29,9 @@ public class items : MonoBehaviour {
     private static RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
     private int id;
 
+    private float TimeScale;
+    private bool time;
+
     void Awake() {
 
         type = null;
@@ -40,6 +43,15 @@ public class items : MonoBehaviour {
         rareGlow.SetActive(rare);
 
         if (itemsList.selecting == true) {
+
+            if (time == false) {
+
+                time = true;
+                TimeScale = Time.timeScale;
+
+            }
+
+            Time.timeScale = 0;
 
             if (type == null) {
 
@@ -119,6 +131,9 @@ public class items : MonoBehaviour {
 
         item1.type = null;
         item2.type = null;
+
+        Time.timeScale = TimeScale;
+        time = false;
 
     }
 

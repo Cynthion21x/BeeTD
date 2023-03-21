@@ -5,28 +5,26 @@ using UnityEngine.Events;
 
 public class projectile : MonoBehaviour {
 
-    public int statusStack = 0;
-
-    public float damage;
+    [Header("Behaivours")]
     public float speed;
     public float lifeTime;
-
     public float aoe = 0f;
 
-    public float minSpeed;
+    public StatusEffectData status;
 
-    public float speedReduce;
-
+    [Header("effects")]
     public GameObject ImpactEffect;
-    public GameObject DespawnEffect;
+
+    [Header("TowerManaged")]
+    public float damage;
+    public int level;
 
     public LayerMask EnemyLayer;
 
-    public string statusEffect = "none";
-
     void Start() {
 
-        StartCoroutine(kill(lifeTime));
+        //StartCoroutine(kill(lifeTime));
+        Invoke("kill", lifeTime);
 
     }
 
@@ -44,96 +42,44 @@ public class projectile : MonoBehaviour {
 
             if (enemy.enabled == true) {
 
-                enemy.Dealdamage(damage);
-
-                int sCount = 0;
-
-                foreach (string i in enemy.statusEffect) {
-
-                    if (i == statusEffect) {
-
-                        sCount++;
-
-                    }
-
-                }
-
-                //Debug.Log(sCount);
-                //Debug.Log(statusStack);
-
-                if (!(sCount >= statusStack)) {
-
-                    enemy.statusEffect.Add(statusEffect);
-
-                }
-
-                Collider2D[] enemys = Physics2D.OverlapCircleAll(this.transform.position, aoe, EnemyLayer);
-
-                foreach (Collider2D coll in enemys) {
-
-                    if (coll.GetComponent<EnemyController>() != enemy){
-
-                        coll.GetComponent<EnemyController>().Dealdamage(damage * 0.75f); 
-                        Debug.Log("Aditional target hit");  
-
-                        sCount = 0;
-
-                        foreach (string i in enemy.statusEffect) {
-
-                            if (i == statusEffect) {
-
-                                sCount++;
-
-                            }
-
-                        }
-
-                        if (!(sCount >= statusStack)) {
-
-                            enemy.statusEffect.Add(statusEffect);
-
-                        }
-
-                    }
-
-                }
+                Attack(enemy);
 
             }
-
-            if (ImpactEffect != null) {
-
-                Instantiate(ImpactEffect, transform.position, Quaternion.identity);
-
-            }
-
-            Destroy(gameObject);
 
         }
 
+        kill();
+
     }
 
-    private IEnumerator kill(float Time) {
-
-        yield return new WaitForSeconds(Time);
+    private void kill() {
 
         Collider2D[] enemys = Physics2D.OverlapCircleAll(this.transform.position, aoe, EnemyLayer);
 
-        //Debug.Log("Aoe Hit: " + enemys.Length.ToString());
-
         foreach (Collider2D coll in enemys) {
 
-            coll.GetComponent<EnemyController>().Dealdamage(damage * 0.75f); 
-            Debug.Log("Aditional target hit");  
+            Attack(coll.GetComponent<EnemyController>(), true);
 
         }   
 
-        if (DespawnEffect != null){
+        if (ImpactEffect != null){
 
-            Instantiate(DespawnEffect, transform.position, transform.rotation);
+            Instantiate(ImpactEffect, transform.position, transform.rotation);
 
         }
 
         Destroy(gameObject);
+
+    }
+
+    private void Attack(EnemyController target, bool aoe = false) {
+
+        //damage
+        target.ApplyEffect(status, level);
+
+        if (aoe == true) { target.Dealdamage(damage * 0.25f); return; } 
+
+        target.Dealdamage(damage);
 
     }
 

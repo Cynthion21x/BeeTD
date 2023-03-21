@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class activate : MonoBehaviour {
 
+    public bool notFullscreen;
+
     public string ability;
     public GameObject effect;
     public int Cost;
 
     private int ogCost;
+
+    public StatusEffectData status;
 
     void Start() {
 
@@ -24,7 +28,13 @@ public class activate : MonoBehaviour {
 
     public void trigger() {
 
-        GameObject summon = Instantiate(effect, this.transform.position, Quaternion.identity);
+        GameObject summon = Instantiate(effect, Vector2.zero, Quaternion.identity);
+
+        if (notFullscreen) {
+
+            summon.transform.position = transform.position;
+
+        }
 
         if (ability == "summon") {
 
@@ -44,18 +54,31 @@ public class activate : MonoBehaviour {
 
             }
 
-            if (ability == "Slow") {
+            if (ability == "Status") {
 
-                en.statusEffect.Add("slow");
+                en.ApplyEffect(status, GetComponent<towermanager>().level);
 
             }
 
             if (ability == "push") {
 
-                en.statusEffect.Add("push");
-                en.Dealdamage(20);
+                en.ApplyEffect(status, GetComponent<towermanager>().level);
+                en.Dealdamage(20 * GetComponent<towermanager>().level);
 
             }
+
+            if (ability == "jump") {
+
+                this.transform.position = en.transform.position;
+
+            }
+
+             if (ability == "Detonate") {
+
+                if (!en.isBoss) { Destroy(en.gameObject); }
+                else { en.Dealdamage(en.hp / 6); }
+
+             }
 
         }
 
@@ -67,6 +90,13 @@ public class activate : MonoBehaviour {
 
          if (ability == "summon") {
 
+                Destroy(gameObject);
+
+         }
+
+         if (ability == "Detonate") {
+
+                
                 Destroy(gameObject);
 
          }

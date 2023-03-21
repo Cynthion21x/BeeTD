@@ -1,27 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class mapSelector : MonoBehaviour {
 
-    public map[] maps;
+    public GameObject[] maps;
+    public bool weatherOn;
+
+    public map mapSelected;
+
+    [Header("UI")]
+    public TextMeshProUGUI title;
+    public TextMeshProUGUI author;
+
 
     void Start() {
 
-        int mapSelected = Random.Range(0, maps.Length);
+        loadMap();
 
-        maps[mapSelected].isActive = true;
-        maps[mapSelected].gameObject.SetActive(true);
+    }
 
-        foreach (map i in maps) {
 
-            if (maps[mapSelected] != i) {
+    void loadMap() {
 
-                Destroy(i.gameObject);
+        if (mapSelected != null) {
 
-            }
-
+            mapSelected.Fade();
+                
         }
+
+        mapSelected = Instantiate(maps[Random.Range(0, maps.Length)]).GetComponent<map>();
+
+        mapSelected.title = title;
+        mapSelected.author = author;
+        mapSelected.isActive = true;
+        mapSelected.transform.position = Vector3.zero;
 
     }
 

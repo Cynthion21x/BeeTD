@@ -84,7 +84,7 @@ public class AchievementUnlocks : MonoBehaviour {
 
                     case conditionPrimary.wave:
 
-                        var = spawner.Wave;
+                        //var = spawner.Wave;
                         break;
 
                     case conditionPrimary.towerCount:
@@ -175,9 +175,9 @@ public class AchievementUnlocks : MonoBehaviour {
 
                     if (var == value[i]) {
 
-                        if (spawner.Wave % 16 == 0)
+                        /*if (spawner.Wave % 16 == 0)
 
-                        Unlock(id[i]);
+                        Unlock(id[i]);*/
 
                     }
 

@@ -87,7 +87,7 @@ public class DebugController : MonoBehaviour {
 
         SetWave = new DebugCommand<int>("Set_Wave", "Set wave number, affects newly spawned enemy strength", "Set_Wave <wave>", (x) => {
 
-            GameObject.Find("Spawn").GetComponent<Spawner>().Wave = x;
+            GameObject.Find("Spawn").GetComponent<Spawner>().wave = x;
 
         });
 

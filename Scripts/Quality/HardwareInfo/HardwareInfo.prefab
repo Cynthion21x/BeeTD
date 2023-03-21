@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1000012822431604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4000010015401086}
+  - component: {fileID: 114000010598812434}
+  m_Layer: 0
+  m_Name: HardwareInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000010015401086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012822431604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114000010598812434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012822431604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d193f3f5e4c8974c961fc971e44c37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userHardwareScore: 0
+  userGPUScore: 0
+  userCPUScore: 0
+  compatibilityWarnings: 
+  comparisonWeights:
+    initialized: 1
+    desktopWeight: 1
+    consoleWeight: 1
+    handheldWeight: 0.7
+    ignoreCoresAbove: 2
+    gpuMultithreadPenalty: 0.5
+    computePenalty: 0.25
+    imageEffectPenalty: 0.25
+    shadowPenalty: 0.9
+  useComplexHardwareData: 0
+  referenceConfiguration:
+    initialized: 1
+    deviceType: 3
+    gpuDeviceType: 2
+    gpuMemory: 5997
+    gpuMultiThread: 1
+    gpuShaderLevel: 50
+    maxTextureSize: 16384
+    systemMemory: 32711
+    processorCount: 8
+    processorFrequency: 3998
+    supportsComputeShaders: 1
+    supportsImageEffects: 1
+    supportsShadows: 1
+    SLIScalar: 1.4
+  userConfiguration:
+    initialized: 1
+    deviceType: 0
+    gpuDeviceType: 4
+    gpuMemory: -1
+    gpuMultiThread: 0
+    gpuShaderLevel: -1
+    maxTextureSize: -1
+    systemMemory: -1
+    processorCount: -1
+    processorFrequency: -1
+    supportsComputeShaders: 0
+    supportsImageEffects: 0
+    supportsShadows: 0
+    SLIScalar: 1
+  complexUserConfiguration:
+    initialized: 1
+    deviceModel: 
+    deviceName: 
+    deviceType: 0
+    deviceID: 
+    gpuDeviceID: -1
+    gpuDeviceName: 
+    gpuDeviceType: 4
+    gpuDeviceVendor: 
+    gpuDeviceVendorID: -1
+    gpuDeviceVersion: 
+    gpuMemory: -1
+    gpuMultiThread: 0
+    gpuShaderLevel: -1
+    maxTextureSize: -1
+    npotSupport: 0
+    operatingSystem: 
+    processorCount: -1
+    processorFrequency: -1
+    processorType: 
+    supportedRenderTargetCount: -1
+    supports2DArrayTextures: 0
+    supports3DTextures: 0
+    supportsAudio: 0
+    supportsComputeShaders: 0
+    supportsGyroscope: 0
+    supportsImageEffects: 0
+    supportsInstancing: 0
+    supportsLocationService: 0
+    supportsMotionVectors: 0
+    supportsRawShadowDepthSampling: 0
+    supportsRenderToCubemap: 0
+    supportsShadows: 0
+    supportsSparseTextures: 0
+    supportsVibration: 0
+    systemMemory: -1

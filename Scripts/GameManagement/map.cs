@@ -5,38 +5,39 @@ using TMPro;
 
 public class map : MonoBehaviour {
 
+    [Header("Positions")]
     public Transform[] mapCorners;
-    public Spawner spawn;
-    public GameManager game;
 
+    [Header("Properties")]
     public bool isActive;
+    public bool alternatingWind;
+    public bool hasWeather;
 
     public string mapName;
     public string mapAuthor;
 
+    [Header("UI")]
     public TextMeshProUGUI title;
     public TextMeshProUGUI author;
 
-    public bool alternatingWind;
 
     void Update() {
 
         if (isActive) {
 
-            spawn.positions = mapCorners;
+            //spawn.positions = mapCorners;
 
             title.text = "< " + mapName + " >";
             author.text = "by " + mapAuthor;
-
-            if (alternatingWind) {
-
-                game.altwind = true;
-
-            }
 
         }
 
     }
 
+    public void Fade() {
+
+        Destroy(gameObject);
+
+    }
 
 }

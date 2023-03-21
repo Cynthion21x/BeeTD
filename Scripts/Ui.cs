@@ -6,7 +6,11 @@ using UnityEngine.Audio;
 public class Ui : MonoBehaviour {
 
     public AudioMixerGroup sound;
+    public AudioMixerGroup fX;
     public Spawner spawn;
+
+    public GameObject loadingScreen;
+    public GameObject normalUI;
 
     void Start() {
 
@@ -27,7 +31,7 @@ public class Ui : MonoBehaviour {
 
     public void load(string name){
 
-        SceneManager.LoadScene(name);
+        StartCoroutine(loadingFX(name));
 
     }
 
@@ -37,9 +41,14 @@ public class Ui : MonoBehaviour {
 
     }
 
+     public void effectsSet(System.Single vol){
+
+        fX.audioMixer.SetFloat("volume", vol);
+
+    }
+
     public void timeSet(System.Single vol){
 
-        Time.timeScale = vol;
 
         if(SceneManager.GetActiveScene().name == "MainMenu") {
 
@@ -59,6 +68,23 @@ public class Ui : MonoBehaviour {
 
         if (spawn != null) {
             spawn.autoplay = value;
+        }
+
+    }
+    
+    private IEnumerator loadingFX(string name) {
+
+        if (loadingScreen != null) {
+            normalUI.SetActive(false);
+            loadingScreen.SetActive(true);
+        }
+
+        yield return new WaitForSecondsRealtime(1.01f);
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(name);
+
+        while (asyncLoad.isDone != true) {
+            yield return null;
         }
 
     }

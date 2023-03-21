@@ -1,65 +1,71 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class towermanager : MonoBehaviour {
 
-    public float damageBoost;
-    public float ProjectileSpeedBoost;
-
+    [Header("Calculated Stats")]
+    public float damage;
+    public int sellPrice;
+    public float range;
+    public float fireRate;
+    public float speed;
     public float weight;
+    public int level = 1;
 
+    [Header("Base Stats")]
+    public float baseWeight;
+    public float baseRange;
+    public float baseFireRate;
+    public float baseSpeed;
+    public float baseDamage;
+
+    public float baseProjectileSpeed;
+
+    [Header("Properties")]
+    public bool flying = false;
     public bool NoDamage;
+    public StatusEffectData Status;
 
     public bool melee;
     public GameObject meleeEffect;
 
-    public int accuracy;
+    public bool canShoot = true;
 
-    public float range;
-    public float fireRate;
-    public float speed;
-    public float damage;
-
-    public float LifeTime;
-
+    [Header("Projectile")]
     public GameObject projectileType;
-
     public Transform firePoint;
 
-    [SerializeField]private EnemyController target;
+    [Header("Bonuses")]
+    public float damageBoost;
+    public float ProjectileSpeedBoost;
+    public float ProjectileLifeTime;
 
-    private Animator anim;
-
-    private GameObject game;
+    [Header("Other")]
+    public Spawner spwn;
 
     public LayerMask layerMask;
 
-    public bool canShoot = true;
-    public bool flying = false;
-
-    private Vector3 positionOg;
-
-    public Spawner spwn;
-
     public bool isFlying = false;
-    private GameObject flyingChild = null;
+    public GameObject flyingChild = null;
 
-    public int level = 1;
 
-    public int sellPrice;
-
-    public int Stacks = 1;
-
-    public float maxDamage;
-
+    //private
     private Vector3 scale;
     private bool isScaling;
+    public bool blown;
+    private GameObject game;
+    private EnemyController target;
+    private Vector3 positionOg;
+
+    void Awake()  {
+        range = baseRange;
+    }
 
     public void Set(){
 
         positionOg = transform.position;
-        maxDamage = damage;
 
         scale = transform.localScale;
 
@@ -71,7 +77,7 @@ public class towermanager : MonoBehaviour {
 
         if (flying == false) {
 
-            GameObject.Find("Maps").GetComponentInChildren<AudioSource>().Play();
+            GameObject.Find("Maps").GetComponent<mapSelector>().mapSelected.GetComponent<AudioSource>().Play();
 
         }
 
@@ -91,8 +97,7 @@ public class towermanager : MonoBehaviour {
         if (flyingChild == null && flying) {
 
             flyingChild = new GameObject();
-            flyingChild.AddComponent<flyingTower>();
-            flyingChild.GetComponent<flyingTower>().perentTower = this.gameObject;
+            flyingChild.AddComponent<flyingTower>().perentTower = this.gameObject;
             flyingChild.AddComponent<SpriteRenderer>();
 
         } else {
@@ -105,28 +110,32 @@ public class towermanager : MonoBehaviour {
 
         }
 
-        if(game.GetComponent<Powers>().power != "vengence")
-            damage = maxDamage * Mathf.Pow(2, level-1) + damageBoost;
+        GameManager gameMan = game.GetComponent<GameManager>();
 
-        // Glide away
-        if (GameObject.FindGameObjectWithTag("Enemy") && flying) {
+        //Calculate Damage
+        if (game.GetComponent<Powers>().power != "vengence")
+            damage = (baseDamage + gameMan.bonusBaseDamage) * Mathf.Pow(2, level-1) + damageBoost + gameMan.bonusDamage;
 
-            isFlying = true;
+        //OtherStats
+        range = baseRange + gameMan.bonusRange;
+        fireRate = baseFireRate - gameMan.bonusAttackSpeed;
+        speed = baseSpeed + gameMan.bonusSpeed;
+        weight = baseWeight - gameMan.bonusWeight;
 
-            float wind = game.GetComponent<GameManager>().windSpeed * Time.deltaTime * weight * 0.15f;
+        ProjectileSpeedBoost = baseProjectileSpeed + gameMan.bonusSpeed;
 
-            transform.position = new Vector3(transform.position.x + wind, transform.position.y + wind, transform.position.z);
-
-        } else if (flying && this.transform.position != positionOg){
+        // Fly back to where your supposed to be
+        if (flying && this.transform.position != positionOg && blown == false){
 
             Vector3 ToTarget = positionOg - transform.position;
             float ang = Mathf.Atan2(ToTarget.y, ToTarget.x) * Mathf.Rad2Deg;
             Quaternion qu = Quaternion.AngleAxis(ang, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, qu, Time.deltaTime * speed * 2f);
 
-            float step = 1.5f * Time.deltaTime;
+            float step = speed * Time.deltaTime;
 
-            this.transform.position = Vector2.MoveTowards(this.transform.position, positionOg, step);
+            transform.rotation = Quaternion.Slerp(transform.rotation, qu, step * 2f);
+
+            this.transform.position = Vector2.MoveTowards(this.transform.position, positionOg, step / 2);
 
             isFlying = true;
 
@@ -136,7 +145,7 @@ public class towermanager : MonoBehaviour {
 
         }
 
-
+        // Select who to shoot
         if (target == null) {
 
             if (Physics2D.OverlapCircle(transform.position, range, layerMask)) {
@@ -159,29 +168,28 @@ public class towermanager : MonoBehaviour {
 
         }
 
-        if (c == false)
+        if (c == false) { target = null; }
 
-            target = null;
-
+        //Found someone
         if (target != null) {
 
+            //Rotate
             Vector3 vectorToTarget = target.transform.position - transform.position;
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed);
 
+            // Actually attack
             if (canShoot == true) {
 
                 if (!melee) {
 
                     shoot(q);
 
-                } else if (melee) {
+                } else if (melee && canShoot) {
 
-                    target.Dealdamage(damage);
-                    Instantiate(meleeEffect, target.transform.position, Quaternion.identity);
-
+                    Invoke("bite", 0.1f);
                     StartCoroutine(cooldown(fireRate));
 
                 }
@@ -189,15 +197,18 @@ public class towermanager : MonoBehaviour {
             }
         }
 
+        //Resize
         if (!isScaling) {
 
-            float bonusSize = 1 + (damage / maxDamage) * 0.05f;
+            float bonusSize = 1 + (damage / baseDamage) * 0.05f;
 
-            if (bonusSize > 1.75) {
+            if (NoDamage) { bonusSize = 1; }
 
-                bonusSize = 1.75f;
+            if (bonusSize > 1.75) { bonusSize = 1.75f; }
+            
+            if (bonusSize < 1) { bonusSize = 1; }
 
-            }
+            if (float.IsNaN(bonusSize)) { bonusSize = 1; }
 
             transform.localScale = new Vector2(scale.x * bonusSize, scale.y * bonusSize);
 
@@ -214,29 +225,47 @@ public class towermanager : MonoBehaviour {
 
     }
 
+    //Pew Pew
     void shoot(Quaternion q) {
 
         GameObject project = Instantiate(projectileType, firePoint.position, Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed));
+        projectile projectileStats = project.GetComponent<projectile>();
 
         if (NoDamage) {
 
-            project.GetComponent<projectile>().damage = 0;
+            projectileStats.damage = 0;
 
         } else {
-        
-            project.GetComponent<projectile>().damage = damage;
+
+            projectileStats.damage = damage;
 
         }
 
-        project.GetComponent<projectile>().lifeTime += LifeTime;
-        project.GetComponent<projectile>().statusStack += Stacks;
-        project.GetComponent<projectile>().speed += ProjectileSpeedBoost;
-
+        projectileStats.lifeTime += ProjectileLifeTime;
+        projectileStats.speed += ProjectileSpeedBoost;
+        projectileStats.level = level;
+        projectileStats.status = Status;
 
         StartCoroutine(cooldown(fireRate));
 
     }
 
+    //yum
+    void bite() {
+
+        if (target != null) {
+
+            Instantiate(meleeEffect, target.transform.position, Quaternion.identity);
+            target.Dealdamage(damage);
+
+            if (Status != null) { target.ApplyEffect(Status, level); }
+
+        }
+
+
+    }
+
+    //squash + stretch
     public IEnumerator AppearAnimation() {
 
         float duration = 0.2f;
@@ -276,5 +305,32 @@ public class towermanager : MonoBehaviour {
         isScaling = false;
 
     }
+
+    //Windy
+    public void Blow() {
+
+        if(GameObject.FindGameObjectWithTag("Enemy")) {
+
+            blown = true;
+            float wind = game.GetComponent<GameManager>().windSpeed * Time.deltaTime * weight * UnityEngine.Random.Range(1, 3);
+            StartCoroutine(windBlow(wind));
+            
+        }
+
+    }
+
+    private IEnumerator windBlow(float wind) {
+
+        for (float i = 0; i <= 2; i += Time.unscaledDeltaTime) {
+
+            transform.position += new Vector3(wind, wind);
+
+            yield return null;
+        }
+
+        blown = false;
+
+    }
+
 
 }

@@ -1,271 +1,227 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
-    public GameObject DamagePopup;
-    public float damageReduce;
+    public List<System.Object[]> Data;
 
-    public float hp = 100;
+    [Header("Calculated Stats")]
+    public float ResistiveArmour;
     public float speed;
-    public int inc;
-
-    public bool randomInc;
-
-    public bool coinDrain;
-
-    public bool Ghost;
-
-    public GameObject deathEffect;
-
-    public Transform[] target;
-    private int current = 0;
-
-    private bool invun = false;
-    private float maxHp;
-    private float maxSpd;
-    private int maxCost;
-    private int maxDamage;
-
+    public float hp;
     public int coinDrop;
+
+    [Header("Basic Stats")]
+    public float maxHp;
     public int damage;
+    public float baseSpeed;
 
-    public bool clearing;
+    public int baseCoinDrop;
 
-    public float damageMult = 1f;
+    public float RawArmour;
+    public float BaseResistiveArmour;
+    public float spawnImmune;
 
-    public List<string> statusEffect;
+    [Header("Bonus Stats")]
+    public float bonusSpeed;
+    public int bonusCoins;
 
-    public SpriteRenderer damageSprite;
+    [Header("Properties")]
+    public Sprite image;
+    public string title;
 
-    public int glue;
-    private float totalDot;
-    private float baseDot;
+    public bool flying;
+    public bool dropsItems;
 
-    void Start(){
+    public Trigger effectTrigger;
+    public string ability;
 
-        InvokeRepeating("DOT", 1, 1);
+    public float deathTime;
 
-        maxHp = hp;
-        maxSpd = speed;
-        maxCost = coinDrop;
-        maxDamage = damage;
-        invun = true;
+    [Header("Track")]
+    public Transform[] nodes;
+    public int increment;
+    public int currentNode;
 
-        if (Ghost == false) {
-            StartCoroutine(cooldown());
-        } else if (Ghost) {
-            StartCoroutine(phaseIn());
-        }
+    [Header("Spawnables")]
+    public GameObject onDeath;
+    public EnemyController enemyAhead;
+    public GameObject DamagePopup;
+    public GameObject miniWasp;
 
-        statusEffect = new List<string>() { "none" };
+    [Header("Other")]
+    public SpriteRenderer DamageSprite;
+    public bool isHornet;
+    public bool isBoss;
+    public GameObject moneyEffect;
 
-        baseDot = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().hp;
-        damageSprite.color = new Color(1, 1, 1, 0);
+    [Header("sounds")]
+    public AudioSource spawnSound;
+    public AudioSource deathSound;
 
-        if (coinDrain) {
+    private bool immune;
+    private float invunTimer;
+    private GameManager game;
+    private bool deathing = false;
 
-            GameManager c = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>();
+    void Start() {
 
-            c.coin -= 10;
+        game = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-            if (c.coin < 0) {
+        hp = maxHp;
+        speed = baseSpeed;
+        coinDrop = baseCoinDrop;
+        ResistiveArmour = BaseResistiveArmour;
 
-                c.coin = 0;
+        immune = true;
+        invunTimer = spawnImmune;
 
-            }
+        Data = new List<object[]>();
 
-            coinDrop += 20;
-
-        }
+        if (effectTrigger == Trigger.spawn) { effect(); }
 
     }
 
-    void Update(){
+    void Update() {
 
-        damageSprite.color = new Color(1, 1, 1, 1- hp / maxHp);
+        for (int i = 0; i < Data.Count; i++) {
+            Data[i][3] = (float)Data[i][3] - Time.deltaTime;
 
-        float cricketStacks = 1;
+            StatusEffectData effect = (StatusEffectData)Data[i][0];
+            int potent = (int)Data[i][1];
 
-        totalDot = 0;
+            float tick = (float)Data[i][2];
+            float lifeTime = (float)Data[i][3];
 
-        foreach (string i in statusEffect) {
+            if (effect.movement != 0) { bonusSpeed = baseSpeed * -effect.movement; }
+            if (effect.coinBoost != 0) { bonusCoins = effect.coinBoost * potent; }
+            if (effect.armourShred != 0) { ResistiveArmour = BaseResistiveArmour - effect.armourShred; }
 
-            if (i != "none") {
+            if ( tick <= 0 ) {
 
-                float time = 5f;
-
-                if (i == "push") {
-
-                    time = 0.2f;
-
-                }
+                if (effect.percentDamage) { 
+                    
+                    Dealdamage((maxHp * effect.dotAmmount) * potent, true);
                 
-                if (i == "poision" || i == "damage" || i == "protectionDrain") {
-
-                    time = 7f;
-
+                } else { 
+                    
+                    Dealdamage(effect.dotAmmount * potent, true);
+                
                 }
 
-                if (i == "slow") {
+                if (effect.effect != null) { Instantiate(effect.effect, transform.position, Quaternion.identity); }
 
-                    time = 5f;
+                Data[i][2] = effect.tickSpeed;
 
-                }
+            } else {
 
-                StartCoroutine(cleanStatus(i, time));
+                Data[i][2] = (float)Data[i][2] - Time.deltaTime;
 
             }
 
-            if (i == "slow") {
-
-                speed = maxSpd * 0.5f;
-
-                totalDot += glue;
-
-             }
-
-             if (i == "money") {
-
-                coinDrop = maxCost + 5;
-                damage = maxDamage + 1;
-
-              }
-
-             if (i == "protectionDrain") {
-
-                totalDot += baseDot/2;
-
-             }
-
-              if (i == "posion") {
-
-                //hp -= (maxHp * 0.005f) * Time.deltaTime;
-
-                totalDot += (maxHp * 0.01f);
-
-              }
-
-              if (i == "burn") {
-
-                totalDot += 4;
-
-               }
-
-               if (i == "push") {
-
-                 speed = maxSpd * -1.5f;
-
-               }
-
-               if (i == "damage") {
-
-                 cricketStacks += 0.5f;
-
-               }
+            if (lifeTime <= 0) { Data.RemoveAt(i); bonusSpeed = 0; bonusCoins = 0; ResistiveArmour = BaseResistiveArmour; }
 
         }
 
-        damageMult = cricketStacks;
+        speed = baseSpeed + bonusSpeed;
+        coinDrop = baseCoinDrop + bonusCoins;
 
-        if (invun){
-            hp = maxHp;
-            speed = maxSpd;
-        }
+        if (isHornet) {
 
-        if (hp <= 0) {
-            Destroy(transform.parent.gameObject);
-            Destroy(this.gameObject);
+            if (immune == true) {
 
-            GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().coin += coinDrop;
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
-        }
+                speed = 0f;
+                Vector2 vectorToTarget = (Vector2)nodes[currentNode].position - (Vector2)transform.position;
+                float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+                Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+                transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed * 2);
+                transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 5);
 
-        if(current > (target.Length - 1)){
-            GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().hp -= damage;
-            Destroy(transform.parent.gameObject);
-            Destroy(this.gameObject);
-        }
-
-        if (current >= target.Length) {
-
-            current = target.Length -1;
+            }
 
         }
 
-        if ((Vector2)transform.position != (Vector2)target[current].position) {
+        DamageSprite.color = new Color(1, 1, 1, 1 - hp / maxHp);
 
-            Vector3 vectorToTarget = target[current].position - transform.position;
+        if (invunTimer < 0) {
+
+            immune = false;
+
+        } else {
+
+            invunTimer -= Time.deltaTime;
+
+        }
+
+        if (deathing) { speed = 0; }
+
+        if (immune == false && hp <= 0) {
+
+            //OnDeath Effects
+            Death(true);
+
+        }
+
+        if (currentNode >= nodes.Length) {
+
+            currentNode = nodes.Length -1;
+
+        }
+
+
+        if ((Vector2)nodes[currentNode].position != (Vector2)transform.position) {
+
+            //move to next node
+
+            Vector2 vectorToTarget = (Vector2)nodes[currentNode].position - (Vector2)transform.position;
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed * 2);
 
-            this.transform.position = Vector2.MoveTowards(this.transform.position, target[current].position, speed * Time.deltaTime); 
+            this.transform.position = Vector2.MoveTowards(this.transform.position, (Vector2)nodes[currentNode].position, speed * Time.deltaTime);
 
-        } else if(current >= (target.Length - 1)) {
+        } else if (currentNode >= (nodes.Length - 1)) {
 
-            Destroy(transform.parent.gameObject);
-            Destroy(this.gameObject);
-
-            GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().hp--;
+            Death();
+            game.hp -= damage;
 
         } else {
 
-            if (randomInc == false) {
-                current += inc;
-            } else {
-                current += Random.Range(0, inc);
-            }
+            currentNode += increment;
 
-        }
-
-        //Debug.Log(transform.position);
-        //Debug.Log(target[current].position);
-        //Debug.Log(current);
-
-    }
-
-    public IEnumerator cooldown(){
-
-        yield return new WaitForSeconds(2f);
-        invun = false;
-
-    }
-
-    public IEnumerator phaseIn(){
-
-        speed = maxSpd * 2f;
-        yield return new WaitForSeconds(4f);
-        invun = false;
-
-        speed = maxSpd;
-
-    }
-
-    public IEnumerator cleanStatus(string status, float time) {
-
-        yield return new WaitForSeconds(time);
-
-        statusEffect.Remove(status);
-
-        coinDrop = maxCost;
-        speed = maxSpd;
-        damage = maxDamage;
-
-        if (status == "damage") {
-
-            damageMult = 1f;
+            //OnNode abilities
+            if (effectTrigger == Trigger.corner) { effect(); }
 
         }
 
     }
 
+    public void ApplyEffect(StatusEffectData sdata, int potency) {
+
+        var item = new System.Object[] { sdata, potency, 0f, sdata.lifeTime };
+
+        bool canAdd = true;
+
+        for (int i = 0; i < Data.Count; i++) {
+
+            StatusEffectData effect = (StatusEffectData)Data[i][0];
+
+            if (effect.name == sdata.name) { canAdd = false; }
+
+        }
+
+        if (canAdd) { Data.Add(item); }
+ 
+    }
+    
     public void Dealdamage(float dmg, bool isDot = false) {
 
-        float totalDamage = (dmg * damageMult) - damageReduce;
+        //calculate modifyers
+        float totalDamage = (dmg * 1-ResistiveArmour) - RawArmour;
 
-        if (damageReduce > dmg) {
+        if (RawArmour > dmg) {
 
             totalDamage = 0;
 
@@ -288,13 +244,21 @@ public class EnemyController : MonoBehaviour {
 
         hp -= totalDamage;
 
+        if (totalDamage < 0) {
+
+            hp += totalDamage;
+            hp -= dmg;
+
+        }
+
         GameObject num = Instantiate(DamagePopup, transform.position, Quaternion.identity);
 
         popup damagePopup = num.GetComponent<popup>();
 
-        if (totalDamage < 0) {
+        //manage popups
+        if (dmg < 0) {
 
-            damagePopup.Setup(totalDamage, "heal", 6);
+            damagePopup.Setup(Mathf.Abs(dmg), "heal", 7);
 
         } else if ((int)totalDamage == 0) {
 
@@ -308,11 +272,11 @@ public class EnemyController : MonoBehaviour {
 
             damagePopup.Setup(totalDamage, "crit", 8);
 
-        } else if (damageReduce > 0) {
+        } else if (RawArmour > 0) {
 
             damagePopup.Setup(totalDamage, "shield", 5);
 
-        } else if (damageMult > 1) {
+        } else if (ResistiveArmour < 0) {
 
             damagePopup.Setup(totalDamage, "cricket", 7);
 
@@ -322,16 +286,100 @@ public class EnemyController : MonoBehaviour {
 
         }
 
-        }
+    }
 
-    void DOT() {
+    public enum Trigger {
 
-        if (totalDot > 0) {
+        corner,
+        death,
+        spawn,
+        none
 
-            Dealdamage(totalDot, true);
+    }
+
+    private void effect() {
+
+        switch (ability) {
+
+            case "spawn": 
+
+                EnemyController miniWaspClone = Instantiate(miniWasp).GetComponent<EnemyController>();
+
+                miniWaspClone.transform.position = this.transform.position;
+                miniWaspClone.nodes = nodes;
+                miniWaspClone.currentNode = currentNode;
+
+                break;
+
+            case "heal":
+
+                enemyAhead.Dealdamage(hp * -0.5f);
+                break;
+
+            case "crazy":
+
+                increment = UnityEngine.Random.Range(0, 3);
+                break;
+
+            case "destroy":
+
+                var bugs = GameObject.FindGameObjectsWithTag("bug");
+
+                foreach (GameObject b in bugs) {
+
+                    var bT = b.GetComponent<towermanager>();
+
+                    int cost = -(bT.GetComponent<towermanager>().sellPrice);
+                    Instantiate(moneyEffect, b.transform.position, Quaternion.identity);
+                    game.coin -= cost;
+
+                    Destroy(b);
+
+                }
+
+                break;
 
         }
 
     }
 
+    public void Death(bool reward = false) {
+
+        StartCoroutine(death(reward));
+
+    }
+
+    public IEnumerator death(bool reward) {
+
+        deathing = true;
+
+        if (reward) {
+
+            Animator a = GetComponent<Animator>();
+
+            if (a != null) { a.SetTrigger("die"); }
+
+        }
+
+        yield return new WaitForSeconds(deathTime);
+
+        if (reward) {
+
+            if (dropsItems) { game.GetComponent<itemList>().selecting = true; }
+
+            if (effectTrigger == Trigger.death) { effect(); }
+
+            if (onDeath != null) { Instantiate(onDeath, transform.position, Quaternion.identity); }
+
+            game.coin += coinDrop;
+
+        } else {
+
+            game.coin += (coinDrop / 2);
+
+        }
+
+        Destroy(gameObject);
+
+    }
 }

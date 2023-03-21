@@ -62,7 +62,7 @@ public class Powers : MonoBehaviour {
 
                 case "destruction":
 
-                    shop.baseDamageBoost = 1;
+                    gameManager.bonusBaseDamage = 1;
 
                     selectingPower = false;
 
@@ -84,6 +84,14 @@ public class Powers : MonoBehaviour {
 
                     break;
 
+                case "regulation":
+
+                    gameManager.EgainRate = 2;
+                    gameManager.bonusWeight = 0.05f;
+                    selectingPower = false;
+
+                    break;
+
             }
 
         }
@@ -92,19 +100,15 @@ public class Powers : MonoBehaviour {
 
         if (power == "vengence") {
 
-            if (gameManager.hp != startHp) {
-
-                venStats += 1;
-
-                startHp = gameManager.hp;
-
-            }
+            //On Hp change
+            if (gameManager.hp != startHp) { venStats += 1; startHp = gameManager.hp; }
 
             GameObject[] towers = GameObject.FindGameObjectsWithTag("bug");
 
+            //recalculate damage as vengence
             foreach (GameObject i in towers) {
 
-                i.GetComponent<towermanager>().damage = (i.GetComponent<towermanager>().maxDamage * Mathf.Pow(2, i.GetComponent<towermanager>().level-1)) * (1 + (0.075f * venStats)) + i.GetComponent<towermanager>().damageBoost;
+                i.GetComponent<towermanager>().damage = ((i.GetComponent<towermanager>().baseDamage + gameManager.bonusBaseDamage) * Mathf.Pow(2, i.GetComponent<towermanager>().level-1)) * (1 + (0.075f * venStats)) + i.GetComponent<towermanager>().damageBoost + gameManager.bonusDamage;
 
             }
 
@@ -120,10 +124,7 @@ public class Powers : MonoBehaviour {
 
                 if (i == "weight") {
 
-                    foreach (GameObject t in towers) {
-
-                        t.GetComponent<towermanager>().weight *= 0.5f;
-                    }
+                    gameManager.bonusWeight = 0.5f;
 
                     items.Remove(i);
                     ogLen = items.Count;
@@ -132,17 +133,7 @@ public class Powers : MonoBehaviour {
 
                 if (i == "stinger") {
 
-                    shop.damageBonus += 2;
-
-                    foreach (GameObject t in towers) {
-
-                        towermanager towerman = t.GetComponent<towermanager>();
-
-                        if (towerman.maxDamage != 0) {
-                            towerman.damageBoost += 2;
-                        }
-
-                    }
+                    gameManager.bonusDamage += 2;
 
                     items.Remove(i);
                     ogLen = items.Count;
@@ -151,17 +142,7 @@ public class Powers : MonoBehaviour {
 
                 if (i == "toy dragon") {
 
-                    shop.baseDamageBoost += 1;
-
-                    foreach (GameObject t in towers) {
-
-                        towermanager towerman = t.GetComponent<towermanager>();
-
-                        if (towerman.maxDamage != 0) {
-                            towerman.maxDamage += 1;
-                        }
-
-                    }
+                    gameManager.bonusBaseDamage += 1;
 
                     items.Remove(i);
                     ogLen = items.Count;
@@ -210,13 +191,7 @@ public class Powers : MonoBehaviour {
 
                 if (i == "Prosthetic Legs") {
 
-                    foreach (GameObject t in towers) {
-
-                        towermanager towerman = t.GetComponent<towermanager>();
-
-                        towerman.speed += 1;
-
-                    }
+                    gameManager.bonusSpeed += 1;
 
                     items.Remove(i);
                     ogLen = items.Count;
@@ -225,13 +200,7 @@ public class Powers : MonoBehaviour {
 
                 if (i == "Prosthetic Arms") {
 
-                    foreach (GameObject t in towers) {
-
-                        towermanager towerman = t.GetComponent<towermanager>();
-
-                        towerman.fireRate -= .1f;
-
-                    }
+                    gameManager.bonusAttackSpeed = 0.1f;
 
                     items.Remove(i);
                     ogLen = items.Count;
@@ -240,13 +209,7 @@ public class Powers : MonoBehaviour {
 
                 if (i == "sunglasses") {
 
-                    foreach (GameObject t in towers) {
-
-                        towermanager towerman = t.GetComponent<towermanager>();
-
-                        towerman.range += 0.5f;
-
-                    }
+                    gameManager.bonusRange = 0.5f;
 
                     items.Remove(i);
                     ogLen = items.Count;
@@ -293,13 +256,25 @@ public class Powers : MonoBehaviour {
 
                 if (i == "gunpowder") {
 
-                    foreach (GameObject t in towers) {
+                    gameManager.bonusProjectileSpeed += 0.25f;               
 
-                        towermanager towerman = t.GetComponent<towermanager>();
+                    items.Remove(i);
+                    ogLen = items.Count;
 
-                        towerman.ProjectileSpeedBoost += 0.5f;
+                }
 
-                    }                    
+                if (i == "solar panel") {
+
+                    gameManager.EgainRate += 1;             
+
+                    items.Remove(i);
+                    ogLen = items.Count;
+
+                }
+
+                if (i == "insect repellent") {
+
+                    gameManager.spawner.spawnDelay += 0.5f;             
 
                     items.Remove(i);
                     ogLen = items.Count;

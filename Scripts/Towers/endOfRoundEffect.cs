@@ -14,12 +14,13 @@ public class endOfRoundEffect : MonoBehaviour {
     private Spawner spawn;
     private towermanager tower;
 
-    private bool canActivate = true;
+    private bool canActivate = false;
 
     public GameObject Peffect;
 
     void Start() {
 
+        canActivate = false;
         value = 1;
         tower = this.GetComponent<towermanager>();
         spawn = tower.spwn;

@@ -7,8 +7,8 @@ using UnityEngine.Rendering;
 public class BossHp : MonoBehaviour {
 
     public Slider bar;
-    public GameObject bossG = null;
-    public GameObject bossE = null;
+    public GameObject boss = null;
+
 
     public float maxHP;
 
@@ -16,35 +16,32 @@ public class BossHp : MonoBehaviour {
 
     void Start() {
 
-        bossG = null;
-        bossE = null;
+        boss = null;
 
     }
 
     void Update() {
 
-        if (bossG == null && bossE == null) {
+        /*if (boss == null) {
 
-            bossG = GameObject.Find("waspBoss(Clone)");
-            bossE = GameObject.Find("Elite(Clone)");
+            boss = GameObject.Find("waspBoss(Clone)");
 
-            if (bossG != null || bossE != null) {
+            if (boss != null) {
 
                 maxHP = GameObject.Find("wasp").GetComponent<EnemyController>().hp;
                 effects.GetComponent<Volume>().weight = 0;
 
             }
 
-        }
+        }*/
 
-        if (bossG != null || bossE != null) {
+        if (boss != null) {
  
             bar.gameObject.SetActive(true);
-            bar.maxValue = maxHP;
+            bar.maxValue = boss.GetComponentInChildren<EnemyController>().maxHp;
 
             effects.SetActive(true);
-
-            bar.value = GameObject.Find("wasp").GetComponent<EnemyController>().hp;
+            bar.value = boss.GetComponentInChildren<EnemyController>().hp;
 
             Volume vol = effects.GetComponent<Volume>();
 

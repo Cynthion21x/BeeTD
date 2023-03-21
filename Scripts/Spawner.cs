@@ -1,52 +1,242 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour {
 
-    public float BaseHpScale;
-    public float EnemyScale;
-    public float EnemyHpBoost;
+    public enum Mode {
 
-    public itemList selectingItem;
+        easy,
+        normal,
+        tricky
 
-    public string mode;
+    }
 
-    public Image modeIcon;
-    public Sprite easy;
-    public Sprite tricky;
-
-    public GameObject[] wasp1;
-    public GameObject[] wasp2;
-    public GameObject wasp3;
-    public GameObject wasp4;
-
-    public GameObject[] elites;
-
-    public Transform[] positions;
-    public float spacing;
-
-    public int Wave = 1;
-
-    public Button button;
-    public TextMeshProUGUI text;
-
+    [Header("options")]
     public bool autoplay;
-    public bool spawning;
-    public bool flying;
+    public itemList items;
+    public float spawnDelay;
 
-    public int hpBonus = 0;
-    public int coinBonus = 0;
+    [Header("bonus")]
+    public int coinBonus;
+    public int glue;
 
-    public int glue = 0;
+    [Header("UI")]
+    public BossHp hpBar;
+    public Image modeIcon;
 
-    void Update(){
+    public Sprite easyMode;
+    public Sprite hardMode;
 
-        text.text = (Wave-1).ToString();
+    public TextMeshProUGUI text;
+    public Button button;
 
-        if (GameObject.FindGameObjectWithTag("Enemy")) {
+    public GameObject waveUI;
+
+    [Header("Map")]
+    public mapSelector mapSelector;
+    public map map;
+
+    [Header("Waves")]
+    public int wave;
+
+    public int bossWave;
+    public int hornetWave;
+
+    public Mode mode;
+    public int EasyMode;
+    public int NormalMode;
+    public int TrickyMode;
+
+    public int flyingCount;
+
+    [Header("Spawn List")]
+    public List<GameObject> EnemiesToSpawn;
+
+    [Header("Enemies")]
+    public GameObject[] groundWasps;
+    public GameObject[] airWasps;
+    public GameObject[] eliteWasps;
+
+    public GameObject[] bosses;
+
+    public GameObject hornet;
+
+    private bool spawning;
+    private EnemyController previouslySpawned;
+    private bool isBoss;
+    private float spawnTimer;
+
+    void Start() {
+
+        spawnDelay = 2;
+        generateSpawnList();
+
+    }
+
+    void Update() {
+
+        map = mapSelector.mapSelected;
+        text.text = (wave - 1).ToString();
+
+        if (wave >= EasyMode) { mode = Mode.easy; modeIcon.sprite = easyMode; modeIcon.color = new Color(1, 1, 1, 1); }
+        if (wave >= NormalMode) { mode = Mode.normal; modeIcon.color = new Color(0, 0, 0, 0); }
+        if (wave >= TrickyMode) { mode = Mode.tricky; modeIcon.sprite = hardMode; modeIcon.color = new Color(1, 1, 1, 1); }
+
+        if (spawning) {
+
+            if (EnemiesToSpawn.Count > 0) {
+
+                if (spawnTimer > 0) { spawnTimer -= Time.deltaTime; } else {
+
+                    spawnEnemy(isBoss);
+                    spawnTimer = spawnDelay;
+
+                }
+
+            } else {
+
+                spawning = false;
+                generateSpawnList();
+
+            }
+
+        }
+
+    }
+    
+    public void Spawn() {
+
+        wave++;
+        spawning = true;
+
+
+    }
+
+    void generateSpawnList() {
+
+        isBoss = false;
+
+        foreach (Transform x in waveUI.transform) {
+            Destroy(x.gameObject);
+        }
+
+        int len = bossWave;
+        if (mode == Mode.easy) { len = wave; };
+
+        EnemiesToSpawn = new List<GameObject>();
+
+        if (wave % hornetWave == 0) {
+
+            int w = UnityEngine.Random.Range(0, bosses.Length);
+
+            EnemiesToSpawn.Add(hornet);
+            GameObject icon = new GameObject("WaspIcon", typeof(Image));
+            icon.GetComponent<Image>().sprite = hornet.GetComponent<EnemyController>().image;
+            icon.GetComponent<Image>().sprite = hornet.GetComponent<EnemyController>().image;
+            icon.GetComponent<Image>().preserveAspect = true;
+            icon.transform.parent = waveUI.transform;
+
+            isBoss = true;
+            return;
+
+        }
+
+        if (wave % bossWave == 0) {
+            int w = UnityEngine.Random.Range(0, bosses.Length);
+
+            EnemiesToSpawn.Add(bosses[w]);
+            GameObject icon = new GameObject("WaspIcon", typeof(Image));
+            icon.GetComponent<Image>().sprite = bosses[w].GetComponent<EnemyController>().image;
+            icon.GetComponent<Image>().preserveAspect = true;
+            icon.transform.parent = waveUI.transform;
+
+            isBoss = true;
+            return;
+
+        }
+
+        for (int i = 1; i < len+1; i++) {
+
+            if (mode == Mode.easy) {
+
+                //Add Defaults
+                if (i % bossWave == 0) {
+
+                    EnemiesToSpawn.Add(eliteWasps[0]);
+
+                } else if (i % (bossWave / flyingCount) == 0) { EnemiesToSpawn.Add(airWasps[0]); } else { EnemiesToSpawn.Add(groundWasps[0]); }
+
+            } else if (mode == Mode.normal) {
+
+                if (UnityEngine.Random.Range(0, 100) >= 60) {
+
+                    //Add Elite
+                    if (i % bossWave == 0) {
+
+                        EnemiesToSpawn.Add(eliteWasps[UnityEngine.Random.Range(0, eliteWasps.Length)]);
+
+                    } else if (i % (bossWave / flyingCount) == 0) { 
+                        
+                        EnemiesToSpawn.Add(airWasps[UnityEngine.Random.Range(0, airWasps.Length)]); 
+                    
+                    } else { 
+                        
+                        EnemiesToSpawn.Add(groundWasps[UnityEngine.Random.Range(0, groundWasps.Length)]);
+                    
+                    }
+
+                } else {
+
+                    if (i % bossWave == 0) {
+
+                        EnemiesToSpawn.Add(eliteWasps[0]);
+
+                    } else if (i % (bossWave / flyingCount) == 0) { EnemiesToSpawn.Add(airWasps[0]); } else { EnemiesToSpawn.Add(groundWasps[0]); }
+
+                }
+
+            } else if (mode == Mode.tricky) {
+
+                //Add Elite
+                if (i % bossWave == 0) {
+
+                    EnemiesToSpawn.Add(eliteWasps[UnityEngine.Random.Range(0, eliteWasps.Length)]);
+
+                } else if (i % (bossWave / flyingCount) == 0) {
+
+                    EnemiesToSpawn.Add(airWasps[UnityEngine.Random.Range(0, airWasps.Length)]);
+
+                } else {
+
+                    EnemiesToSpawn.Add(groundWasps[UnityEngine.Random.Range(0, groundWasps.Length)]);
+
+                }
+
+            }
+
+        }
+
+        foreach (var i in EnemiesToSpawn) {
+
+            GameObject icon = new GameObject("WaspIcon", typeof(Image));
+            Image img = icon.GetComponent<Image>();
+
+            img.sprite = i.GetComponent<EnemyController>().image;
+            img.preserveAspect = true;
+
+            icon.transform.parent = waveUI.transform;
+
+        }
+
+    }
+
+    void LateUpdate(){
+        
+        if (GameObject.FindGameObjectWithTag("Enemy") || spawning || items.selecting || wave == 1) {
 
             button.interactable = false;
 
@@ -54,254 +244,40 @@ public class Spawner : MonoBehaviour {
 
             button.interactable = true;
 
-        }
-
-        GameObject[] tow = GameObject.FindGameObjectsWithTag("bug");
-        int requiredCount = tow.Length;
-        int currentCount = 0;
-
-        foreach (GameObject i in tow) {
-
-            if (i.GetComponent<towermanager>().isFlying == false) {
-                currentCount++;
-            }
+            if (autoplay) { Spawn(); }
 
         }
 
-        if (currentCount >= requiredCount) {
+        if (wave == 1) {
 
-            flying = false;
-
-        } else {
-
-            flying = true;
-
-        }
-
-        if (button.interactable && autoplay && spawning == false && flying == false) {
-
-            if (selectingItem.selecting == false) {
-                if (Wave != 1) {
-                    //spawning = true;
-                    spawn();
-                }
-            }
-
-        }
-
-        if (mode == "tricky"){
-
-                modeIcon.sprite = tricky;
-
-        }
-
-        if (mode == "easy"){
-
-                modeIcon.sprite = easy;
-
-        }
-
-        if (mode == "regular") {
-
-            modeIcon.enabled = false;;
-
-        } else {
-
-            modeIcon.enabled = true;
+            button.interactable = true;
 
         }
 
     }
 
-    public void spawn(){
-        spawning = true;
+    void spawnEnemy(bool boss = false) {
 
-        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+        GameObject enemy = Instantiate(EnemiesToSpawn[0], map.mapCorners[0]);
+        EnemiesToSpawn.RemoveAt(0);
 
-        int isElite = UnityEngine.Random.Range(1, 10);
+        EnemyController enemyControl = enemy.GetComponent<EnemyController>();
 
-        //Debug.Log("Spawning Elite" + isElite.ToString());
+        enemyControl.maxHp -= glue * 10;
 
-        if (isElite == 1 && mode != "easy") {
+        if (mode == Mode.normal) { enemyControl.maxHp = enemyControl.maxHp * 0.5f * (wave - bossWave + 1); }
+        if (mode == Mode.tricky) { enemyControl.maxHp = (enemyControl.maxHp * 0.4f * (wave - bossWave + 1)) * Mathf.Pow(1.01f, wave); }
 
-            float QueenHp = 500 * BaseHpScale;
-            float QueenSpeed = .8f;
+        enemyControl.baseCoinDrop += coinBonus;
+        enemyControl.enemyAhead = previouslySpawned;
+        enemyControl.nodes = map.mapCorners;
+        previouslySpawned = enemyControl;
 
-            StartCoroutine(AsyncSpawn(elites[UnityEngine.Random.Range(1, elites.Length)], 0, QueenHp, QueenSpeed));
+        if (boss) {
 
-            //Debug.Log("SpawnElite");
-
-            return;
-
-        }
-
-        if (Wave % 16 == 0) {
-
-            StartCoroutine(AsyncSpawn(wasp4, 0, 800 * BaseHpScale, .75f));
-
-            //Debug.Log("SpawnBoss");
-
-            Wave++;
-
-            return;
-        }
-
-        int spawnCount = Wave;
-
-        mode = "easy";
-
-        if (spawnCount >= 16) {
-
-            spawnCount = 16;
-            mode = "regular";
+            hpBar.boss = enemy;
 
         }
-
-        if (Wave >= 48) {
-
-            mode = "tricky";
-
-        }
-
-        string waveType = "normal";
-
-        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
-
-        int decider = UnityEngine.Random.Range(1, 20);
-
-        Debug.Log("Selecting Wave: " + decider.ToString());
-
-         if (mode == "easy") {
-
-            waveType = "normal";
-            decider = 0;
-
-        }
-
-
-        if (decider == 1) {
-
-            waveType = "flying";
-
-            spawnCount = 19;
-
-
-        }
-
-        if (decider == 2) {
-
-            waveType = "bossRush";
-
-            spawnCount = 3;
-
-        }
-
-        if (decider == 3) {
-
-            waveType = "normal";
-            spawnCount = spawnCount + spawnCount;
-
-
-        }
-
-        for (int i = 1; i < spawnCount+1; i++) {
-
-            int Eindex = 0;
-                
-            if (mode == "regular") {
-
-                Eindex = UnityEngine.Random.Range(0, wasp1.Length);
-
-                //Debug.Log(Eindex);
-
-            } else if (mode == "tricky") {
-
-                Eindex = UnityEngine.Random.Range(0, wasp1.Length-1) + 1;
-
-            }
-
-                if (i % 16 == 0 && waveType == "normal") {
-
-                    float QueenHp = 300 * BaseHpScale;
-                    float QueenSpeed = .75f;
-
-                    StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
-
-                    //Debug.Log("SpawnQueen");
-
-                } else if (i % 4 == 0 && waveType == "normal") {
-
-                    float SpeedHp = 75 * BaseHpScale;
-                    float SpeedSpeed = 1.5f;
-
-                    StartCoroutine(AsyncSpawn(wasp2[Eindex], (float)(i - 1) * (float)(spacing), SpeedHp, SpeedSpeed));
-                    //Debug.Log("SpawnSpeed");
-
-                } else if (waveType == "normal") {
-
-                    float DroneHp = 125 * BaseHpScale;
-                    float DroneSpeed = 1f;
-
-                    StartCoroutine(AsyncSpawn(wasp1[Eindex], (float)(i - 1) * (float)(spacing), DroneHp, DroneSpeed));
-                    //Debug.Log("SpawnNormal");
-
-                }
-
-                if (waveType == "bossRush") {
-
-                    float QueenHp = 600 * BaseHpScale;
-                    float QueenSpeed = .75f;
-
-                    StartCoroutine(AsyncSpawn(wasp3, (float)(i - 1) * (float)(spacing), QueenHp, QueenSpeed));
-
-                }
-
-                if (waveType == "flying") {
-
-                    float SpeedHp = 125 * BaseHpScale;
-                    float SpeedSpeed = 1.5f;
-
-                    StartCoroutine(AsyncSpawn(wasp2[Eindex], (float)(i - 1) * (float)(spacing), SpeedHp, SpeedSpeed));                 
-
-                }
-
-            }
-
-        Wave++;
 
     }
-
-    private IEnumerator AsyncSpawn(GameObject type, float time, float hp, float speed){
-
-        yield return new WaitForSeconds(time);
-        
-        GameObject enemy = Instantiate(type, positions[0].position, Quaternion.identity);
-
-        enemy.GetComponentInChildren<EnemyController>().target = positions;
-
-        if (mode == "easy") {
-
-            enemy.GetComponentInChildren<EnemyController>().hp = hp;
-
-        }
-
-        if (mode == "tricky") {
-
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * 2 * (1 + ((Wave - 32) * EnemyScale));
-
-        }
-
-        if (mode == "regular") {
-
-            enemy.GetComponentInChildren<EnemyController>().hp = hp * (1 + ((Wave-15) * EnemyScale));
-
-        }
-
-        //enemy.GetComponentInChildren<EnemyController>().speed = speed;
-        enemy.GetComponentInChildren<EnemyController>().coinDrop += coinBonus;
-        enemy.GetComponentInChildren<EnemyController>().glue = glue;
-
-        spawning = false;
-    }
-
 }

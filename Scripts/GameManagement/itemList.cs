@@ -19,10 +19,31 @@ public class itemList : MonoBehaviour {
     public GameObject itemMenu;
     public GameManager hp;
 
+    private float time;
+    private bool timer;
+
+    void Start() {
+        time = Time.timeScale; 
+    }
+
     void Update() {
 
         itemMenu.SetActive(selecting);
 
+        if (selecting) {
+            
+            if (Time.timeScale != 0) { time = Time.timeScale; }
+
+            //Time.timeScale = 0f;
+            timer = false;
+        
+        } else {
+            
+            if (timer == false)
+                Time.timeScale = time;
+                timer = true;
+           
+        }
         
         if (hp.hp <= 0) {
 

@@ -10,6 +10,7 @@ public class Shop : MonoBehaviour {
 
     public bool mouseOverUi;
     public GameObject placeingUI;
+    public GameObject placeHiddenUi;
 
     public GameManager gameManager;
 
@@ -63,6 +64,16 @@ public class Shop : MonoBehaviour {
 
     void Update(){
 
+        towermanager bug = null;
+        SpriteRenderer bugSprite = null;
+
+        if (turret != null) {
+
+            bug = turret.GetComponent<towermanager>();
+            bugSprite = turret.GetComponent<SpriteRenderer>();
+
+        }
+
         // Place
         mousePos = main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -70,7 +81,7 @@ public class Shop : MonoBehaviour {
 
         canPlace = !(Physics2D.OverlapCircle(mousePos, .5f, cantPlaceOn));
 
-        if (turret != null && turret.GetComponent<towermanager>().flying == false) {
+        if (turret != null && bug.flying == false) {
 
             if (Physics2D.OverlapCircle(mousePos, .2f, noGround)) {
 
@@ -80,13 +91,12 @@ public class Shop : MonoBehaviour {
 
         }
 
-
         if (placing == true){
 
             selectedTower = null;
 
-            turret.GetComponent<SpriteRenderer>().color = Color.grey;
-            turret.GetComponent<towermanager>().enabled = false;
+            bugSprite.color = Color.grey;
+            bug.enabled = false;
             turret.GetComponent<BoxCollider2D>().enabled = false;
             turret.transform.position = mousePos;
 
@@ -97,26 +107,24 @@ public class Shop : MonoBehaviour {
 
             if (Input.GetMouseButtonUp(0) && canPlace && IsPointerOverUIElement() == false) {
 
-                turret.GetComponent<SpriteRenderer>().color = Color.white;
-                turret.GetComponent<towermanager>().enabled = true;
+                bugSprite.color = Color.white;
+                bug.enabled = true;
                 turret.GetComponent<BoxCollider2D>().enabled = true;
 
-                turret.GetComponent<towermanager>().Set();
-                turret.GetComponent<towermanager>().spwn = spwn;
-                turret.GetComponent<towermanager>().sellPrice = (int)((double)buyPrice * 0.75d);
-
-                if (turret.GetComponent<towermanager>().maxDamage != 0)
-                    turret.GetComponent<towermanager>().damageBoost = damageBonus;
-                    turret.GetComponent<towermanager>().maxDamage += baseDamageBoost;
+                bug.Set();
+                bug.spwn = spwn;
+                bug.sellPrice = (int)((double)buyPrice * 0.75d);
 
                 placing = false;
                 selectedTower = null;
+
+                placeHiddenUi.SetActive(true);
 
             }
 
             if (canPlace == false){
 
-                turret.GetComponent<SpriteRenderer>().color = Color.red;
+                bugSprite.color = Color.red;
                 circle.GetComponent<SpriteRenderer>().color = new Color32(255, 25, 63, 101);
 
             }
@@ -129,7 +137,7 @@ public class Shop : MonoBehaviour {
 
             if (Input.GetMouseButtonDown(0) && IsPointerOverUIElement() == false) {
 
-                Debug.Log("selecting");
+                //Debug.Log("selecting");
 
                 Collider2D[] checker = Physics2D.OverlapCircleAll(mousePos, .001f, cantPlaceOn);
 
@@ -204,6 +212,12 @@ public class Shop : MonoBehaviour {
 
         placeingUI.SetActive(placing);
 
+        if (placing) {
+
+            placeHiddenUi.SetActive(false);
+
+        }
+
     }
 
     public bool IsPointerOverUIElement() {
@@ -213,20 +227,29 @@ public class Shop : MonoBehaviour {
 
     }
 
+    public void ButtonUpgrade() {
 
-    public void buyUpgrade() {
+        buyUpgrade();
 
-        towermanager tar = selectedTower.GetComponent<towermanager>();
+    }
+
+    public void buyUpgrade(towermanager tar = null, bool nocost = false) {
+
+        if (tar == null) {
+
+            tar = selectedTower.GetComponent<towermanager>();
+
+        }
 
         int cost = (int)Mathf.Pow(tar.level * 10, 2);
+
+        if (nocost) { cost = 0; }
 
         if (cost <= gameManager.coin) {
 
             gameManager.coin -= cost;
 
             tar.level++;
-
-            tar.Stacks++;
 
             tar.sellPrice += (int)(cost * 0.75f);
 
@@ -240,7 +263,7 @@ public class Shop : MonoBehaviour {
 
             if (tar.gameObject.name == "centipede(Clone)") {
 
-                tar.maxDamage += 0.5f;
+                tar.baseDamage += 0.5f;
 
             }
 
@@ -256,39 +279,7 @@ public class Shop : MonoBehaviour {
 
     public void FreeUpgrade(towermanager tar) {
 
-       int cost = 0;
-
-        if (cost <= gameManager.coin) {
-
-            gameManager.coin -= cost;
-
-            tar.level++;
-
-            tar.Stacks++;
-
-            tar.sellPrice += (int)(cost * 0.75f);
-
-            Instantiate(upgradeEffect, tar.transform.position, Quaternion.identity);
-
-            if (tar.GetComponent<endOfRoundEffect>() != null) {
-
-                tar.GetComponent<endOfRoundEffect>().value++;
-
-            }
-
-            if (tar.gameObject.name == "centipede(Clone)") {
-
-                tar.maxDamage += 0.5f;
-
-            }
-
-            if (tar.gameObject.name == "shield(Clone)") {
-
-                tar.fireRate -= 0.5f;
-
-            }
-
-        }
+        buyUpgrade(tar, true);
 
     }
 
@@ -324,6 +315,9 @@ public class Shop : MonoBehaviour {
             Destroy(turret.gameObject);
             placing = false;
         }
+
+        placing = false;
+        placeHiddenUi.SetActive(true);
 
     }
 

@@ -27,7 +27,7 @@ public class DiscordRP : MonoBehaviour {
         else
         {
 
-            Destroy(this);
+            Destroy(gameObject);
 
         }
 
@@ -66,10 +66,14 @@ public class DiscordRP : MonoBehaviour {
 
             Details = GameObject.FindGameObjectWithTag("GameControl").GetComponent<Powers>().power;
 
-            State = "Wave: " + GameObject.Find("Spawn").GetComponent<Spawner>().Wave;
+            //State = "Wave: " + GameObject.Find("Spawn").GetComponent<Spawner>().Wave;
         }
 
-        discord.RunCallbacks();
+        if (discord != null) {
+
+            discord.RunCallbacks();
+
+        }
 
         var activity = new Discord.Activity
         {

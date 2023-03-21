@@ -182,30 +182,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14393c158d8b636488f4014fc76ab011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageBoost: 0
-  ProjectileSpeedBoost: 0
-  weight: 0.05
-  precise: 0
-  accuracy: 0
-  range: 3.09
-  fireRate: 0.64
-  speed: 0.5
-  damage: 3
-  LifeTime: 0
+  damage: 0
+  sellPrice: 0
+  range: 0
+  fireRate: 0
+  speed: 0
+  weight: 0
+  level: 1
+  baseWeight: 0.05
+  baseRange: 3.09
+  baseFireRate: 0.5
+  baseSpeed: 1.5
+  baseDamage: 2
+  baseProjectileSpeed: 0
+  flying: 1
+  NoDamage: 0
+  Status: {fileID: 11400000, guid: 1ba14441aee190441a196a4f6ab6f8ff, type: 2}
+  melee: 0
+  meleeEffect: {fileID: 0}
+  canShoot: 1
   projectileType: {fileID: 5938905900805307995, guid: 06cf1ff0d51c5f84da55b2899465833e, type: 3}
   firePoint: {fileID: 75266554797413950}
-  target: {fileID: 0}
+  damageBoost: 0
+  ProjectileSpeedBoost: 0
+  ProjectileLifeTime: 0
+  spwn: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  canShoot: 1
-  flying: 1
-  spwn: {fileID: 0}
   isFlying: 0
-  level: 1
-  sellPrice: 0
-  Stacks: 1
-  maxDamage: 3
+  flyingChild: {fileID: 0}
+  blown: 0
 --- !u!61 &9200873605159302537
 BoxCollider2D:
   m_ObjectHideFlags: 0

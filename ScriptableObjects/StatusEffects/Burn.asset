@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a310519010c69449fc36b0c3687c0f, type: 3}
+  m_Name: Burn
+  m_EditorClassIdentifier: 
+  Name: Burn
+  effect: {fileID: 5285433963562953027, guid: 4003f2cc7b9511c44a248874d5fb48df, type: 3}
+  percentDamage: 0
+  dotAmmount: 3
+  movement: 0
+  coinBoost: 0
+  armourShred: 0
+  tickSpeed: 1.5
+  lifeTime: 4

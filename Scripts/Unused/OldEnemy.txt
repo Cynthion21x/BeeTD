@@ -1,0 +1,392 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyController : MonoBehaviour {
+
+    public GameObject minion = null;
+    public int spawnCount;
+    public float spawnInterval;
+
+    public bool isBoss;
+
+    public GameObject DamagePopup;
+    public float damageReduce;
+
+    public float hp = 100;
+    public float speed;
+    public int inc;
+
+    public bool randomInc;
+
+    public bool coinDrain;
+
+    public bool Ghost;
+
+    public GameObject deathEffect;
+
+    public Transform[] target;
+    public int current = 0;
+
+    private bool invun = false;
+    public float maxHp;
+    private float maxSpd;
+    private int maxCost;
+    private int maxDamage;
+
+    public int coinDrop;
+    public int damage;
+
+    public bool clearing;
+
+    public float damageMult = 1f;
+
+    public List<string> statusEffect;
+
+    public SpriteRenderer damageSprite;
+
+    public int glue;
+    private float totalDot;
+    private float baseDot;
+
+    void Start(){
+
+        InvokeRepeating("DOT", 1, 1);
+
+        if (minion != null) {
+
+            InvokeRepeating("SpawnMinion", spawnInterval, spawnInterval);
+
+        }
+
+        maxHp = hp;
+        maxSpd = speed;
+        maxCost = coinDrop;
+        maxDamage = damage;
+        invun = true;
+
+        if (Ghost == false) {
+            StartCoroutine(cooldown());
+        } else if (Ghost) {
+            StartCoroutine(phaseIn());
+        }
+
+        statusEffect = new List<string>() { "none" };
+
+        baseDot = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().hp;
+        damageSprite.color = new Color(1, 1, 1, 0);
+
+        if (coinDrain) {
+
+            GameManager c = GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>();
+
+            c.coin -= 10;
+
+            if (c.coin < 0) {
+
+                c.coin = 0;
+
+            }
+
+            coinDrop += 20;
+
+        }
+
+    }
+
+    void Update(){
+
+        damageSprite.color = new Color(1, 1, 1, 1- hp / maxHp);
+
+        float cricketStacks = 1;
+
+        totalDot = 0;
+
+        foreach (string i in statusEffect) {
+
+            if (i != "none") {
+
+                float time = 5f;
+
+                if (i == "push") {
+
+                    time = 0.2f;
+
+                }
+                
+                if (i == "poision" || i == "damage" || i == "protectionDrain") {
+
+                    time = 7f;
+
+                }
+
+                if (i == "slow") {
+
+                    time = 5f;
+
+                }
+
+                StartCoroutine(cleanStatus(i, time));
+
+            }
+
+            if (i == "slow") {
+
+                speed = maxSpd * 0.5f;
+
+                totalDot += glue;
+
+             }
+
+             if (i == "money") {
+
+                coinDrop = maxCost + 5;
+                damage = maxDamage + 1;
+
+              }
+
+             if (i == "protectionDrain") {
+
+                totalDot += baseDot/2;
+
+             }
+
+              if (i == "posion") {
+
+                //hp -= (maxHp * 0.005f) * Time.deltaTime;
+
+                totalDot += (maxHp * 0.01f);
+
+              }
+
+              if (i == "burn") {
+
+                totalDot += 4;
+
+               }
+
+               if (i == "push") {
+
+                 speed = maxSpd * -1.5f;
+
+               }
+
+               if (i == "damage") {
+
+                 cricketStacks += 0.5f;
+
+               }
+
+        }
+
+        damageMult = cricketStacks;
+
+        if (invun){
+            hp = maxHp;
+            speed = maxSpd;
+        }
+
+        if (hp <= 0) {
+            Destroy(transform.parent.gameObject);
+            Destroy(this.gameObject);
+
+            GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().coin += coinDrop;
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
+
+        if(current > (target.Length - 1)){
+            GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().hp -= damage;
+            Destroy(transform.parent.gameObject);
+            Destroy(this.gameObject);
+        }
+
+        if (current >= target.Length) {
+
+            current = target.Length -1;
+
+        }
+
+        if (target[current] == null) {
+
+            Destroy(gameObject);
+
+        }
+
+        if ((Vector2)transform.position != (Vector2)target[current].position) {
+
+            Vector3 vectorToTarget = target[current].position - transform.position;
+            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed * 2);
+
+            this.transform.position = Vector2.MoveTowards(this.transform.position, target[current].position, speed * Time.deltaTime); 
+
+        } else if(current >= (target.Length - 1)) {
+
+            Destroy(transform.parent.gameObject);
+            Destroy(this.gameObject);
+
+            GameObject.FindGameObjectWithTag("GameControl").GetComponent<GameManager>().hp--;
+
+        } else {
+
+            if (randomInc == false) {
+                current += inc;
+            } else {
+                current += Random.Range(0, inc);
+            }
+
+        }
+
+        //Debug.Log(transform.position);
+        //Debug.Log(target[current].position);
+        //Debug.Log(current);
+
+    }
+
+    public IEnumerator cooldown(){
+
+        yield return new WaitForSeconds(2f);
+        invun = false;
+
+    }
+
+    public IEnumerator phaseIn(){
+
+        speed = maxSpd * 2f;
+        yield return new WaitForSeconds(4f);
+        invun = false;
+
+        speed = maxSpd;
+
+    }
+
+    public IEnumerator cleanStatus(string status, float time) {
+
+        yield return new WaitForSeconds(time);
+
+        statusEffect.Remove(status);
+
+        coinDrop = maxCost;
+        speed = maxSpd;
+        damage = maxDamage;
+
+        if (status == "damage") {
+
+            damageMult = 1f;
+
+        }
+
+    }
+
+    public void Dealdamage(float dmg, bool isDot = false) {
+
+        float totalDamage = (dmg * damageMult) - damageReduce;
+
+        if (damageReduce > dmg) {
+
+            totalDamage = 0;
+
+        }
+
+        bool crit = false;
+
+        if (UnityEngine.Random.Range(1, 100) > 70) {
+
+            crit = true;
+            totalDamage *= 1.5f;
+
+        }
+
+        if (isDot) {
+
+            crit = false;
+
+        }
+
+        hp -= totalDamage;
+
+        GameObject num = Instantiate(DamagePopup, transform.position, Quaternion.identity);
+
+        popup damagePopup = num.GetComponent<popup>();
+
+        if (totalDamage < 0) {
+
+            damagePopup.Setup(totalDamage, "heal", 6);
+
+        } else if ((int)totalDamage == 0) {
+
+            damagePopup.Setup(totalDamage, "none", 4);
+
+        } else if (isDot) {
+
+            damagePopup.Setup(totalDamage, "dot", 7);
+
+        } else if (crit) {
+
+            damagePopup.Setup(totalDamage, "crit", 8);
+
+        } else if (damageReduce > 0) {
+
+            damagePopup.Setup(totalDamage, "shield", 5);
+
+        } else if (damageMult > 1) {
+
+            damagePopup.Setup(totalDamage, "cricket", 7);
+
+        } else {
+
+            damagePopup.Setup(totalDamage, "hit", 6);
+
+        }
+
+        }
+
+    void DOT() {
+
+        if (totalDot > 0) {
+
+            Dealdamage(totalDot, true);
+
+        }
+
+    }
+
+    void SpawnMinion() {
+
+        Animator anim = GetComponent<Animator>();
+
+        if (anim != null) {
+
+            anim.SetTrigger("spawn");
+
+        }
+
+
+        for (int i = 1; i < spawnCount+1; i++) {
+
+            StartCoroutine(spawnDelay(i));
+
+        }
+
+    }
+
+    public IEnumerator spawnDelay(float time) {
+
+        speed = 0;
+
+        yield return new WaitForSeconds(time);
+
+        GameObject Lminion = Instantiate(minion, transform.position, Quaternion.identity);
+
+        EnemyController summon = minion.GetComponentInChildren<EnemyController>();
+
+        summon.target = target;
+        summon.hp = hp / (spawnCount * 2);
+        summon.current = current;
+
+        speed = maxSpd;
+
+    }
+
+}

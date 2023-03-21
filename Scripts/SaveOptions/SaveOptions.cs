@@ -9,9 +9,10 @@ using UnityEngine.Audio;
 public class SaveOptions : MonoBehaviour {
 
     public AudioMixerGroup sound;
+    public AudioMixerGroup fX;
     public Slider soundSlider;
 
-    public Slider timeSlider;
+    public Slider soundSlider2;
 
     public Toggle fulscreen;
     public Toggle AutoPlay;
@@ -29,9 +30,8 @@ public class SaveOptions : MonoBehaviour {
         soundSlider.value = PlayerPrefs.GetFloat("vol");
         sound.audioMixer.SetFloat("volume", PlayerPrefs.GetFloat("vol"));
 
-        timeSlider.value = PlayerPrefs.GetFloat("time");
-
-        Time.timeScale = PlayerPrefs.GetFloat("time");
+        soundSlider2.value = PlayerPrefs.GetFloat("vol2");
+        fX.audioMixer.SetFloat("volume", PlayerPrefs.GetFloat("vol2"));
 
         
         if(SceneManager.GetActiveScene().name == "MainMenu") {
@@ -79,7 +79,7 @@ public class SaveOptions : MonoBehaviour {
     public void saveFloat(){
 
         PlayerPrefs.SetFloat("vol", soundSlider.value);
-        PlayerPrefs.SetFloat("time", timeSlider.value);
+        PlayerPrefs.SetFloat("time", soundSlider2.value);
 
         if (AutoPlay.isOn) {
 

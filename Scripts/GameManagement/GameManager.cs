@@ -6,19 +6,32 @@ using TMPro;
 
 public class GameManager : MonoBehaviour {
     
+    [Header("Player Stats")]
     public int hp = 10;
     public int coin = 100;
     public int energy = 0;
 
     public int EgainRate;
     public int Ecap;
-
     public Color fullColor;
+
+    [Header("Wind")]
+    public int WindRate;
 
     public float windSpeed = 5;
     public Spawner spawner;
     public bool altwind;
 
+    [Header("Bonus Stats")]
+    public float bonusRange;
+    public float bonusDamage;
+    public float bonusBaseDamage;
+    public float bonusSpeed;
+    public float bonusAttackSpeed;
+    public float bonusWeight;
+    public float bonusProjectileSpeed;
+
+    [Header("UI")]
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI energyText;
@@ -29,6 +42,7 @@ public class GameManager : MonoBehaviour {
     public TextMeshProUGUI endWave;
 
     public GameObject died;
+    public ParticleSystem wind;
 
     private string easystring;
     private string normalstring;
@@ -49,16 +63,17 @@ public class GameManager : MonoBehaviour {
         tricktstring = tricky[num];
 
         InvokeRepeating("GainEnergy", 1f, 1f);
+        InvokeRepeating("BlowTowers", WindRate, WindRate);
 
     }
 
     void Update(){
 
-        windSpeed = Mathf.Round(Mathf.Abs(Mathf.Sin((float)spawner.Wave * 2)) * 700f) / 100f;
+        windSpeed = Mathf.Round(Mathf.Abs(Mathf.Sin((float)spawner.wave * 2)) * 700f) / 100f;
 
         if (altwind) {
 
-            windSpeed = Mathf.Round(Mathf.Sin((float)spawner.Wave) * 1400f) / 100f;
+            //windSpeed = Mathf.Round(Mathf.Sin((float)spawner.Wave) * 1400f) / 100f;
 
         }
 
@@ -80,18 +95,18 @@ public class GameManager : MonoBehaviour {
 
         if (hp <= 0){
 
-            spawner.autoplay = false;
+            //spawner.autoplay = false;
 
             died.SetActive(true);
 
             endCoin.text = (coin).ToString();
-            endWave.text = (spawner.Wave).ToString();
+            endWave.text = (spawner.wave).ToString();
 
-            if (spawner.mode == "easy") {
+            if (spawner.mode == Spawner.Mode.easy) {
 
                 endMessage.text = "\"" + easystring + "\"";
 
-            } else if (spawner.mode == "regular") {
+            } else if (spawner.mode == Spawner.Mode.normal) {
 
                 endMessage.text = "\"" + normalstring + "\"";
 
@@ -114,6 +129,33 @@ public class GameManager : MonoBehaviour {
                 energy += EgainRate;
 
             }
+
+        }
+
+    }
+
+    public void BlowTowers() {
+
+        bool blown = false;
+
+        GameObject[] insects = GameObject.FindGameObjectsWithTag("bug");
+
+        foreach (GameObject i in insects) {
+
+            towermanager tow = i.GetComponent<towermanager>();
+
+            if (tow.flying == true) {
+
+                tow.Blow();
+                blown = true;
+
+            }
+
+        }
+
+        if (blown == true) {
+
+            wind.Play();
 
         }
 
